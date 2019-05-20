@@ -1,12 +1,14 @@
 import React from 'react'
 
+
 export default class CourseCard
-    extends React.Component
-{
+    extends React.Component {
+
     constructor(props) {
         super(props)
         this.state = {}
     }
+
     render() {
         return (
             <div className="card" styles={{width: '18rem'}}>
@@ -17,9 +19,14 @@ export default class CourseCard
                         {this.props.title}
                     </h5>
                     <p className="card-text">Card text.</p>
-                    <a href="#" className="btn btn-primary">More...</a>
+                    <a href="#"
+                       className="btn btn-primary" onClick={()=> this.selectCourse(this.props.course)}
+                        to={`/course/edit/${this.props.course.id}`}>s
+                        More...
+                    </a>
                 </div>
             </div>
         )
     }
+
 }
