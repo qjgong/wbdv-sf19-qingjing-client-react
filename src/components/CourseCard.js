@@ -16,9 +16,9 @@ export default class CourseCard
                      src="https://picsum.photos/300/200"/>
                 <div className="card-body">
                     <h5 className="card-title">
-                        {this.props.title}
+                        {this.props.course.title}
                     </h5>
-                    <p className="card-text"> {this.props.title}</p>
+                    <p className="card-text"> {this.props.course.id}</p>
                     <a href="#"
                        className="btn btn-primary" onClick={()=> this.selectCourse(this.props.course)}
                         to={`/course/edit/${this.props.course.id}`}>
