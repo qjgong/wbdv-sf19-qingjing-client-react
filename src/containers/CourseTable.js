@@ -3,6 +3,7 @@ import React from 'react'
 import CourseList from "../components/CourseList";
 import {Link} from "react-router-dom";
 import CourseGrid from "./CourseGrid";
+import CourseRow from "../components/CourseRow";
 
 
 export default class CourseTable extends React.Component {
@@ -43,19 +44,20 @@ export default class CourseTable extends React.Component {
                         <th> Title</th>
                         <th>Owned by <i className="fa fa-caret-down"/></th>
                         <th id="small"> Last modified by me</th>
-                        <th> <Link to="/course-grid">Grid<i className="fas fa-grip-horizontal"/></Link></th>
-                        <th><i className="fas fa-sort-alpha-down"/></th>
+                        <th><Link to="/course-grid">Grid<i className="fa fa-grip-horizontal"/></Link></th>
+                        <th><i className="fa fa-sort-alpha-down"/></th>
                         <th>&nbsp;</th>
                     </tr>
 
                     </thead>
 
-<tbody>
-                    {this.props.courses.map((courses, selectCourse, key) =>
-                        <CourseList selectCourse={selectCourse}
-                                    courses={courses} key={key}/>
+                    <tbody>
+                    {this.props.courses.map((course, selectCourse, key) =>
+                        <CourseRow selectCourse={selectCourse}
+                                    course={course} key={key}/>
                     )}
-</tbody>
+
+                    </tbody>
 
                 </table>
 

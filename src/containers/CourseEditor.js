@@ -33,7 +33,7 @@ export default class CourseEditor
     render() {
         return (
             <div>
-                <h2>Course Editor</h2>
+                <h2>{this.props.title}</h2>
                 <div className="row">
                     <div className="col-4 left">
                         <ModuleList selectedModule={this.state.selectedModule}

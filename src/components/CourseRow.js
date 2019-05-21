@@ -1,4 +1,5 @@
 import React from 'react'
+import {BrowserRouter as Router, Link, Route} from 'react-router-dom'
 export default class CourseRow extends React.Component{
     constructor(props) {
         super(props)
@@ -8,10 +9,9 @@ export default class CourseRow extends React.Component{
     render() {
         return (
             <tr>
-                <td onClick={() => this.selectCourse(this.props.course)}
-                    to={`/course/edit/${this.props.course.id}`}>
+                <Link to={`/course-editor/${this.props.course.id}`}><td onClick={() => this.selectCourse(this.props.course)}>
                     <i className="fas fa-file-alt" style={{color: "dodgerblue"}}></i>{this.props.course.title}
-                </td>
+                </td></Link>
                 <td style={{color: "gray"}}>me</td>
                 <td style={{color: "gray"}}>6:54PM</td>
                 <th>&nbsp;</th>

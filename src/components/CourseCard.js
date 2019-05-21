@@ -1,4 +1,5 @@
 import React from 'react'
+import {Link} from "react-router-dom";
 
 
 export default class CourseCard
@@ -15,15 +16,14 @@ export default class CourseCard
                 <img className="card-img-top"
                      src="https://picsum.photos/300/200"/>
                 <div className="card-body">
-                    <h5 className="card-title">
+                    <Link to={`/course-editor/${this.props.course.id}`}><h5 className="card-title">
                         {this.props.course.title}
-                    </h5>
+                    </h5></Link>
                     <p className="card-text"> {this.props.course.id}</p>
-                    <a href="#"
-                       className="btn btn-primary" onClick={()=> this.selectCourse(this.props.course)}
-                        to={`/course/edit/${this.props.course.id}`}>
+                    <Link to={`/course-editor/${this.props.course.id}`}><a href="#"
+                       className="btn btn-primary" onClick={()=> this.selectCourse(this.props.course)}>
                         More...
-                    </a>
+                    </a></Link>
                 </div>
             </div>
         )
