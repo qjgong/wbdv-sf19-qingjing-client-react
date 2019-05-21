@@ -8,7 +8,11 @@ export default class ModuleList extends React.Component {
             module: {id: -1, title: 'New Module'},
             modules: [
                 {id: 123, title: "Module 1 - jQuery"},
-                {id: 234, title: "Module 2 - React"}
+                {id: 234, title: "Module 2 - React"},
+                {id:345,title:"Module 3 - Redux"},
+                {id:456,title:"Module 4 - Angular"},
+                {id:567,title:"Module 5 - Node.js"},
+                {id:678,title:"Module 6 - MongoDB"},
 
             ]
 
@@ -68,15 +72,6 @@ export default class ModuleList extends React.Component {
                                 key={module.id}/>
                         )
                     }
-                    /*
-                    <ModuleItem title="Module 1 - jQuery"/>
-                    <ModuleItem title="Module 2 - React"/>
-                    <ModuleItem title="Module 3 - Redux"/>
-                    <ModuleItem title="Module 4 - Angular"/>
-                    <ModuleItem title="Module 5 - Node.js"/>
-                    <ModuleItem title="Module 6 - MongoDB"/>
-
-                     */
 
                 </ul>
             </div>

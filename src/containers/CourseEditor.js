@@ -5,13 +5,15 @@ import TopicPills from "../components/TopicPills";
 
 export default class CourseEditor
     extends React.Component {
+
     constructor(props) {
         super(props)
         this.state = {
+
             selectedModule:
-                this.props.course.modules[0],
+                this.props.modules[0],
             selectedLesson:
-                this.props.course.modules[0].lessons[0]
+                this.props.modules[0].lessons[0]
         }
     }
 
@@ -36,7 +38,7 @@ export default class CourseEditor
                     <div className="col-4 left">
                         <ModuleList selectedModule={this.state.selectedModule}
                                     selectModule={this.selectModule}
-                                    modules={this.props.course.modules}/></div>
+                                    modules={this.props.modules}/></div>
 
                 </div>
                 <div className="col-8 right">
