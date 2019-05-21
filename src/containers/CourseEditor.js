@@ -10,19 +10,35 @@ export default class CourseEditor
         super(props)
         this.state = {
 
-            selectedModule:
-                this.props.modules[0],
-            selectedLesson:
-                this.props.modules[0].lessons[0]
+            selectedModule: "",
+            selectedLesson: ""
+        }
+        if (this.props.course.modules !== undefined && this.props.course.modules.length !== 0) {
+            this.state.selectedModule = this.props.course.modules[0];
+            if (this.props.course.modules[0].lessons !== undefined) {
+                this.state.selectedLesson = this.props.course.modules[0].lessons[0];
+            }
         }
     }
 
-    selectModule = module =>
-        this.setState({
-            selectedModule: module,
-            selectedLesson: module.lessons[0],
-            selectedTopic: module.lessons[0].topics[0]
-        })
+
+    selectModule = module => {
+        let selectedLesson = module.lessons === undefined ? "" : module.lessons[0];
+        let selectedTopic = "";
+        if (selectedLesson.length !== 0 && selectedLesson.topics !== undefined) {
+            selectedTopic = module.lessons[0].topics[0];
+        }
+        ;
+        this.setState(
+            {
+
+                selectedModule: module,
+                selectedLesson: selectedLesson,
+                selectedTopic: selectedTopic,
+            })
+    }
+
+
     selectLesson = lesson =>
         this.setState({
             selectedLesson: lesson,
@@ -33,25 +49,28 @@ export default class CourseEditor
     render() {
         return (
             <div>
-                <h2>{this.props.title}</h2>
+                <h2>{this.props.course.title}</h2>
                 <div className="row">
                     <div className="col-4 left">
                         <ModuleList selectedModule={this.state.selectedModule}
                                     selectModule={this.selectModule}
                                     modules={this.props.modules}/></div>
 
-                </div>
-                <div className="col-8 right">
-                    <LessonTabs selectLesson={this.selectLesson}
-                                selectedLesson={this.state.selectedLesson}
-                                lessons={this.state.selectedModule.lessons}/>
 
-                    <br/>
-                    <TopicPills topics={"2"}/>
+                    <div className="col-8 right">
+                        <h2>Lessons</h2>
+                        <LessonTabs selectLesson={this.selectLesson}
+                                    selectedLesson={this.state.selectedLesson}
+                                    lessons={this.state.selectedModule.lessons}
+                        />
 
+                        <br/>
+                        <TopicPills topics={"2"}/>
+
+                    </div>
                 </div>
             </div>
 
-        )
-    }
-}
+                )
+                }
+                }

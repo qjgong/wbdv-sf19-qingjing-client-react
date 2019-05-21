@@ -52,8 +52,8 @@ export default class CourseTable extends React.Component {
                     </thead>
 
                     <tbody>
-                    {this.props.courses.map((course, selectCourse, key) =>
-                        <CourseRow selectCourse={selectCourse}
+                    {this.props.courses.map((course, key) =>
+                        <CourseRow selectCourse={this.props.selectCourse}
                                     course={course} key={key}/>
                     )}
 

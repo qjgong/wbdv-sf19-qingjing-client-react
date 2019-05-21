@@ -21,7 +21,7 @@ export default class CourseCard
                     </h5></Link>
                     <p className="card-text"> {this.props.course.id}</p>
                     <Link to={`/course-editor/${this.props.course.id}`}><a href="#"
-                       className="btn btn-primary" onClick={()=> this.selectCourse(this.props.course)}>
+                       className="btn btn-primary" onClick={()=> this.props.selectCourse(this.props.course)}>
                         More...
                     </a></Link>
                 </div>

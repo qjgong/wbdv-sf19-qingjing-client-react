@@ -9,7 +9,7 @@ export default class CourseRow extends React.Component{
     render() {
         return (
             <tr>
-                <Link to={`/course-editor/${this.props.course.id}`}><td onClick={() => this.selectCourse(this.props.course)}>
+                <Link to={`/course-editor/${this.props.course.id}`}><td onClick={() => this.props.selectCourse(this.props.course)}>
                     <i className="fas fa-file-alt" style={{color: "dodgerblue"}}></i>{this.props.course.title}
                 </td></Link>
                 <td style={{color: "gray"}}>me</td>

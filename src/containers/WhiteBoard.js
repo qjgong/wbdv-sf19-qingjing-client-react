@@ -32,7 +32,7 @@ export default class Whiteboard extends React.Component {
                 <div className="container-fluid">
                     <Link to="/course-table">Table</Link>
                     <Link to="/course-grid">Grid</Link>
-                    <Link to="/course-editor">Editor</Link>
+
 
 
                     <Route path="/course-table"
@@ -43,10 +43,10 @@ export default class Whiteboard extends React.Component {
                            render={() => <CourseGrid
                                selectCourse={this.selectCourse}
                                courses={this.courses}/>}/>
-                    <Route path="/course-editor"
+                    <Route path={"/course-editor/" + this.state.selectedCourse.id}
                            render={() => <CourseEditor
                                selectCourse={this.selectCourse}
-                               courses={this.courses}/>}/>
+                               course={this.state.selectedCourse}/>}/>
 
 
 

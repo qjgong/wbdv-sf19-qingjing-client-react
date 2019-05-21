@@ -1,13 +1,17 @@
 import React from 'react'
+import LessonTabItem from "./LessonTabItem";
 
 const LessonTabs =
-    ({key,lesson, selectedLesson, selectLesson}) =>
+    ({lessons, selectedLesson, selectLesson}) =>
 
-        <li className="nav-item"
-            onClick={() => selectLesson(lesson)}
-            key={key}>
-            <a className={lesson===selectedLesson?
-                "nav-link active":"nav-link"}>{lesson.title}</a>
-        </li>
+        <ul className={"navbar-header"}>
+            {
+                lessons && lessons.map((lesson, key) =>
+                <LessonTabItem lesson={lesson}
+                key={key}
+                selectedLesson={selectedLesson}
+                selectLesson={selectLesson}/>)
+            }
+        </ul>
 
 export default LessonTabs

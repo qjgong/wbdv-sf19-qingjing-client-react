@@ -53,9 +53,9 @@ export default class CourseGrid
 
                     <tbody>
             <div className="card-deck">
-                {this.props.courses.map((course, selectCourse, key) =>
+                {this.props.courses.map((course, key) =>
                     <CourseCard course={course}
-                                selectCourse={selectCourse}
+                                selectCourse={this.props.selectCourse}
                                 key={key}/>)}
             </div>
                     </tbody>
