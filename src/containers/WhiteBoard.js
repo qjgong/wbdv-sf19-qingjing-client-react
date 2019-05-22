@@ -10,7 +10,7 @@ import CourseTable from "./CourseTable";
 
 
 export default class Whiteboard extends React.Component {
-    courses = require("./course");
+    courses = require("./courses");
 
 
     constructor(props) {

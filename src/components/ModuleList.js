@@ -21,10 +21,15 @@ export default class ModuleList extends React.Component {
     }
 
     createModule = () => {
-        this.state.module.id = (new Date()).getTime()
+        let module={
+            title: this.state.module.title,
+            // id: (new Date()).getTime()
+            id: Math.random()*50
+        }
+        console.log(module);
         let modules=this.state.modules;
         if (!modules) {modules=[]}
-        modules.push(this.state.module);
+        modules.push(module);
         this.setState({
             modules: modules
         })
@@ -33,8 +38,7 @@ export default class ModuleList extends React.Component {
         console.log(event.target.value)
         this.setState({
             module: {
-                title: event.target.value,
-                id: (new Date()).getTime()
+                title: event.target.value
             }
         })
     }
@@ -53,22 +57,20 @@ export default class ModuleList extends React.Component {
                     <li className="list-group-item">
                         <input
                             onChange={this.titleChanged}
-                            defaultValue={this.state.module.title}
-                            value={this.state.module.title} className="form-control"/>
-                        <button onClick={this.createModule} className="btn btn-primary btn-block">Add Module</button>
+                            placeholder={this.state.module.title}
+                             className="form-control"/>
+                        <button onClick={()=>this.createModule()} className="btn btn-primary btn-block">Add Module</button>
                     </li>
-                    <li>
                     {
-                        this.state.modules && this.state.modules.map(module =>
+                        this.state.modules && this.state.modules.map((module,key)=>
                             <ModuleItem
                                 deleteModule={this.deleteModule}
                                 selectModule={this.props.selectModule}
-                                selectedModel={this.props.selectedModule}
+                                selectedModule={this.props.selectedModule}
                                 module={module}
-                                key={module.id}/>
+                            key={key}/>
                         )
                     }
-                    </li>
 
                 </ul>
             </div>

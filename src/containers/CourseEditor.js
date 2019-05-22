@@ -6,6 +6,7 @@ import TopicPills from "../components/TopicPills";
 export default class CourseEditor
     extends React.Component {
 
+
     constructor(props) {
         super(props)
         this.state = {
@@ -23,12 +24,14 @@ export default class CourseEditor
 
 
     selectModule = module => {
-        let selectedLesson = module.lessons === undefined ? "" : module.lessons[0];
+        let selectedLesson ="";
         let selectedTopic = "";
+        if(module.lessons !== undefined&&module.lessons.length!==0) {selectedLesson=module.lessons[0];
+
         if (selectedLesson.length !== 0 && selectedLesson.topics !== undefined) {
             selectedTopic = module.lessons[0].topics[0];
-        }
-        ;
+        }}
+
         this.setState(
             {
 
@@ -47,6 +50,7 @@ export default class CourseEditor
 
 
     render() {
+        console.log(this.props.courses);
         return (
             <div>
                 <h2>{this.props.course.title}</h2>
@@ -54,7 +58,7 @@ export default class CourseEditor
                     <div className="col-4 left">
                         <ModuleList selectedModule={this.state.selectedModule}
                                     selectModule={this.selectModule}
-                                    modules={this.props.modules}/></div>
+                                    modules={this.props.course.modules}/></div>
 
 
                     <div className="col-8 right">
@@ -65,7 +69,7 @@ export default class CourseEditor
                         />
 
                         <br/>
-                        <TopicPills topics={"2"}/>
+                        <TopicPills topics={this.state.selectedTopic}/>
 
                     </div>
                 </div>
