@@ -38,6 +38,14 @@ export default class TopicPills extends React.Component {
         })
     }
 
+    componentDidUpdate(prevProps) {
+        if (prevProps.topics !== this.props.topics){
+            this.setState({
+                topics:this.props.topics
+            })
+        }
+    }
+
     render() {
         return (
             <ul className="nav nav-pills">

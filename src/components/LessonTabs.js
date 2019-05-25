@@ -38,6 +38,14 @@ export default class LessonTabs extends React.Component {
         })
     }
 
+    componentDidUpdate(prevProps) {
+        if (prevProps.lessons !== this.props.lessons){
+            this.setState({
+                lessons:this.props.lessons
+            })
+        }
+    }
+
     render() {
         return (
             <ul className="nav nav-tabs">

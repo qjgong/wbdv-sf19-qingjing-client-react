@@ -101,6 +101,8 @@ export default class CourseEditor
 
 
     render() {
+
+        console.log(this.state.selectedModule)
         return (
             <div>
                 <h2>{this.props.course.title}</h2>

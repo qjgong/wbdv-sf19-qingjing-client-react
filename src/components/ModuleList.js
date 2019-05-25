@@ -52,6 +52,14 @@ export default class ModuleList extends React.Component {
         })
     }
 
+    componentDidUpdate(prevProps) {
+        if (prevProps.modules !== this.props.modules){
+            this.setState({
+                modules:this.props.modules
+            })
+        }
+    }
+
     render() {
         console.log(this.state.modules);
         return (
