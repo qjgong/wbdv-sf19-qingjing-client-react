@@ -1,17 +1,69 @@
 import React from 'react'
 import LessonTabItem from "./LessonTabItem";
 
-const LessonTabs =
-    ({lessons, selectedLesson, selectLesson}) =>
 
-        <ul className="nav nav-tabs">
-            {
-                lessons && lessons.map((lesson, key) =>
-                <LessonTabItem lesson={lesson}
-                key={key}
-                selectedLesson={selectedLesson}
-                selectLesson={selectLesson}/>)
+export default class LessonTabs extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            lessons: this.props.lessons
+        }
+    }
+
+    createLesson = () => {
+        let lesson = {
+            title: 'New Lesson',
+            id: Math.random() * 100
+        }
+        console.log(lesson)
+        let lessons = this.state.lessons;
+        if (!lessons) {
+            lessons = []
+        }
+        lessons.push(lesson);
+        this.setState({lessons: lessons})
+    }
+
+    titleChanged = (event) => {
+        this.setState({
+            lesson: {
+                title: event.target.value
             }
-        </ul>
+        })
+    }
 
-export default LessonTabs
+    deleteLesson=(id)=>{
+        this.setState({
+            lessons:this.state.lessons.filter(lesson=>lesson.id!==id)
+        })
+    }
+
+    render() {
+        return (
+            <ul className="nav nav-tabs">
+                {
+                    this.state.lessons && this.state.lessons.map((lesson, key) =>
+                        <LessonTabItem lesson={lesson} key={key}
+                                       selectedLesson={this.props.selectedLesson}
+                                       selectLesson={this.props.selectLesson}
+                                       updateLesson={this.props.updateLesson}
+                                       titleChanged={this.titleChanged}
+                                       deleteLesson={this.deleteLesson}
+                        />)
+                }
+
+
+                <li className="nav-item">
+                    <input
+                        onChange={this.titleChanged}
+                        placeholder="New Lesson"
+                        className="form-control"/>
+                    <button onClick={()=>this.createLesson()} className="btn btn-primary">Add Lesson</button>
+                </li>
+            </ul>
+
+
+        )
+    }
+}
+

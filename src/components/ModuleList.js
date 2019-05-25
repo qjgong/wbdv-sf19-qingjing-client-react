@@ -34,8 +34,11 @@ export default class ModuleList extends React.Component {
             modules: modules
         })
     }
+
+
+
+
     titleChanged = (event) => {
-        console.log(event.target.value)
         this.setState({
             module: {
                 title: event.target.value
@@ -50,6 +53,7 @@ export default class ModuleList extends React.Component {
     }
 
     render() {
+        console.log(this.state.modules);
         return (
             <div>
                 <h3>Module List</h3>
@@ -68,6 +72,8 @@ export default class ModuleList extends React.Component {
                                 selectModule={this.props.selectModule}
                                 selectedModule={this.props.selectedModule}
                                 module={module}
+                                updateModule={this.props.updateModule}
+                                // titleChanged={this.titleChanged}
                             key={key}/>
                         )
                     }
