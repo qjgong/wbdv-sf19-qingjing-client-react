@@ -78,11 +78,12 @@ export default class CourseEditor
         m.title = title;
         console.log(m);
         this.setState({
-            modules: this.selectedLesson.modules.map(i => i.id === m.id ? m : i)
+            modules: this.state.modules.map(i => i.id === m.id ? m : i)
         })
     }
 
     updateLesson = (lesson, title) => {
+        console.log(title);
         let m = lesson;
         m.title = title;
         this.setState({

@@ -12,7 +12,7 @@ export default class LessonTabs extends React.Component {
 
     createLesson = () => {
         let lesson = {
-            title: 'New Lesson',
+            title: this.state.lesson.title,
             id: Math.random() * 100
         }
         console.log(lesson)

@@ -12,7 +12,7 @@ export default class TopicPills extends React.Component {
 
     createTopic = () => {
         let topic = {
-            title: 'New Topic',
+            title: this.state.topic.title,
             id: Math.random() * 100
         }
         

@@ -17,10 +17,8 @@ export default class LessonTabItem extends React.Component {
 
     titleChanged = (event) => {
         this.setState({
-                lesson:
-                    {
-                        title: event.target.value
-                    }
+                title: event.target.value
+
             }
         )
     }

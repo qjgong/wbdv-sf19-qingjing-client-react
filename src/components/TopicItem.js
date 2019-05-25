@@ -17,10 +17,7 @@ export default class TopicItem extends React.Component {
 
     titleChanged = (event) => {
         this.setState({
-                topic:
-                    {
-                        title: event.target.value
-                    }
+                title: event.target.value
             }
         )
     }
