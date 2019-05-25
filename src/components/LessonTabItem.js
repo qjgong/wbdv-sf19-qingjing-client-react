@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default class LessonTabItem extends React.Component{
+export default class LessonTabItem extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -17,15 +17,17 @@ export default class LessonTabItem extends React.Component{
 
     titleChanged = (event) => {
         this.setState({
-            title: event.target.value
-
-        })
+                lesson:
+                    {
+                        title: event.target.value
+                    }
+            }
+        )
     }
 
 
-
-    render(){
-        return(
+    render() {
+        return (
             <li className="nav-item" onClick={() => this.props.selectLesson(this.props.lesson)}
                 className={this.props.lesson === this.props.selectedLesson ? "nav-link active" : "nav-link"}>
                 <a>{this.props.lesson.title}</a>
@@ -36,7 +38,10 @@ export default class LessonTabItem extends React.Component{
                 {
                     this.state.inputHidden ? "" :
                         <div><input type="text" onChange={this.titleChanged} placeholder={this.props.lesson.title}/>
-                            <button onClick={() => this.props.updateLesson(this.props.selectedLesson, this.state.title)}
+                            <button onClick={() => {
+                                this.props.updateLesson(this.props.selectedLesson, this.state.title);
+                                this.toggleInput()
+                            }}
                                     className="btn btn-primary">Save
                             </button>
                         </div>

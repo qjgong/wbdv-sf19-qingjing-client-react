@@ -64,7 +64,7 @@ export default class CourseEditor
         m.title = title;
         console.log(m);
         this.setState({
-            modules: this.state.modules.map(i => i.id === m.id ? m : i)
+            modules: this.selectedLesson.modules.map(i => i.id === m.id ? m : i)
         })
     }
 
@@ -72,7 +72,7 @@ export default class CourseEditor
         let m = lesson;
         m.title = title;
         this.setState({
-            lessons: this.state.lessons.map(i => i.id === m.id ? m : i)
+            lessons: this.state.selectedModule.lessons.map(i => i.id === m.id ? m : i)
         })
     }
 
