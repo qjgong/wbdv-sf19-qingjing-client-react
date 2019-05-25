@@ -12,7 +12,8 @@ export default class CourseEditor
         this.state = {
             modules: this.props.course.modules,
             selectedModule: "",
-            selectedLesson: ""
+            selectedLesson: "",
+            selectedTopic: "",
         }
         if (this.props.course.modules !== undefined && this.props.course.modules.length !== 0) {
             this.state.selectedModule = this.props.course.modules[0];
@@ -49,7 +50,7 @@ export default class CourseEditor
 
     selectLesson = lesson => {
         let selectedTopic = "";
-        if (lesson.length!==0 && lesson.topics !== undefined) {
+        if (lesson.length !== 0 && lesson.topics !== undefined) {
             selectedTopic = lesson.topics[0];
         }
 
@@ -57,6 +58,19 @@ export default class CourseEditor
             selectedLesson: lesson,
             selectedTopic: selectedTopic,
         })
+    }
+
+    selectTopic = topic => {
+
+        let selectedTopic = "";
+        if (topic.length !== 0 && topic !== undefined) {
+            selectedTopic = topic;
+        }
+
+        this.setState({
+            selectedTopic: selectedTopic,
+        })
+
     }
 
     updateModule = (module, title) => {
@@ -73,6 +87,14 @@ export default class CourseEditor
         m.title = title;
         this.setState({
             lessons: this.state.selectedModule.lessons.map(i => i.id === m.id ? m : i)
+        })
+    }
+
+    updateTopic = (topic, title) => {
+        let m = topic;
+        m.title = title;
+        this.setState({
+            lessons: this.state.selectedLesson.topics.map(i => i.id === m.id ? m : i)
         })
     }
 
@@ -99,7 +121,9 @@ export default class CourseEditor
 
                         <br/>
                         <TopicPills topics={this.state.selectedLesson.topics}
-                                    selectedTopic={this.state.selectedTopic}/>
+                                    selectedTopic={this.state.selectedTopic}
+                                    updateTopic={this.updateLesson}
+                                    selectTopic={this.selectTopic}/>
 
                     </div>
                 </div>

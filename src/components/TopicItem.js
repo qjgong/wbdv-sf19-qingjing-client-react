@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default class LessonTabItem extends React.Component {
+export default class TopicItem extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -17,7 +17,7 @@ export default class LessonTabItem extends React.Component {
 
     titleChanged = (event) => {
         this.setState({
-                lesson:
+                topic:
                     {
                         title: event.target.value
                     }
@@ -27,18 +27,18 @@ export default class LessonTabItem extends React.Component {
 
     render() {
         return (
-            <li className="nav-item" onClick={() => this.props.selectLesson(this.props.lesson)}
-                className={this.props.lesson === this.props.selectedLesson ? "nav-link active" : "nav-link"}>
-                <a>{this.props.lesson.title}</a>
+            <li className="nav-item" onClick={() => this.props.selectTopic(this.props.topic)}
+                className={this.props.topic === this.props.selectedTopic ? "nav-link active" : "nav-link"}>
+                <a>{this.props.topic.title}</a>
 
-                <i onClick={() => this.props.deleteLesson(this.props.lesson.id)} className="fa fa-trash"/>
+                <i onClick={() => this.props.deleteTopic(this.props.topic.id)} className="fa fa-trash"/>
 
                 <i onClick={() => this.toggleInput()} className="fa fa-edit"/>
                 {
                     this.state.inputHidden ? "" :
-                        <div><input type="text" onChange={this.titleChanged} placeholder={this.props.lesson.title}/>
+                        <div><input type="text" onChange={this.titleChanged} placeholder={this.props.topic.title}/>
                             <button onClick={() => {
-                                this.props.updateLesson(this.props.selectedLesson, this.state.title);
+                                this.props.updateTopic(this.props.selectedTopic, this.state.title);
                                 this.toggleInput()
                             }}
                                     className="btn btn-primary">Save
