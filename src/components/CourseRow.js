@@ -17,7 +17,7 @@ export default class CourseRow extends React.Component{
                 <th>&nbsp;</th>
                 <th>&nbsp;</th>
                 <td>
-                    <i className="fa fa-times"></i>
+                    <i onclick={()=>this.props.deleteCourse(this.props.course.id)} className="fa fa-times"></i>
                 </td>
             </tr>
         )

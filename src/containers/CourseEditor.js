@@ -2,6 +2,7 @@ import React from 'react'
 import ModuleList from "../components/ModuleList";
 import LessonTabs from "../components/LessonTabs";
 import TopicPills from "../components/TopicPills";
+import WidgetList from "../components/WidgetList";
 
 export default class CourseEditor
     extends React.Component {
@@ -128,8 +129,12 @@ export default class CourseEditor
                                     updateTopic={this.updateLesson}
                                     selectTopic={this.selectTopic}/>
 
+                        <br/>
+                        <WidgetList/>
+
                     </div>
                 </div>
+
             </div>
 
         )

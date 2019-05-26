@@ -1,28 +1,33 @@
 import React from 'react'
-import CourseCard from '../components/CourseCard'
-import ModuleList from "../components/ModuleList";
 import CourseEditor from "./CourseEditor";
 import {BrowserRouter as Router, Link, Route} from 'react-router-dom'
 import CourseGrid from "./CourseGrid";
-import CourseList from "../components/CourseList";
 import CourseTable from "./CourseTable";
-
-
+import CourseService from "../services/CourseService";
+import "./WhiteBoard.css"
 
 export default class Whiteboard extends React.Component {
-    courses = require("./courses");
+    courses= (new CourseService()).findAllCourses();
+
 
 
     constructor(props) {
 
         super(props);
         this.state = {
-            selectedCourse: this.courses[0]
+            selectedCourse: this.courses[0],
+            courses:this.courses
         }
     }
 
     selectCourse = course =>
         this.setState({selectedCourse: course})
+
+    deleteCourse=(id)=>{
+        this.setState({
+            courses:this.courses.filter(course=>course.id !==id)
+        })
+    }
 
 
     render() {
@@ -34,20 +39,20 @@ export default class Whiteboard extends React.Component {
                     <Link to="/course-grid">Grid</Link>
 
 
-
                     <Route path="/course-table"
                            render={() => <CourseTable
                                selectCourse={this.selectCourse}
+                               deleteCourse={this.deleteCourse}
                                courses={this.courses}/>}/>
                     <Route path="/course-grid"
                            render={() => <CourseGrid
                                selectCourse={this.selectCourse}
+                               deleteCourse={this.deleteCourse}
                                courses={this.courses}/>}/>
                     <Route path={"/course-editor/" + this.state.selectedCourse.id}
                            render={() => <CourseEditor
                                selectCourse={this.selectCourse}
                                course={this.state.selectedCourse}/>}/>
-
 
 
                 </div>

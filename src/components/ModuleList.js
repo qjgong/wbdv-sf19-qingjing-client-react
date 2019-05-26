@@ -46,7 +46,6 @@ export default class ModuleList extends React.Component {
         })
     }
     deleteModule=(id)=>{
-        console.log('deleteModule'+id)
         this.setState({
             modules:this.state.modules.filter(module=>module.id !==id)
         })

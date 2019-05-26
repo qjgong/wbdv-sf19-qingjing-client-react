@@ -24,6 +24,8 @@ export default class CourseCard
                        className="btn btn-primary" onClick={()=> this.props.selectCourse(this.props.course)}>
                         More...
                     </a></Link>
+
+                    <button onClick={() => this.props.deleteCourse(this.props.course.id)} className="btn btn-danger">Delete</button>
                 </div>
             </div>
         )
