@@ -9,16 +9,16 @@ export default class CourseRow extends React.Component{
     render() {
         return (
             <tr>
-                <Link to={`/course-editor/${this.props.course.id}`}><td onClick={() => this.props.selectCourse(this.props.course)}>
+                <Link to={`/course-editor/${this.props.course.id}`}><li onClick={() => this.props.selectCourse(this.props.course)}>
                     <i className="fas fa-file-alt" style={{color: "dodgerblue"}}></i>{this.props.course.title}
-                </td></Link>
-                <td style={{color: "gray"}}>me</td>
-                <td style={{color: "gray"}}>6:54PM</td>
+                </li></Link>
+                <th style={{color: "gray"}}>me</th>
+                <th style={{color: "gray"}}>6:54PM</th>
                 <th>&nbsp;</th>
                 <th>&nbsp;</th>
-                <td>
-                    <i onclick={()=>this.props.deleteCourse(this.props.course.id)} className="fa fa-times"></i>
-                </td>
+                <th>
+                    <li onClick={()=>this.props.deleteCourse(this.props.course.id)} className="fa fa-times"></li>
+                </th>
             </tr>
         )
     }

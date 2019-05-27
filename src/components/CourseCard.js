@@ -25,7 +25,7 @@ export default class CourseCard
                         More...
                     </a></Link>
 
-                    <button onClick={() => this.props.deleteCourse(this.props.course.id)} className="btn btn-danger">Delete</button>
+                    <button onClick={() => this.props.deleteCourse(this.props.course.id)} className="btn btn-danger ml-1">Delete</button>
                 </div>
             </div>
         )

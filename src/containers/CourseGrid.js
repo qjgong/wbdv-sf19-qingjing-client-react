@@ -45,7 +45,6 @@ export default class CourseGrid
                     <tr>
                         <th> Title</th>
                         <th>Owned by <i className="fa fa-caret-down"/></th>
-                        <th id="small"> Last modified by me</th>
                         <th><Link to="/course-table"><i className="fa fa-bars"/></Link></th>
                         <th><i className="fa fa-sort-alpha-asc"/></th>
                         <th><i className="fa fa-folder"/></th>

@@ -65,7 +65,7 @@ export default class ModuleList extends React.Component {
             <div>
                 <h3>Module List</h3>
                 <ul className="list-group">
-                    <li className="list-group-item">
+                    <li className="list-group-item bg-dark">
                         <input
                             onChange={this.titleChanged}
                             placeholder={this.state.module.title}

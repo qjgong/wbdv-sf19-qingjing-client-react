@@ -28,9 +28,11 @@ export default class TopicItem extends React.Component {
                 className={this.props.topic === this.props.selectedTopic ? "nav-link active" : "nav-link"}>
                 <a>{this.props.topic.title}</a>
 
-                <i onClick={() => this.props.deleteTopic(this.props.topic.id)} className="fa fa-trash"/>
+                <button className="btn btn-danger btn-sm ml-3">
+                    <i onClick={() => this.props.deleteTopic(this.props.topic.id)} className="fa fa-trash"/></button>
 
-                <i onClick={() => this.toggleInput()} className="fa fa-edit"/>
+                <button className="btn btn-success btn-sm ml-3">
+                    <i onClick={() => this.toggleInput()} className="fa fa-edit"/></button>
                 {
                     this.state.inputHidden ? "" :
                         <div><input type="text" onChange={this.titleChanged} placeholder={this.props.topic.title}/>

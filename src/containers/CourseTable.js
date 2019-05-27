@@ -1,8 +1,8 @@
 import React from 'react'
 
-import CourseList from "../components/CourseList";
+
 import {Link} from "react-router-dom";
-import CourseGrid from "./CourseGrid";
+
 import CourseRow from "../components/CourseRow";
 
 
@@ -19,22 +19,22 @@ export default class CourseTable extends React.Component {
                 <div className="navbar navbar-dark bg-primary navbar-expand">
 
 
-                    <a className="nav-link" href="#">
+                    <li className="nav-link" href="#">
                         <button type="button" className="btn btn-primary btn-lg">
                             <i className="fa fa-bars"></i></button>
-                    </a>
+                    </li>
 
-                    <a className="navbar-brand" href="#">Course Manager </a>
+                    <li className="navbar-brand" href="#">Course Manager </li>
 
 
-                    <a className="collapse navbar-collapse" id="navbarTogglerDemo01">
+                    <li className="collapse navbar-collapse" id="navbarTogglerDemo01">
 
-                        <input type="text" className="form-control" placeholder="New Course Title"/></a>
+                        <input type="text" className="form-control" placeholder="New Course Title"/></li>
 
-                    <a className="nav-link" href="#">
+                    <li className="nav-link" href="#">
                         <button type="button" className="btn btn-danger btn-lg">
                             <i className="fa fa-plus"></i></button>
-                    </a>
+                    </li>
 
                 </div>
 
