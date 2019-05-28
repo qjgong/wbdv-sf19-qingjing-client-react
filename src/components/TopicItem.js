@@ -25,7 +25,7 @@ export default class TopicItem extends React.Component {
     render() {
         return (
             <li className="nav-item mr-3" onClick={() => this.props.selectTopic(this.props.topic)}
-                className={this.props.topic === this.props.selectedTopic ? "nav-link active" : "nav-link"}>
+                className={this.props.topic === this.props.selectedTopic ? "nav-link active bg-secondary" : "nav-link bg-dark"}>
                 <a>{this.props.topic.title}</a>
 
                 <button className="btn btn-danger btn-sm ml-3">

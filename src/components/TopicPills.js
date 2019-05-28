@@ -48,7 +48,7 @@ export default class TopicPills extends React.Component {
 
     render() {
         return (
-            <ul className="nav nav-pills">
+            <ul className="nav nav-pills mt-3">
                 {
                     this.state.topics && this.state.topics.map((topic, key) =>
                         <TopicItem topic={topic} key={key}
