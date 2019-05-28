@@ -3,6 +3,7 @@ import ModuleList from "../components/ModuleList";
 import LessonTabs from "../components/LessonTabs";
 import TopicPills from "../components/TopicPills";
 import WidgetList from "../components/WidgetList";
+import {Link} from "react-router-dom";
 
 export default class CourseEditor
     extends React.Component {
@@ -105,9 +106,26 @@ export default class CourseEditor
 
         console.log(this.state.selectedModule)
         return (
-            <div>
-                <h2>{this.props.course.title}</h2>
+            <div className="container-fluid bg-dark">
+                <div className="row bg-dark">
+                    <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+                        <div className="navbar-header ml-5">
+                            <Link to="/">
+                                <li className="fa fa-times" style={{color: "white"}}/></Link>
+                            <a className="navbar-brand ml-3">
+                                {this.props.course.title}
+                            </a>
+                        </div>
+
+                        <LessonTabs selectLesson={this.selectLesson}
+                                    selectedLesson={this.state.selectedLesson}
+                                    lessons={this.state.selectedModule.lessons}
+                                    updateLesson={this.updateLesson}
+                        />
+                    </nav>
+                </div>
                 <div className="row">
+
                     <div className="col-4 left">
                         <ModuleList selectedModule={this.state.selectedModule}
                                     selectModule={this.selectModule}
@@ -115,15 +133,14 @@ export default class CourseEditor
                                     modules={this.state.modules}/></div>
 
 
-                    <div className="col-8 right">
-                        <h2>Lessons</h2>
-                        <LessonTabs selectLesson={this.selectLesson}
-                                    selectedLesson={this.state.selectedLesson}
-                                    lessons={this.state.selectedModule.lessons}
-                                    updateLesson={this.updateLesson}
-                        />
+                    <div className="col-8 right bg-light">
+                        {/*<LessonTabs selectLesson={this.selectLesson}*/}
+                        {/*            selectedLesson={this.state.selectedLesson}*/}
+                        {/*            lessons={this.state.selectedModule.lessons}*/}
+                        {/*            updateLesson={this.updateLesson}*/}
+                        {/*/>*/}
 
-                        <br/>
+                        {/*<br/>*/}
                         <TopicPills topics={this.state.selectedLesson.topics}
                                     selectedTopic={this.state.selectedTopic}
                                     updateTopic={this.updateLesson}
@@ -131,9 +148,14 @@ export default class CourseEditor
 
                         <br/>
                         <WidgetList/>
-
                     </div>
+
                 </div>
+
+
+                <button className="btn btn-danger floating">
+                    <i className="fa fa-plus" style={{color: "white"}}></i>
+                </button>
 
             </div>
 

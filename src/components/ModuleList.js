@@ -63,14 +63,13 @@ export default class ModuleList extends React.Component {
         console.log(this.state.modules);
         return (
             <div>
-                <h3>Module List</h3>
                 <ul className="list-group">
                     <li className="list-group-item bg-dark">
                         <input
                             onChange={this.titleChanged}
                             placeholder={this.state.module.title}
                              className="form-control"/>
-                        <button onClick={()=>this.createModule()} className="btn btn-primary btn-block">Add Module</button>
+                        <button onClick={()=>this.createModule()} className="btn btn-secondary btn-block">Add Module</button>
                     </li>
                     {
                         this.state.modules && this.state.modules.map((module,key)=>

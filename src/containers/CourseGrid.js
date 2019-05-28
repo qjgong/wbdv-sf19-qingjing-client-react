@@ -15,30 +15,32 @@ export default class CourseGrid
             <div className="container-fluid">
 
 
-                <div className="navbar navbar-dark bg-primary navbar-expand-sm">
+                <nav className="navbar navbar-dark bg-primary navbar-expand-md">
+                    <div className="navbar-nav">
+
+                        <li className="nav-link" href="#">
+                            <button type="button" className="btn btn-primary btn-lg">
+                                <i className="fa fa-bars"></i></button>
+                        </li>
+
+                        <li className="navbar-brand" href="#">Course Manager</li>
 
 
-                    <li className="nav-link">
-                        <button type="button" className="btn btn-primary btn-lg">
-                            <i className="fa fa-bars"></i></button>
-                    </li>
+                        <li className="collapse navbar-collapse" id="navbarTogglerDemo01">
 
-                    <li className="navbar-brand">Course Manager</li>
+                            <input type="text" className="form-control" placeholder="New Course Title"/></li>
 
+                        <li className="nav-link" href="#">
+                            <button type="button" className="btn btn-danger btn-lg">
+                                <i className="fa fa-plus"></i></button>
+                        </li>
+                    </div>
 
-                    <li className="collapse navbar-collapse" id="navbarTogglerDemo01">
+                </nav>
 
-                        <input type="text" className="form-control" placeholder="New Course Title"/></li>
+                <div className="container">
+                    <table className="table table-hover table-responsive">
 
-                    <li className="nav-link">
-                        <button type="button" className="btn btn-danger btn-lg">
-                            <i className="fa fa-plus"></i></button>
-                    </li>
-
-                </div>
-
-
-                <table className="table table-hover">
 
                     <thead className="thead-light">
 
@@ -64,6 +66,7 @@ export default class CourseGrid
                     </tr>
                     </tbody>
                 </table>
+                </div>
 
                 <button className="btn btn-danger floating">
                     <i className="fa fa-plus" style={{color:"white"}}></i>

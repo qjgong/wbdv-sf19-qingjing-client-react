@@ -26,8 +26,9 @@ export default class ModuleItem extends React.Component {
 
     render() {
         return (
+
             <li onClick={() => this.props.selectModule(this.props.module)}
-                className={this.props.module === this.props.selectedModule ? "list-group-item active" : "list-group-item"}>
+                className={this.props.module === this.props.selectedModule ? "list-group-item active" : "list-group-item bg-dark"}>
                 <a>{this.props.module.title}</a>
 
                 <button className="btn btn-danger btn-sm ml-3">
@@ -49,6 +50,7 @@ export default class ModuleItem extends React.Component {
 
                 }
             </li>
+
         )
     }
 }

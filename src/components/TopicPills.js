@@ -62,12 +62,12 @@ export default class TopicPills extends React.Component {
                 }
 
 
-                <li className="nav-item">
+                <li className="nav-item ml-3">
                     <input
                         onChange={this.titleChanged}
                         placeholder="New topic"
                         className="form-control"/>
-                    <button onClick={()=>this.createTopic()} className="btn btn-primary">Add topic</button>
+                    <button onClick={()=>this.createTopic()} className="btn btn-secondary btn-block">Add topic</button>
                 </li>
             </ul>
 

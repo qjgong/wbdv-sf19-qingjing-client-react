@@ -12,7 +12,7 @@ export default class CourseCard
 
     render() {
         return (
-            <div className="card" styles={{width: '18rem'}}>
+            <td className="card" styles={{width: '18rem'}}>
                 <img className="card-img-top"
                      src="https://picsum.photos/300/200"/>
                 <div className="card-body">
@@ -20,14 +20,14 @@ export default class CourseCard
                         {this.props.course.title}
                     </h5></Link>
                     <p className="card-text"> {this.props.course.id}</p>
-                    <Link to={`/course-editor/${this.props.course.id}`}><a href="#"
+                    <Link to={`/course-editor/${this.props.course.id}`}
                        className="btn btn-primary" onClick={()=> this.props.selectCourse(this.props.course)}>
                         More...
-                    </a></Link>
+                    </Link>
 
                     <button onClick={() => this.props.deleteCourse(this.props.course.id)} className="btn btn-danger ml-1">Delete</button>
                 </div>
-            </div>
+            </td>
         )
     }
 

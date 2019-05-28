@@ -66,7 +66,7 @@ export default class LessonTabs extends React.Component {
                         onChange={this.titleChanged}
                         placeholder="New Lesson"
                         className="form-control"/>
-                    <button onClick={()=>this.createLesson()} className="btn btn-primary">Add Lesson</button>
+                    <button onClick={()=>this.createLesson()} className="btn btn-secondary btn-block">Add Lesson</button>
                 </li>
             </ul>
 

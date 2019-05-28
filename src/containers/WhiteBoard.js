@@ -25,7 +25,7 @@ export default class Whiteboard extends React.Component {
 
     deleteCourse=(id)=>{
         this.setState({
-            courses:this.courses.filter(course=>course.id !==id)
+            courses:this.state.courses.filter(course=>course.id !==id)
         })
     }
 
@@ -34,21 +34,18 @@ export default class Whiteboard extends React.Component {
 
         return (
             <Router>
-                <div className="container-fluid">
-                    <Link to="/course-table">Table</Link>
-                    <Link to="/course-grid">Grid</Link>
+                <div>
 
-
-                    <Route path="/course-table"
+                    <Route path="/(course-table|)"
                            render={() => <CourseTable
                                selectCourse={this.selectCourse}
                                deleteCourse={this.deleteCourse}
-                               courses={this.courses}/>}/>
+                               courses={this.state.courses}/>}/>
                     <Route path="/course-grid"
                            render={() => <CourseGrid
                                selectCourse={this.selectCourse}
                                deleteCourse={this.deleteCourse}
-                               courses={this.courses}/>}/>
+                               courses={this.state.courses}/>}/>
                     <Route path={"/course-editor/" + this.state.selectedCourse.id}
                            render={() => <CourseEditor
                                selectCourse={this.selectCourse}
