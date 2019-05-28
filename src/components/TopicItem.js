@@ -35,7 +35,8 @@ export default class TopicItem extends React.Component {
                     <i onClick={() => this.toggleInput()} className="fa fa-edit"/></button>
                 {
                     this.state.inputHidden ? "" :
-                        <div><input type="text" onChange={this.titleChanged} placeholder={this.props.topic.title}/>
+                        <div><input type="text" onChange={this.titleChanged} placeholder={this.props.topic.title}
+                        defaultValue={this.props.topic.title}/>
                             <button onClick={() => {
                                 this.props.updateTopic(this.props.selectedTopic, this.state.title);
                                 this.toggleInput()

@@ -38,7 +38,8 @@ export default class ModuleItem extends React.Component {
                     <i onClick={() => this.toggleInput()} className="fa fa-edit"/></button>
                 {
                     this.state.inputHidden ? "" :
-                        <div><input type="text" onChange={this.titleChanged} placeholder={this.props.module.title}/>
+                        <div><input type="text" onChange={this.titleChanged} placeholder={this.props.module.title}
+                                    defaultValue={this.props.module.title}/>
                             <button onClick={() => {
                                 this.props.updateModule(this.props.selectedModule, this.state.title);
                                 this.toggleInput()

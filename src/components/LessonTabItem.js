@@ -34,7 +34,8 @@ export default class LessonTabItem extends React.Component {
                     <i onClick={() => this.toggleInput()} className="fa fa-edit"/></button>
                 {
                     this.state.inputHidden ? "" :
-                        <div><input type="text" onChange={this.titleChanged} placeholder={this.props.lesson.title}/>
+                        <div><input type="text" onChange={this.titleChanged} placeholder={this.props.lesson.title}
+                                    defaultValue={this.props.lesson.title}/>
                             <button onClick={() => {
                                 this.props.updateLesson(this.props.selectedLesson, this.state.title);
                                 this.toggleInput()

@@ -134,13 +134,6 @@ export default class CourseEditor
 
 
                     <div className="col-8 right bg-light">
-                        {/*<LessonTabs selectLesson={this.selectLesson}*/}
-                        {/*            selectedLesson={this.state.selectedLesson}*/}
-                        {/*            lessons={this.state.selectedModule.lessons}*/}
-                        {/*            updateLesson={this.updateLesson}*/}
-                        {/*/>*/}
-
-                        {/*<br/>*/}
                         <TopicPills topics={this.state.selectedLesson.topics}
                                     selectedTopic={this.state.selectedTopic}
                                     updateTopic={this.updateLesson}
