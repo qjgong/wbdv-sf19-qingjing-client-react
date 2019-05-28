@@ -21,11 +21,13 @@ export default class CourseCard
                     </h5></Link>
                     <p className="card-text"> {this.props.course.id}</p>
                     <Link to={`/course-editor/${this.props.course.id}`}
-                       className="btn btn-primary" onClick={()=> this.props.selectCourse(this.props.course)}>
+                          className="btn btn-primary" onClick={() => this.props.selectCourse(this.props.course)}>
                         More...
                     </Link>
 
-                    <button onClick={() => this.props.deleteCourse(this.props.course.id)} className="btn btn-danger ml-1">Delete</button>
+                    <button onClick={() => this.props.deleteCourse(this.props.course.id)}
+                            className="btn btn-danger ml-1">Delete
+                    </button>
                 </div>
             </td>
         )

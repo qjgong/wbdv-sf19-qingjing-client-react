@@ -21,22 +21,22 @@ export default class ModuleList extends React.Component {
     }
 
     createModule = () => {
-        let module={
+        let module = {
             title: this.state.module.title,
             // id: (new Date()).getTime()
-            id: Math.random()*50
+            id: Math.random() * 50
         }
         console.log(module);
-        let modules=this.state.modules;
-        if (!modules) {modules=[]}
+        let modules = this.state.modules;
+        if (!modules) {
+            modules = []
+        }
         modules.push(module);
-        document.getElementById("add-module-input").value="";
+        document.getElementById("add-module-input").value = "";
         this.setState({
             modules: modules
         })
     }
-
-
 
 
     titleChanged = (event) => {
@@ -46,16 +46,16 @@ export default class ModuleList extends React.Component {
             }
         })
     }
-    deleteModule=(id)=>{
+    deleteModule = (id) => {
         this.setState({
-            modules:this.state.modules.filter(module=>module.id !==id)
+            modules: this.state.modules.filter(module => module.id !== id)
         })
     }
 
     componentDidUpdate(prevProps) {
-        if (prevProps.modules !== this.props.modules){
+        if (prevProps.modules !== this.props.modules) {
             this.setState({
-                modules:this.props.modules
+                modules: this.props.modules
             })
         }
     }
@@ -69,19 +69,20 @@ export default class ModuleList extends React.Component {
                         <input
                             onChange={this.titleChanged}
                             placeholder="New Module"
-                             className="form-control"
-                        id="add-module-input"/>
-                        <button onClick={()=>this.createModule()} className="btn btn-secondary btn-block">Add Module</button>
+                            className="form-control"
+                            id="add-module-input"/>
+                        <button onClick={() => this.createModule()} className="btn btn-secondary btn-block">Add Module
+                        </button>
                     </li>
                     {
-                        this.state.modules && this.state.modules.map((module,key)=>
+                        this.state.modules && this.state.modules.map((module, key) =>
                             <ModuleItem
                                 deleteModule={this.deleteModule}
                                 selectModule={this.props.selectModule}
                                 selectedModule={this.props.selectedModule}
                                 module={module}
                                 updateModule={this.props.updateModule}
-                            key={key}/>
+                                key={key}/>
                         )
                     }
 

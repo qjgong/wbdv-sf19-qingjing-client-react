@@ -7,8 +7,7 @@ import CourseService from "../services/CourseService";
 import "./WhiteBoard.css"
 
 export default class Whiteboard extends React.Component {
-    courses= (new CourseService()).findAllCourses();
-
+    courses = (new CourseService()).findAllCourses();
 
 
     constructor(props) {
@@ -16,16 +15,16 @@ export default class Whiteboard extends React.Component {
         super(props);
         this.state = {
             selectedCourse: this.courses[0],
-            courses:this.courses
+            courses: this.courses
         }
     }
 
     selectCourse = course =>
         this.setState({selectedCourse: course})
 
-    deleteCourse=(id)=>{
+    deleteCourse = (id) => {
         this.setState({
-            courses:this.state.courses.filter(course=>course.id !==id)
+            courses: this.state.courses.filter(course => course.id !== id)
         })
     }
 

@@ -111,7 +111,8 @@ export default class CourseEditor
                     <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
                         <div className="navbar-header ml-5">
                             <Link to="/">
-                                <li className="fa fa-times" style={{color: "white"}}/></Link>
+                                <li className="fa fa-times" style={{color: "white"}}/>
+                            </Link>
                             <a className="navbar-brand ml-3">
                                 {this.props.course.title}
                             </a>

@@ -7,7 +7,6 @@ import '../node_modules/font-awesome/css/font-awesome.min.css';
 import WhiteBoard from "./containers/WhiteBoard";
 
 
-
 ReactDOM.render(
     <div className="container-fluid">
         <WhiteBoard/>

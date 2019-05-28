@@ -21,7 +21,7 @@ export default class LessonTabs extends React.Component {
             lessons = []
         }
         lessons.push(lesson);
-        document.getElementById("add-lesson-input").value="";
+        document.getElementById("add-lesson-input").value = "";
         this.setState({lessons: lessons})
     }
 
@@ -33,16 +33,16 @@ export default class LessonTabs extends React.Component {
         })
     }
 
-    deleteLesson=(id)=>{
+    deleteLesson = (id) => {
         this.setState({
-            lessons:this.state.lessons.filter(lesson=>lesson.id!==id)
+            lessons: this.state.lessons.filter(lesson => lesson.id !== id)
         })
     }
 
     componentDidUpdate(prevProps) {
-        if (prevProps.lessons !== this.props.lessons){
+        if (prevProps.lessons !== this.props.lessons) {
             this.setState({
-                lessons:this.props.lessons
+                lessons: this.props.lessons
             })
         }
     }
@@ -67,8 +67,9 @@ export default class LessonTabs extends React.Component {
                         onChange={this.titleChanged}
                         placeholder="New Lesson"
                         className="form-control"
-                    id="add-lesson-input"/>
-                    <button onClick={()=>this.createLesson()} className="btn btn-secondary btn-block">Add Lesson</button>
+                        id="add-lesson-input"/>
+                    <button onClick={() => this.createLesson()} className="btn btn-secondary btn-block">Add Lesson
+                    </button>
                 </li>
             </ul>
 

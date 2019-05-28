@@ -42,36 +42,36 @@ export default class CourseGrid
                     <table className="table table-hover table-responsive">
 
 
-                    <thead className="thead-light">
+                        <thead className="thead-light">
 
-                    <tr>
-                        <th> Title</th>
-                        <th>Owned by <i className="fa fa-caret-down"/></th>
-                        <th><Link to="/course-table"><i className="fa fa-bars"/></Link></th>
-                        <th><i className="fa fa-sort-alpha-asc"/></th>
-                        <th><i className="fa fa-folder"/></th>
+                        <tr>
+                            <th> Title</th>
+                            <th>Owned by <i className="fa fa-caret-down"/></th>
+                            <th><Link to="/course-table"><i className="fa fa-bars"/></Link></th>
+                            <th><i className="fa fa-sort-alpha-asc"/></th>
+                            <th><i className="fa fa-folder"/></th>
 
-                        <th>&nbsp;</th>
-                    </tr>
+                            <th>&nbsp;</th>
+                        </tr>
 
-                    </thead>
+                        </thead>
 
-                    <tbody>
-                    <tr className="card-deck grid-container">
-                        {this.props.courses.map((course, key) =>
-                            <CourseCard course={course}
-                                        selectCourse={this.props.selectCourse}
-                                        deleteCourse={this.props.deleteCourse}
-                                        key={key}/>)}
-                    </tr>
-                    </tbody>
-                </table>
+                        <tbody>
+                        <tr className="card-deck grid-container">
+                            {this.props.courses.map((course, key) =>
+                                <CourseCard course={course}
+                                            selectCourse={this.props.selectCourse}
+                                            deleteCourse={this.props.deleteCourse}
+                                            key={key}/>)}
+                        </tr>
+                        </tbody>
+                    </table>
                 </div>
 
                 <button className="btn btn-danger floating">
-                    <i className="fa fa-plus" style={{color:"white"}}></i>
+                    <i className="fa fa-plus" style={{color: "white"}}></i>
                 </button>
             </div>
-    )
+        )
     }
-    }
+}

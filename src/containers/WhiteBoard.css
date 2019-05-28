@@ -1,5 +1,5 @@
 .grid-container {
-    display:grid;
+    display: grid;
     grid-template-columns: repeat(6, 1fr);
 }
 
@@ -116,7 +116,7 @@ input:checked + .slider:before {
     padding-left: 10px;
     margin-left: 0;
     font-style: italic;
-    width:50%;
+    width: 50%;
 }
 
 .container {
@@ -152,21 +152,23 @@ input:checked + .slider:before {
     padding-right: 5%;
 
 }
-a.navbar-brand.ml-3{
-    color:white;
+
+a.navbar-brand.ml-3 {
+    color: white;
 }
 
 .nav-link {
     color: white;
 }
-li.list-group-item.bg-dark{
-    color:white;
+
+li.list-group-item.bg-dark {
+    color: white;
 }
 
-li.nav-link.active.bg-secondary{
-    color:white;
+li.nav-link.active.bg-secondary {
+    color: white;
 }
 
-.nav-tabs{
+.nav-tabs {
     border-bottom: black;
 }
