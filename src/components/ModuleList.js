@@ -30,6 +30,7 @@ export default class ModuleList extends React.Component {
         let modules=this.state.modules;
         if (!modules) {modules=[]}
         modules.push(module);
+        document.getElementById("add-module-input").value="";
         this.setState({
             modules: modules
         })
@@ -67,8 +68,9 @@ export default class ModuleList extends React.Component {
                     <li className="list-group-item bg-dark">
                         <input
                             onChange={this.titleChanged}
-                            placeholder={this.state.module.title}
-                             className="form-control"/>
+                            placeholder="New Module"
+                             className="form-control"
+                        id="add-module-input"/>
                         <button onClick={()=>this.createModule()} className="btn btn-secondary btn-block">Add Module</button>
                     </li>
                     {
@@ -79,7 +81,6 @@ export default class ModuleList extends React.Component {
                                 selectedModule={this.props.selectedModule}
                                 module={module}
                                 updateModule={this.props.updateModule}
-                                // titleChanged={this.titleChanged}
                             key={key}/>
                         )
                     }

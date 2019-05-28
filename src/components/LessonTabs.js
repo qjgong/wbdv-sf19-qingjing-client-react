@@ -21,6 +21,7 @@ export default class LessonTabs extends React.Component {
             lessons = []
         }
         lessons.push(lesson);
+        document.getElementById("add-lesson-input").value="";
         this.setState({lessons: lessons})
     }
 
@@ -65,7 +66,8 @@ export default class LessonTabs extends React.Component {
                     <input
                         onChange={this.titleChanged}
                         placeholder="New Lesson"
-                        className="form-control"/>
+                        className="form-control"
+                    id="add-lesson-input"/>
                     <button onClick={()=>this.createLesson()} className="btn btn-secondary btn-block">Add Lesson</button>
                 </li>
             </ul>

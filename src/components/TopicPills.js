@@ -21,6 +21,7 @@ export default class TopicPills extends React.Component {
             topics = []
         }
         topics.push(topic);
+        document.getElementById("add-topic-input").value="";
         this.setState({topics: topics})
     }
 
@@ -66,7 +67,8 @@ export default class TopicPills extends React.Component {
                     <input
                         onChange={this.titleChanged}
                         placeholder="New topic"
-                        className="form-control"/>
+                        className="form-control"
+                    id="add-topic-input"/>
                     <button onClick={()=>this.createTopic()} className="btn btn-secondary btn-block">Add topic</button>
                 </li>
             </ul>
