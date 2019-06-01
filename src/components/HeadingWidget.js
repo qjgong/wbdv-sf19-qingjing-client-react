@@ -7,7 +7,7 @@ const HeadingWidget = ({index, widgets, widget, deleteWidget, moveUp, moveDown, 
         <div className="form-group row ml-sm-2 col-sm-12">
             <h4 className="mr-auto">Heading Widget</h4>
             {
-                index && <button className={"btn btn-xs btn-warning mr-1"} onClick={() => moveUp(widget.id)}>
+                (index!=0) && <button className={"btn btn-xs btn-warning mr-1"} onClick={() => moveUp(widget.id)}>
                     <i className={"fa fa-arrow-up fa-sm"}/>
                 </button>
             }

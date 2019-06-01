@@ -5,7 +5,7 @@ const ImageWidget = ({index, widget, widgets, deleteWidget, moveUp, moveDown, ty
         <div className="widget row ml-sm-2 col-sm-12">
             <h4 className="mr-auto">Image Widget</h4>
             {
-                index && <button className={"btn btn-xs btn-warning mr-1"} onClick={() => moveUp(widget.id)}>
+                (index!=0) && <button className={"btn btn-xs btn-warning mr-1"} onClick={() => moveUp(widget.id)}>
                     <i className={"fa fa-arrow-up fa-sm"}/>
                 </button>
             }
