@@ -17,6 +17,7 @@ export default class Whiteboard extends React.Component {
             selectedCourse: this.courses[0],
             courses: this.courses
         }
+
     }
 
     selectCourse = course =>

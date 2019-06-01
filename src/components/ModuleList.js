@@ -26,7 +26,6 @@ export default class ModuleList extends React.Component {
             // id: (new Date()).getTime()
             id: Math.random() * 50
         }
-        console.log(module);
         let modules = this.state.modules;
         if (!modules) {
             modules = []
@@ -61,7 +60,6 @@ export default class ModuleList extends React.Component {
     }
 
     render() {
-        console.log(this.state.modules);
         return (
             <div>
                 <ul className="list-group">

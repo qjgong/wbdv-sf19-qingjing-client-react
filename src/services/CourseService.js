@@ -2,26 +2,35 @@ import data from "./courses.json"
 import React from "react";
 
 
-export default class CourseService extends React.Component {
-
+export default class CourseService {
+    constructor() {
+        if (!!CourseService.instance) {
+            return CourseService.instance;
+        }
+        CourseService.instance = this;
+        this.courses = data;
+        return this;
+    }
 
     createCourse(course) {
-        data.add(course);
+        this.courses.push(course);
     }
 
     findAllCourses() {
-        return data
+        return this.courses;
     }
 
     findCourseById(id) {
-        return data.map(course => course.id === id);
+        return this.courses.find(x => x.id == id);
     }
 
     updateCourse(id, course) {
-        data.map(x => x.id === id ? course : x)
+        let this_course = this.findCourseById(id);
+        this_course.title = course.title;
+        this_course.modules = course.modules;
     }
 
     deleteCourse(id) {
-        data.removeIf(course => course.id === id)
+        this.courses = this.courses.filter(x => x.id !== id);
     }
 }

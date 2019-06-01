@@ -4,6 +4,12 @@ import LessonTabs from "../components/LessonTabs";
 import TopicPills from "../components/TopicPills";
 import WidgetList from "../components/WidgetList";
 import {Link} from "react-router-dom";
+import WidgetListComponent from "../components/WidgetListComponent";
+import { createStore } from 'redux';
+import {connect, Provider} from 'react-redux'
+import widgetReducer from '../reducers/WidgetReducer'
+import WidgetListContainer from "./WidgetListContainer";
+import WidgetService from "../services/WidgetService";
 
 export default class CourseEditor
     extends React.Component {
@@ -26,6 +32,13 @@ export default class CourseEditor
                 }
             }
         }
+        console.log(this.state.selectedTopic.id)
+
+        let widgetService=new WidgetService();
+        let widgets=widgetService.findWidgets(this.state.selectedTopic.id);
+
+        this.store = createStore(widgetReducer, {INITIAL_State: {topicId:this.state.selectedTopic.id, widgets:widgets}})
+        console.log(this.store.getState());
     }
 
 
@@ -104,7 +117,6 @@ export default class CourseEditor
 
     render() {
 
-        console.log(this.state.selectedModule)
         return (
             <div className="container-fluid bg-dark">
                 <div className="row bg-dark">
@@ -141,7 +153,9 @@ export default class CourseEditor
                                     selectTopic={this.selectTopic}/>
 
                         <br/>
-                        <WidgetList/>
+                        <Provider store={this.store}>
+                            <WidgetListContainer/>
+                        </Provider>
                     </div>
 
                 </div>
