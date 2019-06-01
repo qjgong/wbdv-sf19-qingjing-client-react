@@ -99,8 +99,26 @@ export default class WidgetService {
     }
 
     deleteWidget(widgetId) {
+        let i;
+        for (i = 0; i < this.courses.length; i++) {
+            let modules = this.courses[i].modules;
+            let j;
+            for (j = 0; j < modules.length; j++) {
+                let lessons = modules[j].lessons;
+                let k;
+                for (k = 0; k < lessons.length; k++) {
+                    let topics = lessons[k].topics;
+                    let m;
+                    for (m = 0; m < topics.length; m++) {
+                        let widgets = topics[m].widgets;
 
-        let widget= this.findWidget(widgetId);
-        widget=null;
+                        return widgets.filter(x=>x.id!==widgetId);
+                    }
+
+
+                }
+            }
+
+        }
     }
 }

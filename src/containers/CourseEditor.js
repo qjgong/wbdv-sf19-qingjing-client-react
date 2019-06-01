@@ -37,7 +37,7 @@ export default class CourseEditor
         let widgetService=new WidgetService();
         let widgets=widgetService.findWidgets(this.state.selectedTopic.id);
 
-        this.store = createStore(widgetReducer, {INITIAL_State: {topicId:this.state.selectedTopic.id, widgets:widgets}})
+        this.store = createStore(widgetReducer, {topicId:this.state.selectedTopic.id, widgets:widgets})
         console.log(this.store.getState());
     }
 

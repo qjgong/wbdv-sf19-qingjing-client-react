@@ -20,13 +20,16 @@ const propertyToDispatchMapper = dispatch => ({
                     widgets: widgets
                 })),
     deleteWidget: widgetId =>
-        widgetService
-            .deleteWidget(widgetId)
-            .then(widgets =>
-                dispatch({
-                    type: 'DELETE_WIDGET',
-                    widgets: widgets
-                })),
+    {
+        console.log(widgetId)
+    },
+        // widgetService
+        //     .deleteWidget(widgetId)
+        //     .then(widgets =>
+        //         dispatch({
+        //             type: 'DELETE_WIDGET',
+        //             widgets: widgets
+        //         })),
     createWidget: () =>
         widgetService
             .createWidget({
