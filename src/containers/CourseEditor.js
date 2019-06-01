@@ -2,9 +2,7 @@ import React from 'react'
 import ModuleList from "../components/ModuleList";
 import LessonTabs from "../components/LessonTabs";
 import TopicPills from "../components/TopicPills";
-import WidgetList from "../components/WidgetList";
 import {Link} from "react-router-dom";
-import WidgetListComponent from "../components/WidgetListComponent";
 import { createStore } from 'redux';
 import {connect, Provider} from 'react-redux'
 import widgetReducer from '../reducers/WidgetReducer'
@@ -32,13 +30,13 @@ export default class CourseEditor
                 }
             }
         }
-        console.log(this.state.selectedTopic.id)
 
-        let widgetService=new WidgetService();
-        let widgets=widgetService.findWidgets(this.state.selectedTopic.id);
+
+        this.widgetService=new WidgetService();
+        let widgets=this.widgetService.findWidgets(this.state.selectedTopic.id);
 
         this.store = createStore(widgetReducer, {topicId:this.state.selectedTopic.id, widgets:widgets})
-        console.log(this.store.getState());
+
     }
 
 
@@ -85,6 +83,10 @@ export default class CourseEditor
         this.setState({
             selectedTopic: selectedTopic,
         })
+
+        let widgets=this.widgetService.findWidgets(topic.id);
+
+        this.store = createStore(widgetReducer, {topicId:topic.id, widgets:widgets})
 
     }
 
@@ -162,7 +164,7 @@ export default class CourseEditor
 
 
                 <button className="btn btn-danger floating">
-                    <i className="fa fa-plus" style={{color: "white"}}></i>
+                    <i className="fa fa-plus" style={{color: "white"}}/>
                 </button>
 
             </div>

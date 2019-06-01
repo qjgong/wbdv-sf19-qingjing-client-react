@@ -74,8 +74,7 @@ export default class WidgetService {
                     let m;
                     for (m = 0; m < topics.length; m++) {
                         let widgets = topics[m].widgets;
-                        let widget = widgets.find(x => x.id === widgetId);
-                        return widget;
+                        return widgets.find(x=>x.id===widgetId);
                     }
 
 
@@ -89,11 +88,10 @@ export default class WidgetService {
 
 
     updateWidget(widgetId, widget) {
-        let current=this.findWidget(widgetId);
-        current.id=widget.id;
-        current.type=widget.type;
-        current.name=widget.name;
-
+        let current = this.findWidget(widgetId);
+        current.id = widget.id;
+        current.type = widget.type;
+        current.name = widget.name;
 
 
     }
@@ -111,8 +109,16 @@ export default class WidgetService {
                     let m;
                     for (m = 0; m < topics.length; m++) {
                         let widgets = topics[m].widgets;
+                        let n;
+                        for (n = 0; n < widgets.length; n++) {
+                            if (widgets[n] !== null) {
+                                if (widgets[n].id === widgetId) {
+                                    widgets[n] = null;
+                                }
+                                return widgets;
+                            }
+                        }
 
-                        return widgets.filter(x=>x.id!==widgetId);
                     }
 
 
@@ -120,6 +126,5 @@ export default class WidgetService {
             }
 
         }
-        return null;
     }
 }

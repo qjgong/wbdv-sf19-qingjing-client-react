@@ -1,13 +1,21 @@
 import React from "react";
 
-const ParagraphWidget = ({widget, upBtn, downBtn, typeChange, sizeChange, nameChange, textChange}) =>
+const ParagraphWidget = ({index, widget, widgets, deleteWidget, moveUp, moveDown, typeChange, sizeChange, nameChange, textChange}) =>
     <div className="mb-5 card p-1">
         <div className="widget row ml-sm-2 col-sm-12">
             <h4 className="mr-auto">Paragraph Widget</h4>
-            <button className="btn btn-xs btn-warning mr-1"><i
-                className="fa fa-arrow-up"></i></button>
-            <button className="btn btn-xs btn-warning mr-1"><i
-                className="fa fa-arrow-down"></i></button>
+            {
+                index && <button className={"btn btn-xs btn-warning mr-1"} onClick={() => moveUp(widget.id)}>
+                    <i className={"fa fa-arrow-up fa-sm"}/>
+                </button>
+            }
+
+            {(index !== widgets.length - 1) &&
+            <button className="btn btn-xs btn-warning mr-1"
+                    onClick={() => moveDown(widget.id)}>
+                <i className="fa fa-arrow-down fa-sm"/>
+            </button>
+            }
             <select className="form-control col-sm-2">
                 <option>Paragraph</option>
                 <option>Heading</option>
@@ -15,12 +23,13 @@ const ParagraphWidget = ({widget, upBtn, downBtn, typeChange, sizeChange, nameCh
                 <option>Image</option>
                 <option>Link</option>
             </select>
-            <button className="btn btn-xs btn-danger ml-1">X
+            <button className="btn btn-xs btn-danger ml-1"
+                    onClick={() => deleteWidget(widget.id)}><i className="fa fa-times" style={{color: "white"}}/>
             </button>
         </div>
         <div className="widget row ml-sm-2 col-sm-12">
                         <textarea className="form-control"
-                                  placeholder="Lorem ipsum"></textarea>
+                                  placeholder="Lorem ipsum"/>
         </div>
         <div className="widget row ml-sm-2 col-sm-12">
             <input className="form-control" placeholder="Widget name"/>
