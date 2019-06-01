@@ -120,5 +120,6 @@ export default class WidgetService {
             }
 
         }
+        return null;
     }
 }
