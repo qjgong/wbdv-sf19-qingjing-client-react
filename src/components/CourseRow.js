@@ -1,5 +1,5 @@
 import React from 'react'
-import {BrowserRouter as Router, Link, Route} from 'react-router-dom'
+import {Link} from 'react-router-dom'
 
 export default class CourseRow extends React.Component {
     constructor(props) {
@@ -21,7 +21,7 @@ export default class CourseRow extends React.Component {
                 <td>&nbsp;</td>
                 <td>
                     <button onClick={() => this.props.deleteCourse(this.props.course.id)}
-                            className="fa fa-times"></button>
+                            className="fa fa-times"/>
                 </td>
 
             </tr>

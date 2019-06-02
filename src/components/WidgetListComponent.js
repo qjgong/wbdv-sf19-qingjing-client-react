@@ -8,8 +8,9 @@ import LinkWidget from "./LinkWidget";
 
 const WidgetListComponent = ({
                                  widgets, IsPreview, togglePreview, topicId, findWidgets, update_widget_type,
-                                 update_heading_size, update_widget_text, deleteWidget, update_widget_name, addWidget,
-                                 updateWidget, createWidget, moveUp, moveDown
+                                 update_heading_size, update_widget_text, deleteWidget, update_widget_name, createWidget,
+                                 updateWidget, moveUp, moveDown, update_list_items, update_list_type,
+                                 update_img_src, update_widget_href, update_widget_title,
                              }) =>
 
 
@@ -31,7 +32,7 @@ const WidgetListComponent = ({
         </div>
 
 
-        <button className="btn btn-danger floating" onClick={addWidget}>
+        <button className="btn btn-danger floating" onClick={createWidget}>
             <i className="fa fa-plus" style={{color: "white"}}/>
         </button>
 
@@ -50,7 +51,6 @@ const WidgetListComponent = ({
                             deleteWidget={deleteWidget}
                             topicId={topicId}
                             findWidgets={findWidgets}
-                            createWidget={createWidget}
                             moveUp={moveUp}
                             moveDown={moveDown}
                             update_widget_type={update_widget_type}
@@ -69,13 +69,12 @@ const WidgetListComponent = ({
                             deleteWidget={deleteWidget}
                             topicId={topicId}
                             findWidgets={findWidgets}
-                            createWidget={createWidget}
                             moveUp={moveUp}
                             moveDown={moveDown}
                             update_widget_type={update_widget_type}
                             update_widget_text={update_widget_text}
                             update_widget_name={update_widget_name}
-                            update_heading_size={update_heading_size}
+                           // update_heading_size={update_heading_size}
                             IsPreview={IsPreview}/>
                     } else if (widget && widget.type === "LIST") {
                         return <ListWidget
@@ -87,13 +86,14 @@ const WidgetListComponent = ({
                             deleteWidget={deleteWidget}
                             topicId={topicId}
                             findWidgets={findWidgets}
-                            createWidget={createWidget}
                             moveUp={moveUp}
                             moveDown={moveDown}
                             update_widget_type={update_widget_type}
-                            update_widget_text={update_widget_text}
+                            //update_widget_text={update_widget_text}
                             update_widget_name={update_widget_name}
-                            update_heading_size={update_heading_size}
+                            //update_heading_size={update_heading_size}
+                            update_list_items={update_list_items}
+                            update_list_type={update_list_type}
                             IsPreview={IsPreview}/>
                     } else if (widget && widget.type === "IMAGE") {
                         return <ImageWidget
@@ -105,13 +105,14 @@ const WidgetListComponent = ({
                             deleteWidget={deleteWidget}
                             topicId={topicId}
                             findWidgets={findWidgets}
-                            createWidget={createWidget}
                             moveUp={moveUp}
                             moveDown={moveDown}
                             update_widget_type={update_widget_type}
-                            update_widget_text={update_widget_text}
+                            //update_widget_text={update_widget_text}
                             update_widget_name={update_widget_name}
-                            update_heading_size={update_heading_size}
+                           // update_heading_size={update_heading_size}
+                            update_widget_href={update_widget_href}
+                            update_widget_title={update_widget_title}
                             IsPreview={IsPreview}/>
                     } else if (widget && widget.type === "LINK") {
                         return <LinkWidget index={widgets.indexOf(widget)}
@@ -122,20 +123,20 @@ const WidgetListComponent = ({
                                            deleteWidget={deleteWidget}
                                            topicId={topicId}
                                            findWidgets={findWidgets}
-                                           createWidget={createWidget}
                                            moveUp={moveUp}
                                            moveDown={moveDown}
                                            update_widget_type={update_widget_type}
-                                           update_widget_text={update_widget_text}
+                                           //update_widget_text={update_widget_text}
                                            update_widget_name={update_widget_name}
-                                           update_heading_size={update_heading_size}
+                                           //update_heading_size={update_heading_size}
+                                           update_img_src={update_img_src}
                                            IsPreview={IsPreview}/>
                     }
                 })}
 
 
         </ul>
-    </div>
+    </div>;
 
 export default WidgetListComponent
 

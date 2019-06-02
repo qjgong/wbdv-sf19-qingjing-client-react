@@ -1,55 +1,48 @@
 import React from "react";
-import {HEADING, IMAGE, LINK, LIST, PARAGRAPH} from "../constants/constants";
+import WidgetSharedComponents from "./WidgetSharedComponents";
 
 
-const LinkWidget = ({index, IsPreview, widget, widgets, deleteWidget, moveUp, update_widget_type, moveDown, typeChange, sizeChange, nameChange, textChange}) =>
+const LinkWidget = ({index, IsPreview, widget, widgets, deleteWidget, moveUp, update_widget_type, moveDown,  update_widget_href,update_widget_title,update_widget_name}) =>
 
     <div className="mb-5 card p-1">
         {!IsPreview && <div>
+            <div className="form-group row ml-sm-2 col-sm-12 d-flex justify-content-between">
+                <h4 className="mr-auto">Heading Widget</h4>
+                <WidgetSharedComponents
+                    index={index}
+                    widget={widget}
+                    widgets={widgets}
+                    move_up={moveUp}
+                    move_down={moveDown}
+                    update_widget_type={update_widget_type}
+                    delete_widget={deleteWidget}
+                />
+            </div>
             <div className="widget row ml-sm-2 col-sm-12">
-                <h4 className="mr-auto">Link Widget</h4>
-                {
-                    (index != 0) && <button className={"btn btn-xs btn-warning mr-1"} onClick={() => moveUp(widget.id)}>
-                        <i className={"fa fa-arrow-up fa-sm"}/>
-                    </button>
-                }
-
-                {(index !== widgets.length - 1) && <button className="btn btn-xs btn-warning mr-1"
-                                                           onClick={() => moveDown(widget.id)}>
-                    <i className="fa fa-arrow-down fa-sm"/>
-                </button>}
-                <select className="form-control col-sm-2"
-                        id="type"
-                        defaultValue={widget.type}
-                        onChange={(event) => update_widget_type(widget, event.target.value)}>
-                    <option value={HEADING}>Heading</option>
-                    <option value={PARAGRAPH}>Paragraph</option>
-                    <option value={LIST}>List</option>
-                    <option value={IMAGE}>Image</option>
-                    <option value={LINK}>Link</option>
-                </select>
-                <button className="btn btn-xs btn-danger ml-1"
-                        onClick={() => deleteWidget(widget.id)}><i className="fa fa-times" style={{color: "white"}}/>
-                </button>
+                <label>Link URL</label>
+                <input className="form-control"  placeholder="Link URL"
+                       defaultValue={widget.href}
+                       onChange={(event) => update_widget_href(widget, event.target.value)}/>
+            </div>
+            <div className="widget row ml-sm-2 col-sm-12">
+                <input className="form-control" placeholder="Link text"
+                       defaultValue={widget.title}
+                       onChange={(event) => update_widget_title(widget, event.target.value)}/>
             </div>
             <div className="widget row ml-sm-2 col-sm-12">
                 <input className="form-control" placeholder="https://www.youtube.com/user/jannunzi"/>
             </div>
             <div className="widget row ml-sm-2 col-sm-12">
-                <input className="form-control" placeholder="Link text"/>
-            </div>
-            <div className="widget row ml-sm-2 col-sm-12">
-                <input className="form-control" placeholder="https://www.youtube.com/user/jannunzi"/>
-            </div>
-            <div className="widget row ml-sm-2 col-sm-12">
-                <input className="form-control" placeholder="Widget name"/>
+                <input className="form-control" placeholder="Widget name"
+                       onChange={(event) => update_widget_name(widget, event.target.value)}
+                       defaultValue={widget.name}/>
             </div>
             <div className="widget row ml-sm-2 col-sm-12">
                 <h4>Preview</h4>
             </div>
         </div>}
         <div className="widget row ml-sm-2 col-sm-12">
-            <a href="#">Link text</a>
+            <a href={widget.href}>{widget.title}</a>
         </div>
     </div>
 

@@ -1,51 +1,44 @@
 import React from "react";
-import {HEADING, IMAGE, LINK, LIST, PARAGRAPH} from "../constants/constants";
+import WidgetSharedComponents from "./WidgetSharedComponents";
 
 
-const ListWidget = ({index, widget, IsPreview,widgets, deleteWidget, update_widget_type, moveUp, moveDown, typeChange, sizeChange, nameChange, textChange}) =>
+const ListWidget = ({index, widget, IsPreview,widgets, deleteWidget, update_widget_type, moveUp, moveDown, update_widget_name,update_list_items,update_list_type}) =>
     <div className="mb-5 card p-1">
         {!IsPreview && <div>
-            <div className="widget row ml-sm-2 col-sm-12">
-                <h4 className="mr-auto">List Widget</h4>
-                {
-                    (index != 0) && <button className={"btn btn-xs btn-warning mr-1"} onClick={() => moveUp(widget.id)}>
-                        <i className={"fa fa-arrow-up fa-sm"}/>
-                    </button>
-                }
-
-                {(index !== widgets.length - 1) && <button className="btn btn-xs btn-warning mr-1"
-                                                           onClick={() => moveDown(widget.id)}>
-                    <i className="fa fa-arrow-down fa-sm"/>
-                </button>}
-                <select className="form-control col-sm-2"
-                        id="type"
-                        defaultValue={widget.type}
-                        onChange={(event) => update_widget_type(widget, event.target.value)}>
-                    <option value={HEADING}>Heading</option>
-                    <option value={PARAGRAPH}>Paragraph</option>
-                    <option value={LIST}>List</option>
-                    <option value={IMAGE}>Image</option>
-                    <option value={LINK}>Link</option>
-                </select>
-                <button className="btn btn-xs btn-danger ml-1"
-                        onClick={() => deleteWidget(widget.id)}><i className="fa fa-times" style={{color: "white"}}/>
-                </button>
+            <div className="form-group row ml-sm-2 col-sm-12 d-flex justify-content-between">
+                <h4 className="mr-auto">Heading Widget</h4>
+                <WidgetSharedComponents
+                    index={index}
+                    widget={widget}
+                    widgets={widgets}
+                    move_up={moveUp}
+                    move_down={moveDown}
+                    update_widget_type={update_widget_type}
+                    delete_widget={deleteWidget}
+                />
             </div>
             <div className="widget row ml-sm-2 col-sm-12">
+                <label>List Items</label>
                         <textarea className="form-control"
                                   placeholder="Put each&#10;item in&#10;a separate row"
+                                  defaultValue={widget.items.split(",").join("\n")}
+                                  onChange={(event) => update_list_items(widget, event.target.value)}
                                   rows="4"/>
             </div>
 
             <div className="widget row ml-sm-2 col-sm-12">
-                <select className="form-control">
+                <label>Widget Name</label>
+                <select className="form-control"  onChange={(event)=> update_list_type(widget, event.target.value)}
+                        defaultValue={widget.type}>
                     <option value="unordered">Unordered list</option>
                     <option value="ordered">Ordered list</option>
                 </select>
             </div>
 
             <div className="widget row ml-sm-2 col-sm-12">
-                <input className="form-control" placeholder="Widget name"/>
+                <input className="form-control" placeholder="Widget name"
+                       onChange={(event) => update_widget_name(widget, event.target.value)}
+                       defaultValue={widget.name}/>
             </div>
 
             <div className="widget row ml-sm-2 col-sm-12">
@@ -53,12 +46,22 @@ const ListWidget = ({index, widget, IsPreview,widgets, deleteWidget, update_widg
             </div>
         </div>}
         <div className="widget row ml-sm-2 col-sm-12">
-            <ul style={{list: "circle"}}>
-                <li>Put each</li>
-                <li>item in</li>
-                <li>a separate row</li>
-            </ul>
+            {
+                widget.items && ( widget.type === "unordered" ?
+                    <ul>
+                        {
+                            widget.items.split(",").map((item, key) =>
+                                <li key={key}>{item}</li>)
+                        }
+                    </ul> :
+                    <ol>
+                        {
+                            widget.items.split(",").map((item, key) =>
+                                <li key={key}>{item}</li>)
+                        }
+                    </ol>)
+            }
         </div>
-    </div>
+    </div>;
 
 export default ListWidget

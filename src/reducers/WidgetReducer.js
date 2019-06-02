@@ -14,8 +14,8 @@ const widgetReducer = (state, action) => {
     }
 
     switch (action.type) {
-        case "CREATE_WIDGET":
         case "FIND_ALL_WIDGETS":
+            return state;
         case "FIND_WIDGET":
             return {
                 widgets: action.widgets
@@ -41,7 +41,7 @@ const widgetReducer = (state, action) => {
             newState.widgets=SwapItems(state.widgets, index2, index2 +1)
             return newState;
 
-        case "ADD_WIDGET":
+        case "CREATE_WIDGET":
 
 
             let newWidget = {
@@ -68,6 +68,22 @@ const widgetReducer = (state, action) => {
             if (action.size !== undefined) {
                 widget.size = action.size;
             }
+
+            if (action.items !== undefined) {
+                widget.items = action.items.split("\n").join(",");
+            }
+            if (action.listType !== undefined) {
+                widget.listType = action.listType;
+            }
+            if (action.src !== undefined) {
+                widget.src = action.src;
+            }
+            if (action.href !== undefined) {
+                widget.href = action.href;
+            }
+            if (action.title !== undefined) {
+                widget.title = action.title;
+            }
             if (action.widgetType) {
                 let newWidget = {
                     id: widget.id,
@@ -82,7 +98,7 @@ const widgetReducer = (state, action) => {
                         newWidget={...newWidget, text:""};
                         break;
                     case LIST:
-                        newWidget={...newWidget, items:""};
+                        newWidget={...newWidget, items:"",listType: "unordered"};
                         break;
                     case IMAGE:
                         newWidget={...newWidget, src:""};
@@ -95,6 +111,7 @@ const widgetReducer = (state, action) => {
             widgetService.updateWidget(widget.id, widget);
             newState.widgets = widgetService.findWidgets(state.topicId);
             return newState;
+
 
         default:
             return state;

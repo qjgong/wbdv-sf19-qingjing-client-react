@@ -8,7 +8,7 @@ const widgetService = new WidgetService();
 const stateToPropertyMapper = state => ({
     widgets: state.widgets,
     topicId: state.topicId,
-    IsPreview:state.IsPreview
+    IsPreview: state.IsPreview
 })
 
 const propertyToDispatchMapper = dispatch => ({
@@ -26,18 +26,7 @@ const propertyToDispatchMapper = dispatch => ({
             type: 'DELETE_WIDGET',
             widgets: widgetService.deleteWidget(widgetId)
         }),
-    createWidget: () =>
-        widgetService
-            .createWidget({
-                id: (new Date()).getTime(),
-                name: 'New Widget',
-                type: 'HEADING'
-            })
-            .then(widgets =>
-                dispatch({
-                    type: 'CREATE_WIDGET',
-                    widgets: widgets
-                })),
+
     findWidgets: topicId =>
         widgetService
             .findWidgets({topicId})
@@ -57,8 +46,8 @@ const propertyToDispatchMapper = dispatch => ({
                     widget: widget
                 })),
 
-    addWidget: ()=>dispatch({
-        type:'ADD_WIDGET'
+    createWidget: () => dispatch({
+        type: 'CREATE_WIDGET'
     }),
 
 
@@ -93,6 +82,33 @@ const propertyToDispatchMapper = dispatch => ({
     togglePreview: () => dispatch({
         type: 'TOGGLE_PREVIEW'
     }),
+    update_list_items: (widget, items) => dispatch({
+        type: 'UPDATE_WIDGET',
+        widget: widget,
+        items: items
+    }),
+    update_list_type: (widget, type) => dispatch({
+        widget: widget,
+        type: 'UPDATE_WIDGET',
+        listType: type
+    }),
+    update_img_src: (widget, src) => dispatch({
+        type: 'UPDATE_WIDGET',
+        widget: widget,
+        src: src
+    }),
+    update_widget_href: (widget, href) => dispatch({
+        type: 'UPDATE_WIDGET',
+        widget: widget,
+        href: href
+    }),
+    update_widget_title:
+        (widget, title) => dispatch({
+            type: 'UPDATE_WIDGET',
+            widget: widget,
+            title: title
+        }),
+
 
 })
 
