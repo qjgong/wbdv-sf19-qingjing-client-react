@@ -18,7 +18,7 @@
                   {
                     "id": "4",
                     "type": "HEADING",
-                    "size": 1,
+                    "size": "h1",
                     "text": "The Document Object Model"
                   },
                   {

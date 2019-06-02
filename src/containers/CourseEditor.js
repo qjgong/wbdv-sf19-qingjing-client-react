@@ -33,9 +33,9 @@ export default class CourseEditor
 
 
         this.widgetService=new WidgetService();
-        let widgets=this.widgetService.findWidgets(this.state.selectedTopic.id);
-
-        this.store = createStore(widgetReducer, {topicId:this.state.selectedTopic.id, widgets:widgets})
+        // let widgets=this.widgetService.findWidgets(this.state.selectedTopic.id);
+        //
+        // this.store = createStore(widgetReducer, {topicId:this.state.selectedTopic.id, widgets:widgets, IsPreview:false})
 
     }
 
@@ -86,7 +86,8 @@ export default class CourseEditor
 
         let widgets=this.widgetService.findWidgets(topic.id);
 
-        this.store = createStore(widgetReducer, {topicId:topic.id, widgets:widgets})
+        this.store = createStore(widgetReducer, {topicId:topic.id, widgets:widgets, IsPreview:false})
+
 
     }
 
@@ -155,9 +156,9 @@ export default class CourseEditor
                                     selectTopic={this.selectTopic}/>
 
                         <br/>
-                        <Provider store={this.store}>
+                        { this.store &&<Provider store={this.store}>
                             <WidgetListContainer/>
-                        </Provider>
+                        </Provider>}
                     </div>
 
                 </div>

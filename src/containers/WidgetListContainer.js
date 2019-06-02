@@ -7,7 +7,8 @@ const widgetService = new WidgetService();
 
 const stateToPropertyMapper = state => ({
     widgets: state.widgets,
-    topicId: state.topicId
+    topicId: state.topicId,
+    IsPreview:state.IsPreview
 })
 
 const propertyToDispatchMapper = dispatch => ({
@@ -73,7 +74,26 @@ const propertyToDispatchMapper = dispatch => ({
         type: 'UPDATE_WIDGET',
         widget: widget,
         widgetType: type
-    })
+    }),
+    update_widget_text: (widget, text) => dispatch({
+        type: 'UPDATE_WIDGET',
+        widget: widget,
+        text: text
+    }),
+    update_widget_name: (widget, name) => dispatch({
+        type: 'UPDATE_WIDGET',
+        widget: widget,
+        name: name
+    }),
+    update_heading_size: (widget, size) => dispatch({
+        type: 'UPDATE_WIDGET',
+        widget: widget,
+        size: size
+    }),
+    togglePreview: () => dispatch({
+        type: 'TOGGLE_PREVIEW'
+    }),
+
 })
 
 
