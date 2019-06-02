@@ -1,7 +1,8 @@
 import React from "react";
+import {HEADING, IMAGE, LINK, LIST, PARAGRAPH} from "../constants/constants";
 
 
-const LinkWidget = ({index, widget, widgets, deleteWidget, moveUp, moveDown, typeChange, sizeChange, nameChange, textChange}) =>
+const LinkWidget = ({index, widget, widgets, deleteWidget, moveUp, update_widget_type,moveDown, typeChange, sizeChange, nameChange, textChange}) =>
 
     <div className="mb-5 card p-1">
         <div className="widget row ml-sm-2 col-sm-12">
@@ -16,12 +17,15 @@ const LinkWidget = ({index, widget, widgets, deleteWidget, moveUp, moveDown, typ
                                                        onClick={() => moveDown(widget.id)}>
                 <i className="fa fa-arrow-down fa-sm"/>
             </button>}
-            <select className="form-control col-sm-2">
-                <option>Link</option>
-                <option>Heading</option>
-                <option>Paragraph</option>
-                <option>List</option>
-                <option>Image</option>
+            <select className="form-control col-sm-2"
+                    id="type"
+                    defaultValue={widget.type}
+                    onChange={(event) => update_widget_type(widget, event.target.value)}>
+                <option value={HEADING}>Heading</option>
+                <option value={PARAGRAPH}>Paragraph</option>
+                <option value={LIST}>List</option>
+                <option value={IMAGE}>Image</option>
+                <option value={LINK}>Link</option>
             </select>
             <button className="btn btn-xs btn-danger ml-1"
                     onClick={() => deleteWidget(widget.id)}><i className="fa fa-times" style={{color: "white"}}/>

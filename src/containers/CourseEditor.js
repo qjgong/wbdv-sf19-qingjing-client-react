@@ -163,9 +163,7 @@ export default class CourseEditor
                 </div>
 
 
-                <button className="btn btn-danger floating">
-                    <i className="fa fa-plus" style={{color: "white"}}/>
-                </button>
+
 
             </div>
 

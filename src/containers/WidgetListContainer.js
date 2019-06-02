@@ -56,6 +56,10 @@ const propertyToDispatchMapper = dispatch => ({
                     widget: widget
                 })),
 
+    addWidget: ()=>dispatch({
+        type:'ADD_WIDGET'
+    }),
+
 
     moveUp: (widgetId) => {
         dispatch({type: 'MOVE_UP', widgetId: widgetId})
@@ -63,7 +67,13 @@ const propertyToDispatchMapper = dispatch => ({
 
     moveDown: (widgetId) => {
         dispatch({type: 'MOVE_DOWN', widgetId: widgetId})
-    }
+    },
+
+    update_widget_type: (widget, type) => dispatch({
+        type: 'UPDATE_WIDGET',
+        widget: widget,
+        widgetType: type
+    })
 })
 
 
