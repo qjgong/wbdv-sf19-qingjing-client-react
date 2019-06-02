@@ -4,6 +4,7 @@ import {HEADING, IMAGE, LINK, LIST, PARAGRAPH} from "../constants/constants";
 let widgetService=new WidgetService();
 
 const widgetReducer = (state, action) => {
+    let newState = Object.assign({}, state);
     function SwapItems(items, firstIndex, secondIndex) {
         let results = items.slice();
         let firstItem = items[firstIndex];
@@ -21,26 +22,27 @@ const widgetReducer = (state, action) => {
             };
         case "DELETE_WIDGET":
             widgetService.deleteWidget(action.widgetId);
-            let newState = Object.assign({}, state);
             newState.widgets = widgetService.findWidgets(state.topicId);
             return newState;
 
         case 'TOGGLE_PREVIEW':
 
-            let newState3 = Object.assign({}, state);
-            newState3.IsPreview = !newState3.IsPreview;
-            return newState3;
+
+            newState.IsPreview = !newState.IsPreview;
+            return newState;
 
         case "MOVE_UP":
             let index = state.widgets.indexOf(state.widgets.find(x=>x.id===action.widgetId));
-            return {widgets: SwapItems(state.widgets, index, index - 1)};
+            newState.widgets=SwapItems(state.widgets, index, index - 1);
+            return newState;
 
         case "MOVE_DOWN":
             let index2 = state.widgets.indexOf(state.widgets.find(x=>x.id===action.widgetId));
-            return {widgets: SwapItems(state.widgets, index2, index2 +1)};
+            newState.widgets=SwapItems(state.widgets, index2, index2 +1)
+            return newState;
 
         case "ADD_WIDGET":
-            let newState1 = Object.assign({}, state);
+
 
             let newWidget = {
                 "id": Math.floor(Math.random() * 99999),
@@ -50,11 +52,11 @@ const widgetReducer = (state, action) => {
                 "name":"Test"
             };
             widgetService.createWidget(state.topicId,newWidget);
-            newState1.widgets = widgetService.findWidgets(state.topicId);
-            console.log(newState1);
-            return newState1;
+            newState.widgets = widgetService.findWidgets(state.topicId);
+            console.log(newState);
+            return newState;
         case "UPDATE_WIDGET":
-            let newState2 = Object.assign({}, state);
+
 
             let widget = action.widget;
             if (action.text !== undefined) {
@@ -91,8 +93,8 @@ const widgetReducer = (state, action) => {
                 widget = newWidget;
             }
             widgetService.updateWidget(widget.id, widget);
-            newState2.widgets = widgetService.findWidgets(state.topicId);
-            return newState2;
+            newState.widgets = widgetService.findWidgets(state.topicId);
+            return newState;
 
         default:
             return state;

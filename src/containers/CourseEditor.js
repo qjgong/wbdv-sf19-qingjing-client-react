@@ -3,8 +3,8 @@ import ModuleList from "../components/ModuleList";
 import LessonTabs from "../components/LessonTabs";
 import TopicPills from "../components/TopicPills";
 import {Link} from "react-router-dom";
-import { createStore } from 'redux';
-import {connect, Provider} from 'react-redux'
+import {createStore} from 'redux';
+import {Provider} from 'react-redux'
 import widgetReducer from '../reducers/WidgetReducer'
 import WidgetListContainer from "./WidgetListContainer";
 import WidgetService from "../services/WidgetService";
@@ -20,19 +20,22 @@ export default class CourseEditor
             selectedModule: "",
             selectedLesson: "",
             selectedTopic: "",
+            module: "",
+            lesson: "",
+            topic: ""
         }
-        if (this.props.course.modules !== undefined && this.props.course.modules.length !== 0) {
-            this.state.selectedModule = this.props.course.modules[0];
-            if (this.props.course.modules[0].lessons !== undefined) {
-                this.state.selectedLesson = this.props.course.modules[0].lessons[0];
-                if (this.props.course.modules[0].lessons[0].topics !== undefined) {
-                    this.state.selectedTopic = this.props.course.modules[0].lessons[0].topics[0];
-                }
-            }
-        }
+        // if (this.props.course.modules !== undefined && this.props.course.modules.length !== 0) {
+        //     this.state.selectedModule = this.props.course.modules[0];
+        //     if (this.props.course.modules[0].lessons !== undefined) {
+        //         this.state.selectedLesson = this.props.course.modules[0].lessons[0];
+        //         if (this.props.course.modules[0].lessons[0].topics !== undefined) {
+        //             this.state.selectedTopic = this.props.course.modules[0].lessons[0].topics[0];
+        //         }
+        //     }
+        // }
 
 
-        this.widgetService=new WidgetService();
+        this.widgetService = new WidgetService();
         // let widgets=this.widgetService.findWidgets(this.state.selectedTopic.id);
         //
         // this.store = createStore(widgetReducer, {topicId:this.state.selectedTopic.id, widgets:widgets, IsPreview:false})
@@ -41,52 +44,50 @@ export default class CourseEditor
 
 
     selectModule = module => {
-        let selectedLesson = "";
-        let selectedTopic = "";
-        if (module.lessons !== undefined && module.lessons.length !== 0) {
-            selectedLesson = module.lessons[0];
 
-            if (selectedLesson.length !== 0 && selectedLesson.topics !== undefined) {
-                selectedTopic = module.lessons[0].topics[0];
-            }
-        }
+        // if (module.lessons !== undefined && module.lessons.length !== 0) {
+        //     selectedLesson = module.lessons[0];
+        //
+        //     if (selectedLesson.length !== 0 && selectedLesson.topics !== undefined) {
+        //         selectedTopic = module.lessons[0].topics[0];
+        //     }
+        // }
 
         this.setState(
             {
-
                 selectedModule: module,
-                selectedLesson: selectedLesson,
-                selectedTopic: selectedTopic,
+                selectedLesson: "",
+                selectedTopic: "",
             })
     }
 
 
     selectLesson = lesson => {
-        let selectedTopic = "";
-        if (lesson.length !== 0 && lesson.topics !== undefined) {
-            selectedTopic = lesson.topics[0];
-        }
+
+        // if (lesson.length !== 0 && lesson.topics !== undefined) {
+        //     selectedTopic = lesson.topics[0];
+        // }
 
         this.setState({
             selectedLesson: lesson,
-            selectedTopic: selectedTopic,
+            selectedTopic: "",
         })
     }
 
     selectTopic = topic => {
 
-        let selectedTopic = "";
-        if (topic.length !== 0 && topic !== undefined) {
-            selectedTopic = topic;
-        }
+
+        // if (topic.length !== 0 && topic !== undefined) {
+        //     selectedTopic = topic;
+        // }
 
         this.setState({
-            selectedTopic: selectedTopic,
+            selectedTopic: topic,
         })
 
-        let widgets=this.widgetService.findWidgets(topic.id);
+        let widgets = this.widgetService.findWidgets(topic.id);
 
-        this.store = createStore(widgetReducer, {topicId:topic.id, widgets:widgets, IsPreview:false})
+        this.store = createStore(widgetReducer, {topicId: topic.id, widgets: widgets, IsPreview: false})
 
 
     }
@@ -156,14 +157,12 @@ export default class CourseEditor
                                     selectTopic={this.selectTopic}/>
 
                         <br/>
-                        { this.store &&<Provider store={this.store}>
+                        {this.state.selectedTopic && this.store && <Provider store={this.store}>
                             <WidgetListContainer/>
                         </Provider>}
                     </div>
 
                 </div>
-
-
 
 
             </div>

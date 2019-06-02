@@ -1,7 +1,7 @@
 import React from "react";
 import {HEADING, IMAGE, LINK, LIST, PARAGRAPH} from "../constants/constants";
 
-const ParagraphWidget = ({index, widget, IsPreview, widgets, update_widget_type, deleteWidget, moveUp, moveDown, typeChange, sizeChange, nameChange, textChange}) =>
+const ParagraphWidget = ({index, widget, IsPreview, widgets, update_widget_type, deleteWidget, moveUp, moveDown}) =>
     <div className="mb-5 card p-1">
         {!IsPreview && <div>
             <div className="widget row ml-sm-2 col-sm-12">
