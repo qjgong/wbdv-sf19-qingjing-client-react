@@ -2,19 +2,20 @@ import React from "react";
 import WidgetSharedComponents from "./WidgetSharedComponents";
 
 
-const ListWidget = ({index, widget, IsPreview,widgets, deleteWidget, update_widget_type, moveUp, moveDown, update_widget_name,update_list_items,update_list_type}) =>
+const ListWidget = ({index, widget, IsPreview,widgets, deleteWidget, update_widget_type, moveUp, moveDown,
+                        update_widget_name,update_list_items,update_list_type}) =>
     <div className="mb-5 card p-1">
         {!IsPreview && <div>
             <div className="form-group row ml-sm-2 col-sm-12 d-flex justify-content-between">
-                <h4 className="mr-auto">Heading Widget</h4>
+                <h4 className="mr-auto">List Widget</h4>
                 <WidgetSharedComponents
                     index={index}
                     widget={widget}
                     widgets={widgets}
-                    move_up={moveUp}
-                    move_down={moveDown}
+                    moveUp={moveUp}
+                    moveDown={moveDown}
                     update_widget_type={update_widget_type}
-                    delete_widget={deleteWidget}
+                    deleteWidget={deleteWidget}
                 />
             </div>
             <div className="widget row ml-sm-2 col-sm-12">
@@ -29,7 +30,7 @@ const ListWidget = ({index, widget, IsPreview,widgets, deleteWidget, update_widg
             <div className="widget row ml-sm-2 col-sm-12">
                 <label>Widget Name</label>
                 <select className="form-control"  onChange={(event)=> update_list_type(widget, event.target.value)}
-                        defaultValue={widget.type}>
+                        defaultValue="unordered">
                     <option value="unordered">Unordered list</option>
                     <option value="ordered">Ordered list</option>
                 </select>
@@ -45,9 +46,9 @@ const ListWidget = ({index, widget, IsPreview,widgets, deleteWidget, update_widg
                 <h4>Preview</h4>
             </div>
         </div>}
-        <div className="widget row ml-sm-2 col-sm-12">
+        <div className="form-group row ml-sm-2 col-sm-12">
             {
-                widget.items && ( widget.type === "unordered" ?
+                widget.items && ( widget.listType === "unordered"|| widget.listType === undefined ?
                     <ul>
                         {
                             widget.items.split(",").map((item, key) =>

@@ -5,15 +5,15 @@ const ParagraphWidget = ({index, widget, IsPreview, widgets, update_widget_type,
     <div className="mb-5 card p-1">
         {!IsPreview && <div>
             <div className="row ml-sm-2 col-sm-12 d-flex justify-content-between">
-                <h4 className="mr-auto">Heading Widget</h4>
+                <h4 className="mr-auto">Paragraph Widget</h4>
                 <WidgetSharedComponents
                     index={index}
                     widget={widget}
                     widgets={widgets}
-                    move_up={moveUp}
-                    move_down={moveDown}
+                    moveUp={moveUp}
+                    moveDown={moveDown}
                     update_widget_type={update_widget_type}
-                    delete_widget={deleteWidget}
+                    deleteWidget={deleteWidget}
                 />
             </div>
             <div className="widget row ml-sm-2 col-sm-12">

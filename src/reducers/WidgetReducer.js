@@ -59,6 +59,8 @@ const widgetReducer = (state, action) => {
 
 
             let widget = action.widget;
+            //console.log(widget.listType)
+            console.log(action.listType);
             if (action.text !== undefined) {
                 widget.text = action.text;
             }

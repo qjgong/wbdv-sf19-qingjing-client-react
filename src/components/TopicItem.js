@@ -29,7 +29,7 @@ export default class TopicItem extends React.Component {
                 <a>{this.props.topic.title}</a>
 
                 <button className="btn btn-danger btn-sm ml-3">
-                    <i onClick={() => this.props.deleteTopic(this.props.topic.id)} className="fa fa-trash"/></button>
+                    <i onClick={() => this.props.deleteTopic(this.props.topic)} className="fa fa-trash"/></button>
 
                 <button className="btn btn-success btn-sm ml-3">
                     <i onClick={() => this.toggleInput()} className="fa fa-edit"/></button>

@@ -29,7 +29,7 @@ export default class LessonTabItem extends React.Component {
                 className={this.props.lesson === this.props.selectedLesson ? "nav-link active bg-secondary" : "nav-link"}>
                 <a>{this.props.lesson.title}</a>
                 <button className="btn btn-danger btn-sm ml-3">
-                    <i onClick={() => this.props.deleteLesson(this.props.lesson.id)} className="fa fa-trash"/></button>
+                    <i onClick={() => this.props.deleteLesson(this.props.lesson)} className="fa fa-trash"/></button>
                 <button className="btn btn-success btn-sm ml-3">
                     <i onClick={() => this.toggleInput()} className="fa fa-edit"/></button>
                 {

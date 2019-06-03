@@ -13,10 +13,10 @@ const HeadingWidget = ({index, IsPreview, widgets, widget, deleteWidget, moveUp,
                     index={index}
                     widget={widget}
                     widgets={widgets}
-                    move_up={moveUp}
-                    move_down={moveDown}
+                    moveUp={moveUp}
+                    moveDown={moveDown}
                     update_widget_type={update_widget_type}
-                    delete_widget={deleteWidget}
+                    deleteWidget={deleteWidget}
                 />
             </div>
             <div className="form-group row ml-sm-2 col-sm-12">

@@ -22,7 +22,8 @@ export default class CourseEditor
             selectedTopic: "",
             module: "",
             lesson: "",
-            topic: ""
+            topic: "",
+
         }
         // if (this.props.course.modules !== undefined && this.props.course.modules.length !== 0) {
         //     this.state.selectedModule = this.props.course.modules[0];
@@ -43,6 +44,60 @@ export default class CourseEditor
     }
 
 
+    createTopic = () => {
+
+        let topics = this.state.selectedLesson.topics;
+        if (!topics) {
+            topics = []
+        }
+        topics.push({
+            title: this.state.topic.title ? this.state.topic.title : "New Topic",
+            id: Math.random() * 1000,
+            widgets: []
+        });
+        document.getElementById("add-topic-input").value = "";
+        let lesson = this.state.selectedLesson;
+        lesson.topics = topics;
+
+        let lessons = this.state.selectedModule.lessons;
+        lessons = lessons.map(x => x.id === lesson.id ? lesson : x);
+
+        let module = this.state.selectedModule;
+        module.lessons = lessons;
+        this.setState({
+            modules: this.state.modules.map(m => m.id === module.id ? module : m)
+        });
+    };
+
+    createLesson = () => {
+        let lesson = {
+            title: this.state.lesson.title ? this.state.lesson.title : "New Lesson",
+            id: Math.random() * 1000,
+            topics: []
+        };
+        let lessons = this.state.selectedModule.lessons ? [...this.state.selectedModule.lessons] : [];
+        lessons.push(lesson);
+        let module = this.state.selectedModule;
+        module.lessons = lessons;
+        this.setState({
+            modules: this.state.modules.map(m => m.id === module.id ? module : m),
+        });
+    };
+
+    createModule = () => {
+        let modules = this.state.modules ? this.state.modules : [];
+        modules.push({
+            id: Math.random() * 1000,
+            title: this.state.module.title ? this.state.module.title : "New Module",
+            lessons: []
+        });
+        this.setState({
+            modules: modules,
+        });
+        console.log(this.state.modules)
+    };
+
+
     selectModule = module => {
 
         // if (module.lessons !== undefined && module.lessons.length !== 0) {
@@ -56,9 +111,9 @@ export default class CourseEditor
         this.setState(
             {
                 selectedModule: module,
-                selectedLesson: "",
-                selectedTopic: "",
             })
+
+        console.log(this.state.selectedModule)
     }
 
 
@@ -70,12 +125,11 @@ export default class CourseEditor
 
         this.setState({
             selectedLesson: lesson,
-            selectedTopic: "",
         })
+        console.log(this.state.selectedLesson)
     }
 
     selectTopic = topic => {
-
 
         // if (topic.length !== 0 && topic !== undefined) {
         //     selectedTopic = topic;
@@ -95,28 +149,104 @@ export default class CourseEditor
     updateModule = (module, title) => {
         let m = module;
         m.title = title;
-        console.log(m);
         this.setState({
             modules: this.state.modules.map(i => i.id === m.id ? m : i)
         })
     }
 
     updateLesson = (lesson, title) => {
-        console.log(title);
-        let m = lesson;
-        m.title = title;
+        let newLesson = this.state.selectedLesson;
+        newLesson.title = title;
+        let module = this.state.selectedModule;
+        let lessons = this.state.selectedModule.lessons;
+        lessons = lessons.map(l => l.id === lesson.id ? newLesson : l);
+        module.lessons = lessons;
         this.setState({
-            lessons: this.state.selectedModule.lessons.map(i => i.id === m.id ? m : i)
-        })
-    }
+            modules: this.state.modules.map(m => m.id === module.id ? module : m)
+        });
+    };
 
     updateTopic = (topic, title) => {
-        let m = topic;
-        m.title = title;
+        let newTopic = this.state.selectedTopic;
+        newTopic.title = title;
+        let topics = this.state.selectedLesson.topics;
+        topics = topics.map(t => t.id === topic.id ? newTopic : t);
+        let lesson = this.state.selectedLesson;
+        lesson.topics = topics;
+        let lessons = this.state.selectedModule.lessons;
+        lessons = lessons.map(l => l.id === lesson.id ? lesson : l);
+        let module = this.state.selectedModule;
+        module.lessons = lessons;
         this.setState({
-            lessons: this.state.selectedLesson.topics.map(i => i.id === m.id ? m : i)
+            modules: this.state.modules.map(m => m.id === module.id ? module : m)
+        });
+    };
+
+    topicTitleChanged = (event) => {
+        this.setState({
+                topic: {
+                    title: event.target.value
+                }
+            }
+        )
+    };
+
+    moduleTitleChanged = (event) => {
+        this.setState({
+            module: {
+                title: event.target.value
+            }
         })
-    }
+    };
+
+    LessonTitleChanged = (event) => {
+        this.setState({
+            lesson: {
+                title: event.target.value
+            }
+        })
+    };
+
+    deleteModule = id => {
+        let i = this.state.modules.findIndex(m => m.id !== id);
+        this.setState(
+            {
+                selectedModule: i === -1 ? "" : this.state.modules[i],
+                selectedLesson: i !== -1 && this.state.modules[i].lessons ? this.state.modules[i].lessons[0] : "",
+                modules: this.state.modules.filter(m => m.id !== id)
+            }
+        );
+        console.log(this.state.modules)
+    };
+
+    deleteLesson = lesson => {
+        if (this.state.selectedModule.lessons !== undefined) {
+            let lessons = this.state.selectedModule.lessons;
+            lessons = lessons.filter(l => l !== lesson);
+            let module = this.state.selectedModule;
+            module.lessons = lessons;
+            this.setState({
+                modules: this.state.modules.map(m => m.id === module.id ? module : m),
+                selectedLesson: lessons.length === 0 ? "" : lessons[0]
+            });
+        }
+    };
+
+    deleteTopic = (topic) => {
+        if (this.state.selectedLesson.topics !== undefined) {
+            let topics = this.state.selectedLesson.topics;
+            topics = topics.filter(t => t !== topic);
+            let lesson = this.state.selectedLesson;
+            lesson.topics = topics;
+            let lessons = this.state.selectedModule.lessons;
+            lessons = lessons.map(l => l.id === lesson.id ? lesson : l);
+            let module = this.state.selectedModule;
+            module.lessons = lessons;
+            this.setState({
+                modules: this.state.modules.map(m => m.id === module.id ? module : m)
+            });
+        }
+    };
 
 
     render() {
@@ -138,6 +268,9 @@ export default class CourseEditor
                                     selectedLesson={this.state.selectedLesson}
                                     lessons={this.state.selectedModule.lessons}
                                     updateLesson={this.updateLesson}
+                                    createLesson={this.createLesson}
+                                    lessonTitleChanged={this.LessonTitleChanged}
+                                    deleteLesson={this.deleteLesson}
                         />
                     </nav>
                 </div>
@@ -147,14 +280,21 @@ export default class CourseEditor
                         <ModuleList selectedModule={this.state.selectedModule}
                                     selectModule={this.selectModule}
                                     updateModule={this.updateModule}
-                                    modules={this.state.modules}/></div>
+                                    modules={this.state.modules}
+                                    createModule={this.createModule}
+                                    moduleTitleChanged={this.moduleTitleChanged}
+                                    deleteModule={this.deleteModule}
+                        /></div>
 
 
                     <div className="col-8 right bg-light">
                         <TopicPills topics={this.state.selectedLesson.topics}
                                     selectedTopic={this.state.selectedTopic}
-                                    updateTopic={this.updateLesson}
-                                    selectTopic={this.selectTopic}/>
+                                    updateTopic={this.updateTopic}
+                                    selectTopic={this.selectTopic}
+                                    createTopic={this.createTopic}
+                                    topicTitleChanged={this.topicTitleChanged}
+                                    deleteTopic={this.deleteTopic}/>
 
                         <br/>
                         {this.state.selectedTopic && this.store && <Provider store={this.store}>

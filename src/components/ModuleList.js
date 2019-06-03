@@ -20,37 +20,38 @@ export default class ModuleList extends React.Component {
         return modules;
     }
 
-    createModule = () => {
-        let module = {
-            title: this.state.module.title,
-            // id: (new Date()).getTime()
-            id: Math.random() * 50
-        }
-        let modules = this.state.modules;
-        if (!modules) {
-            modules = []
-        }
-        modules.push(module);
-        document.getElementById("add-module-input").value = "";
-        this.setState({
-            modules: modules
-        })
-    }
+    // createModule = () => {
+    //     let module = {
+    //         title: this.state.module.title,
+    //         // id: (new Date()).getTime()
+    //         id: Math.random() * 50,
+    //         lessons:[]
+    //     }
+    //     let modules = this.state.modules;
+    //     if (!modules) {
+    //         modules = []
+    //     }
+    //     modules.push(module);
+    //     document.getElementById("add-module-input").value = "";
+    //     this.setState({
+    //         modules: modules
+    //     })
+    // }
 
-
-    titleChanged = (event) => {
-        this.setState({
-            module: {
-                title: event.target.value
-            }
-        })
-    }
-    deleteModule = (id) => {
-        this.setState({
-            modules: this.state.modules.filter(module => module.id !== id)
-        })
-    }
-
+    //
+    // titleChanged = (event) => {
+    //     this.setState({
+    //         module: {
+    //             title: event.target.value
+    //         }
+    //     })
+    // }
+    // deleteModule = (id) => {
+    //     this.setState({
+    //         modules: this.state.modules.filter(module => module.id !== id)
+    //     })
+    // }
+    //
     componentDidUpdate(prevProps) {
         if (prevProps.modules !== this.props.modules) {
             this.setState({
@@ -65,17 +66,17 @@ export default class ModuleList extends React.Component {
                 <ul className="list-group">
                     <li className="list-group-item bg-dark">
                         <input
-                            onChange={this.titleChanged}
+                            onChange={this.props.moduleTitleChanged}
                             placeholder="New Module"
                             className="form-control"
                             id="add-module-input"/>
-                        <button onClick={() => this.createModule()} className="btn btn-secondary btn-block">Add Module
+                        <button onClick={() => this.props.createModule()} className="btn btn-secondary btn-block">Add Module
                         </button>
                     </li>
                     {
                         this.state.modules && this.state.modules.map((module, key) =>
                             <ModuleItem
-                                deleteModule={this.deleteModule}
+                                deleteModule={this.props.deleteModule}
                                 selectModule={this.props.selectModule}
                                 selectedModule={this.props.selectedModule}
                                 module={module}

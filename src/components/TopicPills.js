@@ -6,39 +6,27 @@ export default class TopicPills extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            topics: this.props.topics
+            topics: this.props.topics,
         }
     }
 
-    createTopic = () => {
-        let topic = {
-            title: this.state.topic.title,
-            id: Math.random() * 100
-        }
 
-        let topics = this.state.topics;
-        if (!topics) {
-            topics = []
-        }
-        topics.push(topic);
-        document.getElementById("add-topic-input").value = "";
-        this.setState({topics: topics})
-    }
-
-    titleChanged = (event) => {
-        this.setState({
-            topic: {
-                title: event.target.value
-            }
-        })
-    }
-
-    deleteTopic = (id) => {
-        this.setState({
-            topics: this.state.topics.filter(topic => topic.id !== id)
-        })
-    }
-
+    // titleChanged = (event) => {
+    //     this.setState({
+    //             topic: {
+    //                 title: event.target.value
+    //             }
+    //
+    //         }
+    //     )
+    // };
+    //
+    // deleteTopic = (id) => {
+    //     this.setState({
+    //         topics: this.state.topics.filter(topic => topic.id !== id)
+    //     })
+    // }
+    //
     componentDidUpdate(prevProps) {
         if (prevProps.topics !== this.props.topics) {
             this.setState({
@@ -57,19 +45,19 @@ export default class TopicPills extends React.Component {
                                    selectTopic={this.props.selectTopic}
                                    updateTopic={this.props.updateTopic}
                                    titleChanged={this.titleChanged}
-                                   deleteTopic={this.deleteTopic}
+                                   deleteTopic={this.props.deleteTopic}
                         />)
 
                 }
 
-
                 <li className="nav-item ml-3">
                     <input
-                        onChange={this.titleChanged}
+                        onChange={this.props.topicTitleChanged}
                         placeholder="New topic"
                         className="form-control"
                         id="add-topic-input"/>
-                    <button onClick={() => this.createTopic()} className="btn btn-secondary btn-block">Add topic
+                    <button onClick={() => this.props.createTopic()}
+                            className="btn btn-secondary btn-block">Add topic
                     </button>
                 </li>
             </ul>
