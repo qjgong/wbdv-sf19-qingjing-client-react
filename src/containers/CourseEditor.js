@@ -75,8 +75,10 @@ export default class CourseEditor
             id: Math.random() * 1000,
             topics: []
         };
+
         let lessons = this.state.selectedModule.lessons ? [...this.state.selectedModule.lessons] : [];
         lessons.push(lesson);
+        document.getElementById("add-lesson-input").value = "";
         let module = this.state.selectedModule;
         module.lessons = lessons;
         this.setState({
@@ -91,6 +93,7 @@ export default class CourseEditor
             title: this.state.module.title ? this.state.module.title : "New Module",
             lessons: []
         });
+        document.getElementById("add-module-input").value = "";
         this.setState({
             modules: modules,
         });
@@ -233,6 +236,7 @@ export default class CourseEditor
     };
 
     deleteTopic = (topic) => {
+        console.log(topic)
         if (this.state.selectedLesson.topics !== undefined) {
             let topics = this.state.selectedLesson.topics;
             topics = topics.filter(t => t !== topic);

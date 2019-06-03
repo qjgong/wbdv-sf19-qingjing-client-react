@@ -48,8 +48,7 @@ export default class WidgetService {
                 for (k = 0; k < lessons.length; k++) {
                     let topics = lessons[k].topics;
                     let topic = topics.find(x => x.id === topicId);
-
-                    return topic.widgets;
+                    return topic===undefined?[]:topic.widgets;
 
                 }
             }
