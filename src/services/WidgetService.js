@@ -1,6 +1,8 @@
 import myData from './courses';
 import React from "react";
 
+let url =  "http://localhost:8080" + "/api/widgets";
+
 export default class WidgetService {
     constructor() {
         if (!!WidgetService.instance) {
@@ -10,6 +12,13 @@ export default class WidgetService {
         this.courses = myData;
         return this;
     }
+    // static myInstance=null;
+    // getInstance(){
+    //     if(WidgetService.myInstance==null){
+    //         WidgetService.myInstance=new WidgetService();
+    //     }
+    //     return this.myInstance;
+    // }
 
 
     createWidget(topicId, widget) {
@@ -35,28 +44,27 @@ export default class WidgetService {
     }
 
 
-    findWidgets(topicId) {
+    findWidgets = () =>
+        fetch(url).then(response => response.json());
 
-
-        let i;
-        for (i = 0; i < this.courses.length; i++) {
-            let modules = this.courses[i].modules;
-            let j;
-            for (j = 0; j < modules.length; j++) {
-                let lessons = modules[j].lessons;
-                let k;
-                for (k = 0; k < lessons.length; k++) {
-                    let topics = lessons[k].topics;
-                    let topic = topics.find(x => x.id === topicId);
-                    return topic===undefined?[]:topic.widgets;
-
-                }
-            }
-
-        }
-
-        return null;
-    }
+    // let i;
+    // for (i = 0; i < this.courses.length; i++) {
+    //     let modules = this.courses[i].modules;
+    //     let j;
+    //     for (j = 0; j < modules.length; j++) {
+    //         let lessons = modules[j].lessons;
+    //         let k;
+    //         for (k = 0; k < lessons.length; k++) {
+    //             let topics = lessons[k].topics;
+    //             let topic = topics.find(x => x.id === topicId);
+    //             return topic===undefined?[]:topic.widgets;
+    //
+    //         }
+    //     }
+    //
+    // }
+    //
+    // return null;
 
 
     findWidget(widgetId) {

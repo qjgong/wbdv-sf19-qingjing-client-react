@@ -1,7 +1,8 @@
 import data from "./courses.json"
 import React from "react";
+import WidgetService from "./WidgetService";
 
-
+let url = "http://localhost:8080" + "/api/courses";
 export default class CourseService {
     constructor() {
         if (!!CourseService.instance) {
@@ -12,17 +13,27 @@ export default class CourseService {
         return this;
     }
 
-    createCourse(course) {
-        this.courses.push(course);
+
+
+    createCourse=course=> {
+        fetch(url,{
+            method:'POST',
+            body:JSON.stringify(course),
+            headers:{'content-type':'application/json'}
+        })
+            .then(response=>response.json())
+
+        //this.courses.push(course);
     }
 
-    findAllCourses() {
-        return this.courses;
-    }
+    findAllCourses=() =>
+        fetch(url).then(response => response.json());
+       // return this.courses;
 
-    findCourseById(id) {
-        return this.courses.find(x => x.id == id);
-    }
+
+    findCourseById=(id)=>
+        fetch(url+'/'+id).then(response => response.json());
+
 
     updateCourse(id, course) {
         let this_course = this.findCourseById(id);

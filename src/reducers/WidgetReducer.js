@@ -15,7 +15,10 @@ const widgetReducer = (state, action) => {
 
     switch (action.type) {
         case "FIND_ALL_WIDGETS":
-            return state;
+            //return state;
+            return {
+                widgets: action.widgets
+            };
         case "FIND_WIDGET":
             return {
                 widgets: action.widgets

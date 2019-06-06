@@ -27,9 +27,9 @@ const propertyToDispatchMapper = dispatch => ({
             widgets: widgetService.deleteWidget(widgetId)
         }),
 
-    findWidgets: topicId =>
+    findWidgets: () =>
         widgetService
-            .findWidgets({topicId})
+            .findWidgets()
             .then(widgets =>
                 dispatch({
                     type: 'FIND_ALL_WIDGETS',
@@ -49,7 +49,6 @@ const propertyToDispatchMapper = dispatch => ({
     createWidget: () => dispatch({
         type: 'CREATE_WIDGET'
     }),
-
 
     moveUp: (widgetId) => {
         dispatch({type: 'MOVE_UP', widgetId: widgetId})
@@ -116,6 +115,6 @@ const propertyToDispatchMapper = dispatch => ({
 const WidgetListContainer = connect(
     stateToPropertyMapper,
     propertyToDispatchMapper,
-)(WidgetListComponent)
+)(WidgetListComponent);
 
 export default WidgetListContainer

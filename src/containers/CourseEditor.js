@@ -97,7 +97,6 @@ export default class CourseEditor
         this.setState({
             modules: modules,
         });
-        console.log(this.state.modules)
     };
 
 
@@ -116,7 +115,6 @@ export default class CourseEditor
                 selectedModule: module,
             })
 
-        console.log(this.state.selectedModule)
     }
 
 
@@ -129,7 +127,6 @@ export default class CourseEditor
         this.setState({
             selectedLesson: lesson,
         })
-        console.log(this.state.selectedLesson)
     }
 
     selectTopic = topic => {
@@ -142,7 +139,7 @@ export default class CourseEditor
             selectedTopic: topic,
         })
 
-        let widgets = this.widgetService.findWidgets(topic.id);
+        let widgets = this.widgetService.findWidgets();
 
         this.store = createStore(widgetReducer, {topicId: topic.id, widgets: widgets, IsPreview: false})
 
@@ -219,7 +216,6 @@ export default class CourseEditor
                 modules: this.state.modules.filter(m => m.id !== id)
             }
         );
-        console.log(this.state.modules)
     };
 
     deleteLesson = lesson => {
