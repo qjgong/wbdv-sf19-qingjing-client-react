@@ -3,30 +3,34 @@ import {HEADING, IMAGE, LINK, LIST, PARAGRAPH} from "../constants/constants";
 
 let widgetService=new WidgetService();
 
-const widgetReducer = (state, action) => {
+function SwapItems(items, firstIndex, secondIndex) {
+    let results = items.slice();
+    let firstItem = items[firstIndex];
+    results[firstIndex] = items[secondIndex];
+    results[secondIndex] = firstItem;
+    return results;
+}
+
+const widgetReducer = (state = {widgets: [], IsPreview:false, topicId:123}, action) => {
     let newState = Object.assign({}, state);
-    function SwapItems(items, firstIndex, secondIndex) {
-        let results = items.slice();
-        let firstItem = items[firstIndex];
-        results[firstIndex] = items[secondIndex];
-        results[secondIndex] = firstItem;
-        return results;
-    }
+
 
     switch (action.type) {
+        case "DELETE_WIDGET":
+        case "CREATE_WIDGET":
         case "FIND_ALL_WIDGETS":
-            //return state;
-            return {
-                widgets: action.widgets
-            };
+        case "UPDATE_WIDGET":
+            newState.widgets = action.widgets;
+            return newState;
+
         case "FIND_WIDGET":
             return {
                 widgets: action.widgets
             };
-        case "DELETE_WIDGET":
-            widgetService.deleteWidget(action.widgetId);
-            newState.widgets = widgetService.findWidgets(state.topicId);
-            return newState;
+        // case "DELETE_WIDGET":
+        //     widgetService.deleteWidget(action.widgetId);
+        //     newState.widgets = widgetService.findWidgets();
+        //     return newState;
 
         case 'TOGGLE_PREVIEW':
 
@@ -44,78 +48,64 @@ const widgetReducer = (state, action) => {
             newState.widgets=SwapItems(state.widgets, index2, index2 +1)
             return newState;
 
-        case "CREATE_WIDGET":
-
-
-            let newWidget = {
-                "id": Math.floor(Math.random() * 99999),
-                "type": "HEADING",
-                "size": "h1",
-                "text": "The Document Object Model",
-                "name":"Test"
-            };
-            widgetService.createWidget(state.topicId,newWidget);
-            newState.widgets = widgetService.findWidgets(state.topicId);
-            console.log(newState);
-            return newState;
-        case "UPDATE_WIDGET":
-
-
-            let widget = action.widget;
-            //console.log(widget.listType)
-            console.log(action.listType);
-            if (action.text !== undefined) {
-                widget.text = action.text;
-            }
-            if (action.name !== undefined) {
-                widget.name = action.name;
-            }
-            if (action.size !== undefined) {
-                widget.size = action.size;
-            }
-
-            if (action.items !== undefined) {
-                widget.items = action.items.split("\n").join(",");
-            }
-            if (action.listType !== undefined) {
-                widget.listType = action.listType;
-            }
-            if (action.src !== undefined) {
-                widget.src = action.src;
-            }
-            if (action.href !== undefined) {
-                widget.href = action.href;
-            }
-            if (action.title !== undefined) {
-                widget.title = action.title;
-            }
-            if (action.widgetType) {
-                let newWidget = {
-                    id: widget.id,
-                    type:action.widgetType,
-                    name:""
-                };
-                switch(action.widgetType){
-                    case HEADING:
-                        newWidget = {...newWidget, size:"h1", text:"",};
-                        break;
-                    case PARAGRAPH:
-                        newWidget={...newWidget, text:""};
-                        break;
-                    case LIST:
-                        newWidget={...newWidget, items:"",listType: "unordered"};
-                        break;
-                    case IMAGE:
-                        newWidget={...newWidget, src:""};
-                        break;
-                    default:
-                        newWidget={...newWidget, title:"", href:""};
-                }
-                widget = newWidget;
-            }
-            widgetService.updateWidget(widget.id, widget);
-            newState.widgets = widgetService.findWidgets(state.topicId);
-            return newState;
+        // case "UPDATE_WIDGET":
+        //
+        //
+        //     let widget = action.widget;
+        //     //console.log(widget.listType)
+        //     console.log(action.listType);
+        //     if (action.text !== undefined) {
+        //         widget.text = action.text;
+        //     }
+        //     if (action.name !== undefined) {
+        //         widget.name = action.name;
+        //     }
+        //     if (action.size !== undefined) {
+        //         widget.size = action.size;
+        //     }
+        //
+        //     if (action.items !== undefined) {
+        //         widget.items = action.items.split("\n").join(",");
+        //     }
+        //     if (action.listType !== undefined) {
+        //         widget.listType = action.listType;
+        //     }
+        //     if (action.src !== undefined) {
+        //         widget.src = action.src;
+        //     }
+        //     if (action.href !== undefined) {
+        //         widget.href = action.href;
+        //     }
+        //     if (action.title !== undefined) {
+        //         widget.title = action.title;
+        //     }
+        //     if (action.widgetType) {
+        //         let newWidget = {
+        //             id: widget.id,
+        //             type:action.widgetType,
+        //             name:""
+        //         };
+        //         switch(action.widgetType){
+        //             case HEADING:
+        //                 newWidget = {...newWidget, size:"h1", text:"",};
+        //                 break;
+        //             case PARAGRAPH:
+        //                 newWidget={...newWidget, text:""};
+        //                 break;
+        //             case LIST:
+        //                 newWidget={...newWidget, items:"",listType: "unordered"};
+        //                 break;
+        //             case IMAGE:
+        //                 newWidget={...newWidget, src:""};
+        //                 break;
+        //             default:
+        //                 newWidget={...newWidget, title:"", href:""};
+        //         }
+        //         widget = newWidget;
+        //     }
+        //     widgetService.updateWidget(widget.id, widget);
+        //     newState.widgets = widgetService.findWidgets(state.topicId);
+        //     return newState;
 
 
         default:

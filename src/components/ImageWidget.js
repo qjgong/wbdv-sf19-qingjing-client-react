@@ -2,7 +2,7 @@ import React from "react";
 
 import WidgetSharedComponents from "./WidgetSharedComponents";
 
-const ImageWidget = ({index, IsPreview,widget, widgets, deleteWidget, moveUp, update_widget_type, moveDown,
+const ImageWidget = ({index, IsPreview,widget, widgets, updateWidget,deleteWidget, moveUp, update_widget_type, moveDown,
                          update_img_src,update_widget_name}) =>
     <div className="mb-5 card p-1">
         {!IsPreview && <div>
@@ -16,16 +16,17 @@ const ImageWidget = ({index, IsPreview,widget, widgets, deleteWidget, moveUp, up
                     moveDown={moveDown}
                     update_widget_type={update_widget_type}
                     deleteWidget={deleteWidget}
+                    updateWidget={updateWidget}
                 />
             </div>
             <div className="widget row ml-sm-2 col-sm-12">
                 <input className="form-control" placeholder="http://lorempixel.com/300/150/"
                        defaultValue={widget.src}
-                       onChange={(event) => update_img_src(widget, event.target.value)}/>
+                       onChange={(event) => updateWidget(widget.id, {...widget,src:event.target.value})}/>
             </div>
             <div className="widget row ml-sm-2 col-sm-12">
                 <input className="form-control" placeholder="Widget name"
-                       onChange={(event) => update_widget_name(widget, event.target.value)}
+                       onChange={(event) => updateWidget(widget.id, {...widget,name:event.target.value})}
                        defaultValue={widget.name}/>
             </div>
             <div className="widget row ml-sm-2 col-sm-12">

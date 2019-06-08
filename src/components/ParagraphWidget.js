@@ -1,7 +1,7 @@
 import React from "react";
 import WidgetSharedComponents from "./WidgetSharedComponents";
 
-const ParagraphWidget = ({index, widget, IsPreview, widgets, update_widget_type, deleteWidget, moveUp, moveDown}) =>
+const ParagraphWidget = ({index, widget, IsPreview, widgets,updateWidget, update_widget_type, deleteWidget, moveUp, moveDown}) =>
     <div className="mb-5 card p-1">
         {!IsPreview && <div>
             <div className="row ml-sm-2 col-sm-12 d-flex justify-content-between">
@@ -14,6 +14,7 @@ const ParagraphWidget = ({index, widget, IsPreview, widgets, update_widget_type,
                     moveDown={moveDown}
                     update_widget_type={update_widget_type}
                     deleteWidget={deleteWidget}
+                    updateWidget={updateWidget}
                 />
             </div>
             <div className="widget row ml-sm-2 col-sm-12">

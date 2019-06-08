@@ -14,25 +14,24 @@ export default class CourseService {
     }
 
 
-
-    createCourse=course=> {
-        fetch(url,{
-            method:'POST',
-            body:JSON.stringify(course),
-            headers:{'content-type':'application/json'}
+    createCourse = course => {
+        fetch(url, {
+            method: 'POST',
+            body: JSON.stringify(course),
+            headers: {'content-type': 'application/json'}
         })
-            .then(response=>response.json())
+            .then(response => response.json())
 
         //this.courses.push(course);
     }
 
-    findAllCourses=() =>
+    findAllCourses = () =>
         fetch(url).then(response => response.json());
-       // return this.courses;
+    // return this.courses;
 
 
-    findCourseById=(id)=>
-        fetch(url+'/'+id).then(response => response.json());
+    findCourseById = (id) =>
+        fetch(url + '/' + id).then(response => response.json());
 
 
     updateCourse(id, course) {
@@ -41,7 +40,11 @@ export default class CourseService {
         this_course.modules = course.modules;
     }
 
-    deleteCourse(id) {
-        this.courses = this.courses.filter(x => x.id !== id);
-    }
+    deleteCourse = (id) => fetch(url+'/'+id, {
+        method: 'DELETE',
+        body: JSON.stringify(id),
+        headers: {
+            'content-type': 'application/json',
+        }
+    });
 }

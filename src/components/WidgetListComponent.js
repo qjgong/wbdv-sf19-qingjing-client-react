@@ -6,137 +6,127 @@ import ImageWidget from "./ImageWidget";
 import LinkWidget from "./LinkWidget";
 
 
-const WidgetListComponent = ({
-                                 widgets, IsPreview, togglePreview, topicId, findWidgets, update_widget_type,
-                                 update_heading_size, update_widget_text, deleteWidget, update_widget_name, createWidget,
-                                 updateWidget, moveUp, moveDown, update_list_items, update_list_type,
-                                 update_img_src, update_widget_href, update_widget_title,
-                             }) =>
+
+class WidgetListComponent extends React.Component {
+    //widgetService = new WidgetService();
+
+    constructor(props) {
+        super(props);
+        this.props.findWidgets();
+    }
 
 
-    <div>
+    render() {
+        return (
+            <div>
 
-        <div className="row mb-sm-3">
-            <button className="btn btn-success btn-sm ml-sm-auto mr-sm-2"
-                    id="moduleSaveBtn"
-                    type="submit">Save
-            </button>
-            <label className="mr-sm-2"><b>Preview</b></label>
-            <div className="custom-control custom-switch col-sm-2">
-                <input className="custom-control-input"
-                       id="customSwitch"
-                       type="checkbox" onClick={togglePreview}/>
-                <label className="custom-control-label"
-                       htmlFor="customSwitch"/>
+                <div className="row mb-sm-3">
+                    <button className="btn btn-success btn-sm ml-sm-auto mr-sm-2"
+                            id="moduleSaveBtn"
+                            type="submit">Save
+                    </button>
+                    <label className="mr-sm-2"><b>Preview</b></label>
+                    <div className="custom-control custom-switch col-sm-2">
+                        <input className="custom-control-input"
+                               id="customSwitch"
+                               type="checkbox" onClick={this.props.togglePreview}/>
+                        <label className="custom-control-label"
+                               htmlFor="customSwitch"/>
+                    </div>
+                </div>
+
+
+                <button className="btn btn-danger floating" onClick={ () => this.props.createWidget(this.props.topicId,{
+                    type:"HEADING",
+                    id:0,
+                    name:"New Widget",
+                    text:"",
+                    size:"h1"
+                })}>
+                    <i className="fa fa-plus" style={{color: "white"}}/>
+                </button>
+
+                <ul>
+                    {
+
+
+                        this.props.widgets.map((widget, key) => {
+                            if (widget && widget.type === "HEADING") {
+                                return <HeadingWidget
+                                    key={key}
+                                    widgets={this.props.widgets}
+                                    index={this.props.widgets.indexOf(widget)}
+                                    updateWidget={this.props.updateWidget}
+                                    widget={widget}
+                                    deleteWidget={this.props.deleteWidget}
+                                    topicId={this.props.topicId}
+                                    findWidgets={this.props.findWidgets}
+                                    moveUp={this.props.moveUp}
+                                    moveDown={this.props.moveDown}
+                                    IsPreview={this.props.IsPreview}
+                                />
+                            } else if (widget && widget.type === "PARAGRAPH") {
+                                return <ParagraphWidget
+                                    key={key}
+                                    widgets={this.props.widgets}
+                                    index={this.props.widgets.indexOf(widget)}
+                                    updateWidget={this.props.updateWidget}
+                                    widget={widget}
+                                    deleteWidget={this.props.deleteWidget}
+                                    topicId={this.props.topicId}
+                                    findWidgets={this.props.findWidgets}
+                                    moveUp={this.props.moveUp}
+                                    moveDown={this.props.moveDown}
+                                    // update_heading_size={update_heading_size}
+                                    IsPreview={this.props.IsPreview}/>
+                            } else if (widget && widget.type === "LIST") {
+                                return <ListWidget
+                                    key={key}
+                                    widgets={this.props.widgets}
+                                    index={this.props.widgets.indexOf(widget)}
+                                    updateWidget={this.props.updateWidget}
+                                    widget={widget}
+                                    deleteWidget={this.props.deleteWidget}
+                                    topicId={this.props.topicId}
+                                    findWidgets={this.props.findWidgets}
+                                    moveUp={this.props.moveUp}
+                                    moveDown={this.props.moveDown}
+                                    IsPreview={this.props.IsPreview}/>
+                            } else if (widget && widget.type === "IMAGE") {
+                                return <ImageWidget
+                                    key={key}
+                                    widgets={this.props.widgets}
+                                    index={this.props.widgets.indexOf(widget)}
+                                    updateWidget={this.props.updateWidget}
+                                    widget={widget}
+                                    deleteWidget={this.props.deleteWidget}
+                                    topicId={this.props.topicId}
+                                    findWidgets={this.props.findWidgets}
+                                    moveUp={this.props.moveUp}
+                                    moveDown={this.props.moveDown}
+                                    IsPreview={this.props.IsPreview}/>
+                            } else if (widget && widget.type === "LINK") {
+                                return <LinkWidget index={this.props.widgets.indexOf(widget)}
+                                                   key={key}
+                                                   widgets={this.props.widgets}
+                                                   updateWidget={this.props.updateWidget}
+                                                   widget={widget}
+                                                   deleteWidget={this.props.deleteWidget}
+                                                   topicId={this.props.topicId}
+                                                   findWidgets={this.props.findWidgets}
+                                                   moveUp={this.props.moveUp}
+                                                   moveDown={this.props.moveDown}
+                                                   IsPreview={this.props.IsPreview}/>
+                            }
+                        })}
+
+
+                </ul>
             </div>
-        </div>
+        )
+    }
+}
 
-
-        <button className="btn btn-danger floating" onClick={createWidget}>
-            <i className="fa fa-plus" style={{color: "white"}}/>
-        </button>
-
-        <ul>
-            {
-
-
-                widgets.map((widget, key) => {
-                    if (widget && widget.type === "HEADING") {
-                        return <HeadingWidget
-                            key={key}
-                            widgets={widgets}
-                            index={widgets.indexOf(widget)}
-                            updateWidget={updateWidget}
-                            widget={widget}
-                            deleteWidget={deleteWidget}
-                            topicId={topicId}
-                            findWidgets={findWidgets}
-                            moveUp={moveUp}
-                            moveDown={moveDown}
-                            update_widget_type={update_widget_type}
-                            update_widget_text={update_widget_text}
-                            update_widget_name={update_widget_name}
-                            update_heading_size={update_heading_size}
-                            IsPreview={IsPreview}
-                        />
-                    } else if (widget && widget.type === "PARAGRAPH") {
-                        return <ParagraphWidget
-                            key={key}
-                            widgets={widgets}
-                            index={widgets.indexOf(widget)}
-                            updateWidget={updateWidget}
-                            widget={widget}
-                            deleteWidget={deleteWidget}
-                            topicId={topicId}
-                            findWidgets={findWidgets}
-                            moveUp={moveUp}
-                            moveDown={moveDown}
-                            update_widget_type={update_widget_type}
-                            update_widget_text={update_widget_text}
-                            update_widget_name={update_widget_name}
-                           // update_heading_size={update_heading_size}
-                            IsPreview={IsPreview}/>
-                    } else if (widget && widget.type === "LIST") {
-                        return <ListWidget
-                            key={key}
-                            widgets={widgets}
-                            index={widgets.indexOf(widget)}
-                            updateWidget={updateWidget}
-                            widget={widget}
-                            deleteWidget={deleteWidget}
-                            topicId={topicId}
-                            findWidgets={findWidgets}
-                            moveUp={moveUp}
-                            moveDown={moveDown}
-                            update_widget_type={update_widget_type}
-                            //update_widget_text={update_widget_text}
-                            update_widget_name={update_widget_name}
-                            //update_heading_size={update_heading_size}
-                            update_list_items={update_list_items}
-                            update_list_type={update_list_type}
-                            IsPreview={IsPreview}/>
-                    } else if (widget && widget.type === "IMAGE") {
-                        return <ImageWidget
-                            key={key}
-                            widgets={widgets}
-                            index={widgets.indexOf(widget)}
-                            updateWidget={updateWidget}
-                            widget={widget}
-                            deleteWidget={deleteWidget}
-                            topicId={topicId}
-                            findWidgets={findWidgets}
-                            moveUp={moveUp}
-                            moveDown={moveDown}
-                            update_widget_type={update_widget_type}
-                            //update_widget_text={update_widget_text}
-                            update_widget_name={update_widget_name}
-                           // update_heading_size={update_heading_size}
-                            update_widget_href={update_widget_href}
-                            update_widget_title={update_widget_title}
-                            IsPreview={IsPreview}/>
-                    } else if (widget && widget.type === "LINK") {
-                        return <LinkWidget index={widgets.indexOf(widget)}
-                                           key={key}
-                                           widgets={widgets}
-                                           updateWidget={updateWidget}
-                                           widget={widget}
-                                           deleteWidget={deleteWidget}
-                                           topicId={topicId}
-                                           findWidgets={findWidgets}
-                                           moveUp={moveUp}
-                                           moveDown={moveDown}
-                                           update_widget_type={update_widget_type}
-                                           //update_widget_text={update_widget_text}
-                                           update_widget_name={update_widget_name}
-                                           //update_heading_size={update_heading_size}
-                                           update_img_src={update_img_src}
-                                           IsPreview={IsPreview}/>
-                    }
-                })}
-
-
-        </ul>
-    </div>;
 
 export default WidgetListComponent
 

@@ -8,21 +8,37 @@ import {Provider} from 'react-redux'
 import widgetReducer from '../reducers/WidgetReducer'
 import WidgetListContainer from "./WidgetListContainer";
 import WidgetService from "../services/WidgetService";
+import CourseService from "../services/CourseService";
+
 
 export default class CourseEditor
     extends React.Component {
 
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        const paths = window.location.pathname.split('/')
+        const courseId = paths[paths.length - 1]
+        if(this.state.course && this.state.course.id != courseId)
+        this.service.findCourseById(courseId)
+            .then(course => this.setState({
+                course: course
+            }))
+    }
 
     constructor(props) {
         super(props)
+
+        this.service = new CourseService();
+
         this.state = {
-            modules: this.props.course.modules,
+            course:{title : "", id: -1, modules: []},
+            modules: [],
             selectedModule: "",
             selectedLesson: "",
             selectedTopic: "",
             module: "",
             lesson: "",
             topic: "",
+            store:"",
 
         }
         // if (this.props.course.modules !== undefined && this.props.course.modules.length !== 0) {
@@ -115,7 +131,7 @@ export default class CourseEditor
                 selectedModule: module,
             })
 
-    }
+    };
 
 
     selectLesson = lesson => {
@@ -127,7 +143,7 @@ export default class CourseEditor
         this.setState({
             selectedLesson: lesson,
         })
-    }
+    };
 
     selectTopic = topic => {
 
@@ -135,15 +151,22 @@ export default class CourseEditor
         //     selectedTopic = topic;
         // }
 
+        console.log(this.state.widgets);
+
+        this.store = createStore(widgetReducer);
         this.setState({
             selectedTopic: topic,
         })
 
-        let widgets = this.widgetService.findWidgets();
+    };
 
-        this.store = createStore(widgetReducer, {topicId: topic.id, widgets: widgets, IsPreview: false})
-
-
+    componentDidMount() {
+        this.widgetService.findWidgets()
+            .then((widgets)=>this.setState(
+            {
+              widgets:widgets
+            }
+        ))
     }
 
     updateModule = (module, title) => {
@@ -152,7 +175,7 @@ export default class CourseEditor
         this.setState({
             modules: this.state.modules.map(i => i.id === m.id ? m : i)
         })
-    }
+    };
 
     updateLesson = (lesson, title) => {
         let newLesson = this.state.selectedLesson;
@@ -249,7 +272,10 @@ export default class CourseEditor
     };
 
 
+
+
     render() {
+        console.log(this.state.selectedTopic)
 
         return (
             <div className="container-fluid bg-dark">
@@ -260,7 +286,8 @@ export default class CourseEditor
                                 <li className="fa fa-times" style={{color: "white"}}/>
                             </Link>
                             <a className="navbar-brand ml-3">
-                                {this.props.course.title}
+                                {this.state.course.title}
+                                {this.state.course.modules.length}
                             </a>
                         </div>
 
@@ -280,7 +307,7 @@ export default class CourseEditor
                         <ModuleList selectedModule={this.state.selectedModule}
                                     selectModule={this.selectModule}
                                     updateModule={this.updateModule}
-                                    modules={this.state.modules}
+                                    modules={this.state.course.modules}
                                     createModule={this.createModule}
                                     moduleTitleChanged={this.moduleTitleChanged}
                                     deleteModule={this.deleteModule}
@@ -297,9 +324,11 @@ export default class CourseEditor
                                     deleteTopic={this.deleteTopic}/>
 
                         <br/>
-                        {this.state.selectedTopic && this.store && <Provider store={this.store}>
+                        {this.state.selectedTopic && this.store &&
+                        <Provider store={this.store}>
                             <WidgetListContainer/>
                         </Provider>}
+
                     </div>
 
                 </div>

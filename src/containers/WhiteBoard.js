@@ -28,7 +28,7 @@ export default class Whiteboard extends React.Component {
                     selectedCourse: courses.length>0?courses[0]:null
                 })
             )
-        console.log(this.state.courses)
+
     }
 
     selectCourse = course =>{
@@ -54,8 +54,6 @@ export default class Whiteboard extends React.Component {
     };
 
 
-
-
     render() {
 
         return (
@@ -73,7 +71,7 @@ export default class Whiteboard extends React.Component {
                                selectCourse={this.selectCourse}
                                deleteCourse={this.deleteCourse}
                                courses={this.state.courses}/>}/>
-                    <Route path={"/course-editor/" + this.state.selectedCourse.id}
+                    <Route path={"/course-editor/:courseId" }
                            render={() => <CourseEditor
                                selectCourse={this.selectCourse}
                                course={this.state.selectedCourse}/>}/>

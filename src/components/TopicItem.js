@@ -20,12 +20,19 @@ export default class TopicItem extends React.Component {
                 title: event.target.value
             }
         )
+    };
+    componentDidUpdate(prevProps) {
+        if (prevProps.selectedTopic !== this.props.selectedTopic) {
+            this.setState({
+                selectedTopic: this.props.selectedTopic
+            })
+        }
     }
 
     render() {
         return (
             <li className="nav-item mr-3" onClick={() => this.props.selectTopic(this.props.topic)}
-                className={this.props.topic === this.props.selectedTopic ? "nav-link active bg-secondary" : "nav-link bg-dark"}>
+                className={this.props.topic === this.state.selectedTopic ? "nav-link active bg-secondary" : "nav-link bg-dark"}>
                 <a>{this.props.topic.title}</a>
 
                 <button className="btn btn-danger btn-sm ml-3">
@@ -38,7 +45,7 @@ export default class TopicItem extends React.Component {
                         <div><input type="text" onChange={this.titleChanged} placeholder={this.props.topic.title}
                                     defaultValue={this.props.topic.title}/>
                             <button onClick={() => {
-                                this.props.updateTopic(this.props.selectedTopic, this.state.title);
+                                this.props.updateTopic(this.state.selectedTopic, this.state.title);
                                 this.toggleInput()
                             }}
                                     className="btn btn-primary">Save
