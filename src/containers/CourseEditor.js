@@ -17,11 +17,11 @@ export default class CourseEditor
     componentDidUpdate(prevProps, prevState, snapshot) {
         const paths = window.location.pathname.split('/')
         const courseId = paths[paths.length - 1]
-        if(this.state.course && this.state.course.id != courseId)
-        this.service.findCourseById(courseId)
-            .then(course => this.setState({
-                course: course
-            }))
+        if (this.state.course && this.state.course.id != courseId)
+            this.service.findCourseById(courseId)
+                .then(course => this.setState({
+                    course: course
+                }))
     }
 
     constructor(props) {
@@ -30,7 +30,7 @@ export default class CourseEditor
         this.service = new CourseService();
 
         this.state = {
-            course:{title : "", id: -1, modules: []},
+            course: {title: "", id: -1, modules: []},
             modules: [],
             selectedModule: "",
             selectedLesson: "",
@@ -159,11 +159,11 @@ export default class CourseEditor
 
     componentDidMount() {
         this.widgetService.findWidgets()
-            .then((widgets)=>this.setState(
-            {
-              widgets:widgets
-            }
-        ))
+            .then((widgets) => this.setState(
+                {
+                    widgets: widgets
+                }
+            ))
     }
 
     updateModule = (module, title) => {
@@ -267,8 +267,6 @@ export default class CourseEditor
             });
         }
     };
-
-
 
 
     render() {

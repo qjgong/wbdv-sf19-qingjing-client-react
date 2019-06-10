@@ -25,7 +25,7 @@ export default class LessonTabItem extends React.Component {
 
     render() {
         return (
-            <li  onClick={() => this.props.selectLesson(this.props.lesson)}
+            <li onClick={() => this.props.selectLesson(this.props.lesson)}
                 className={this.props.lesson === this.props.selectedLesson ? "nav-link active bg-secondary" : "nav-link"}>
                 <i>{this.props.lesson.title}</i>
                 <button className="btn btn-danger btn-sm ml-3">

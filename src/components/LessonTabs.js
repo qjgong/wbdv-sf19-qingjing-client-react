@@ -10,38 +10,6 @@ export default class LessonTabs extends React.Component {
         }
     }
 
-
-
-    // createLesson = () => {
-    //     let lesson = {
-    //         title: this.state.lesson.title,
-    //         id: Math.random() * 100,
-    //         topics:[]
-    //     }
-    //     console.log(lesson)
-    //     let lessons = this.state.lessons;
-    //     if (!lessons) {
-    //         lessons = []
-    //     }
-    //     lessons.push(lesson);
-    //     document.getElementById("add-lesson-input").value = "";
-    //     this.setState({lessons: lessons})
-    // }
-    //
-    // titleChanged = (event) => {
-    //     this.setState({
-    //         lesson: {
-    //             title: event.target.value
-    //         }
-    //     })
-    // };
-    //
-    // deleteLesson = (id) => {
-    //     this.setState({
-    //         lessons: this.state.lessons.filter(lesson => lesson.id !== id)
-    //     })
-    // }
-    //
     componentDidUpdate(prevProps) {
         if (prevProps.lessons !== this.props.lessons) {
             this.setState({

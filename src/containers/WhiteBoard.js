@@ -25,17 +25,17 @@ export default class Whiteboard extends React.Component {
             .then(courses =>
                 this.setState({
                     courses: courses,
-                    selectedCourse: courses.length>0?courses[0]:null
+                    selectedCourse: courses.length > 0 ? courses[0] : null
                 })
             )
 
     }
 
-    selectCourse = course =>{
+    selectCourse = course => {
         this.courseService.findCourseById(course.id)
-            .then(()=>{
+            .then(() => {
                 this.setState({
-                    selectedCourse:course,
+                    selectedCourse: course,
                 })
             })
     };
@@ -71,7 +71,7 @@ export default class Whiteboard extends React.Component {
                                selectCourse={this.selectCourse}
                                deleteCourse={this.deleteCourse}
                                courses={this.state.courses}/>}/>
-                    <Route path={"/course-editor/:courseId" }
+                    <Route path={"/course-editor/:courseId"}
                            render={() => <CourseEditor
                                selectCourse={this.selectCourse}
                                course={this.state.selectedCourse}/>}/>

@@ -20,39 +20,6 @@ export default class ModuleList extends React.Component {
         return modules;
     }
 
-    // createModule = () => {
-    //     let module = {
-    //         title: this.state.module.title,
-    //         // id: (new Date()).getTime()
-    //         id: Math.random() * 50,
-    //         lessons:[]
-    //     }
-    //     let modules = this.state.modules;
-    //     if (!modules) {
-    //         modules = []
-    //     }
-    //     modules.push(module);
-    //     document.getElementById("add-module-input").value = "";
-    //     this.setState({
-    //         modules: modules
-    //     })
-    // }
-
-    //
-    // titleChanged = (event) => {
-    //     this.setState({
-    //         module: {
-    //             title: event.target.value
-    //         }
-    //     })
-    // }
-    // deleteModule = (id) => {
-    //     this.setState({
-    //         modules: this.state.modules.filter(module => module.id !== id)
-    //     })
-    // }
-    //
-
     componentDidUpdate(prevProps, prevState, snapshot) {
 
 
@@ -73,7 +40,8 @@ export default class ModuleList extends React.Component {
                             placeholder="New Module"
                             className="form-control"
                             id="add-module-input"/>
-                        <button onClick={() => this.props.createModule()} className="btn btn-secondary btn-block">Add Module
+                        <button onClick={() => this.props.createModule()} className="btn btn-secondary btn-block">Add
+                            Module
                         </button>
                     </li>
                     {

@@ -21,13 +21,10 @@ export default class CourseService {
             headers: {'content-type': 'application/json'}
         })
             .then(response => response.json())
-
-        //this.courses.push(course);
-    }
+    };
 
     findAllCourses = () =>
         fetch(url).then(response => response.json());
-    // return this.courses;
 
 
     findCourseById = (id) =>
@@ -44,7 +41,7 @@ export default class CourseService {
                 }
             })
             .then(response => response.json());
-    }
+    };
 
     deleteCourse = (id) => fetch(url+'/'+id, {
         method: 'DELETE',

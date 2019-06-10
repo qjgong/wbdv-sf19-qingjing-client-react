@@ -18,7 +18,8 @@ const ParagraphWidget = ({index, widget, IsPreview, widgets, updateWidget, delet
             </div>
             <div className="widget row ml-sm-2 col-sm-12">
                         <textarea className="form-control"
-                                  placeholder="Lorem ipsum"  onChange={(event) => updateWidget(widget.id, {...widget, text: event.target.value})} />
+                                  placeholder="Lorem ipsum"
+                                  onChange={(event) => updateWidget(widget.id, {...widget, text: event.target.value})}/>
             </div>
             <div className="widget row ml-sm-2 col-sm-12">
                 <input className="form-control" placeholder="Widget name"

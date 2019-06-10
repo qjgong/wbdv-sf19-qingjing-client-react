@@ -10,23 +10,6 @@ export default class TopicPills extends React.Component {
         }
     }
 
-
-    // titleChanged = (event) => {
-    //     this.setState({
-    //             topic: {
-    //                 title: event.target.value
-    //             }
-    //
-    //         }
-    //     )
-    // };
-    //
-    // deleteTopic = (id) => {
-    //     this.setState({
-    //         topics: this.state.topics.filter(topic => topic.id !== id)
-    //     })
-    // }
-    //
     componentDidUpdate(prevProps) {
         if (prevProps.topics !== this.props.topics) {
             this.setState({

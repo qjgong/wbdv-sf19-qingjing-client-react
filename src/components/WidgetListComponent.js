@@ -6,7 +6,6 @@ import ImageWidget from "./ImageWidget";
 import LinkWidget from "./LinkWidget";
 
 
-
 class WidgetListComponent extends React.Component {
     //widgetService = new WidgetService();
 
@@ -15,13 +14,13 @@ class WidgetListComponent extends React.Component {
         this.props.findWidgets();
     }
 
-    state={
-        IsPreview:false
+    state = {
+        IsPreview: false
     };
 
-    togglePreview=()=>
+    togglePreview = () =>
         this.setState({
-            IsPreview:!this.state.IsPreview
+            IsPreview: !this.state.IsPreview
         });
 
 
@@ -45,12 +44,12 @@ class WidgetListComponent extends React.Component {
                 </div>
 
 
-                <button className="btn btn-danger floating" onClick={ () => this.props.createWidget(this.props.topicId,{
-                    type:"HEADING",
-                    id:0,
-                    name:"New Widget",
-                    text:"",
-                    size:"h1"
+                <button className="btn btn-danger floating" onClick={() => this.props.createWidget(this.props.topicId, {
+                    type: "HEADING",
+                    id: 0,
+                    name: "New Widget",
+                    text: "",
+                    size: "h1"
                 })}>
                     <i className="fa fa-plus" style={{color: "white"}}/>
                 </button>

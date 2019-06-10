@@ -19,7 +19,6 @@ const stateToPropertyMapper = (state) => {
     return {
         widgets: state.widgets,
         topicId: state.topicId,
-        IsPreview: state.IsPreview
     }
 };
 
@@ -74,75 +73,20 @@ const propertyToDispatchMapper = dispatch => ({
                     widgets: widgets
                 })),
 
-    moveUp: (widgets,widgetId) => {
-        let index = widgets.indexOf(widgets.find(x=>x.id===widgetId));
-        let new_widgets=SwapItems(widgets, index, index - 1);
+    moveUp: (widgets, widgetId) => {
+        let index = widgets.indexOf(widgets.find(x => x.id === widgetId));
+        let new_widgets = SwapItems(widgets, index, index - 1);
         widgetService.updateOrder(new_widgets)
             .then(widgets => dispatch({type: 'MOVE_UP', widgets: widgets}))
 
-
-        /*dispatch({type: 'MOVE_UP', widgetId: widgetId})
-            .then(widgetService.moveUp())
-            .then(widgetService.findWidgets())*/
     },
 
-    moveDown: (widgets,widgetId) => {
-        let index2 = widgets.indexOf(widgets.find(x=>x.id===widgetId));
-        let new_widgets=SwapItems(widgets, index2, index2 +1);
-        widgetService.updateOrder(new_widgets).then(widgets=>
-        dispatch({type: 'MOVE_DOWN', widgets: widgets}))
+    moveDown: (widgets, widgetId) => {
+        let index2 = widgets.indexOf(widgets.find(x => x.id === widgetId));
+        let new_widgets = SwapItems(widgets, index2, index2 + 1);
+        widgetService.updateOrder(new_widgets).then(widgets =>
+            dispatch({type: 'MOVE_DOWN', widgets: widgets}))
     },
-
-    // update_widget_type: (widget, type) => dispatch({
-    //     type: 'UPDATE_WIDGET',
-    //     widget: widget,
-    //     widgetType: type
-    // }),
-    // update_widget_text: (widget, text) => dispatch({
-    //     type: 'UPDATE_WIDGET',
-    //     widget: widget,
-    //     text: text
-    // }),
-    // update_widget_name: (widget, name) => dispatch({
-    //     type: 'UPDATE_WIDGET',
-    //     widget: widget,
-    //     name: name
-    // }),
-    // update_heading_size: (widget, size) => dispatch({
-    //     type: 'UPDATE_WIDGET',
-    //     widget: widget,
-    //     size: size
-    // }),
-    // togglePreview: () => dispatch({
-    //     type: 'TOGGLE_PREVIEW'
-    // }),
-    // update_list_items: (widget, items) => dispatch({
-    //     type: 'UPDATE_WIDGET',
-    //     widget: widget,
-    //     items: items
-    // }),
-    // update_list_type: (widget, type) => dispatch({
-    //     widget: widget,
-    //     type: 'UPDATE_WIDGET',
-    //     listType: type
-    // }),
-    // update_img_src: (widget, src) => dispatch({
-    //     type: 'UPDATE_WIDGET',
-    //     widget: widget,
-    //     src: src
-    // }),
-    // update_widget_href: (widget, href) => dispatch({
-    //     type: 'UPDATE_WIDGET',
-    //     widget: widget,
-    //     href: href
-    // }),
-    // update_widget_title:
-    //     (widget, title) => dispatch({
-    //         type: 'UPDATE_WIDGET',
-    //         widget: widget,
-    //         title: title
-    //     }),
-
 
 });
 

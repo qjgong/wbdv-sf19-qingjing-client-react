@@ -21,6 +21,7 @@ export default class TopicItem extends React.Component {
             }
         )
     };
+
     componentDidUpdate(prevProps) {
         if (prevProps.selectedTopic !== this.props.selectedTopic) {
             this.setState({

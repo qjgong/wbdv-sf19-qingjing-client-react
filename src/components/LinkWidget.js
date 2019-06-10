@@ -3,7 +3,7 @@ import WidgetSharedComponents from "./WidgetSharedComponents";
 //import {Linking} from'react-native'
 
 
-const LinkWidget = ({index, IsPreview, widget, widgets, deleteWidget, updateWidget,moveUp, moveDown,}) =>
+const LinkWidget = ({index, IsPreview, widget, widgets, deleteWidget, updateWidget, moveUp, moveDown,}) =>
 
 
     <div className="mb-5 card p-1">
@@ -22,21 +22,22 @@ const LinkWidget = ({index, IsPreview, widget, widgets, deleteWidget, updateWidg
             </div>
             <div className="widget row ml-sm-2 col-sm-12">
                 <label>Link URL</label>
-                <input className="form-control"  placeholder="Link URL"
+                <input className="form-control" placeholder="Link URL"
                        defaultValue={widget.href}
-                       onChange={(event) => updateWidget(widget.id, {...widget,href:event.target.value})}/>
+                       onChange={(event) => updateWidget(widget.id, {...widget, href: event.target.value})}/>
             </div>
             <div className="widget row ml-sm-2 col-sm-12">
                 <input className="form-control" placeholder="Link text"
                        defaultValue={widget.title}
-                       onChange={(event) => updateWidget(widget.id, {...widget,title:event.target.value})}/>
+                       onChange={(event) => updateWidget(widget.id, {...widget, title: event.target.value})}/>
             </div>
             <div className="widget row ml-sm-2 col-sm-12">
-                <input className="form-control" placeholder="https://www.youtube.com/user/jannunzi" defaultValue={widget.href}/>
+                <input className="form-control" placeholder="https://www.youtube.com/user/jannunzi"
+                       defaultValue={widget.href}/>
             </div>
             <div className="widget row ml-sm-2 col-sm-12">
                 <input className="form-control" placeholder="Widget name"
-                       onChange={(event) => updateWidget(widget.id, {...widget,name:event.target.value})}
+                       onChange={(event) => updateWidget(widget.id, {...widget, name: event.target.value})}
                        defaultValue={widget.name}/>
             </div>
             <div className="widget row ml-sm-2 col-sm-12">
