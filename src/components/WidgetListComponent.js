@@ -15,6 +15,15 @@ class WidgetListComponent extends React.Component {
         this.props.findWidgets();
     }
 
+    state={
+        IsPreview:false
+    };
+
+    togglePreview=()=>
+        this.setState({
+            IsPreview:!this.state.IsPreview
+        });
+
 
     render() {
         return (
@@ -29,7 +38,7 @@ class WidgetListComponent extends React.Component {
                     <div className="custom-control custom-switch col-sm-2">
                         <input className="custom-control-input"
                                id="customSwitch"
-                               type="checkbox" onClick={this.props.togglePreview}/>
+                               type="checkbox" onClick={this.togglePreview}/>
                         <label className="custom-control-label"
                                htmlFor="customSwitch"/>
                     </div>
@@ -63,7 +72,7 @@ class WidgetListComponent extends React.Component {
                                     findWidgets={this.props.findWidgets}
                                     moveUp={this.props.moveUp}
                                     moveDown={this.props.moveDown}
-                                    IsPreview={this.props.IsPreview}
+                                    IsPreview={this.state.IsPreview}
                                 />
                             } else if (widget && widget.type === "PARAGRAPH") {
                                 return <ParagraphWidget
@@ -78,7 +87,7 @@ class WidgetListComponent extends React.Component {
                                     moveUp={this.props.moveUp}
                                     moveDown={this.props.moveDown}
                                     // update_heading_size={update_heading_size}
-                                    IsPreview={this.props.IsPreview}/>
+                                    IsPreview={this.state.IsPreview}/>
                             } else if (widget && widget.type === "LIST") {
                                 return <ListWidget
                                     key={key}
@@ -91,7 +100,7 @@ class WidgetListComponent extends React.Component {
                                     findWidgets={this.props.findWidgets}
                                     moveUp={this.props.moveUp}
                                     moveDown={this.props.moveDown}
-                                    IsPreview={this.props.IsPreview}/>
+                                    IsPreview={this.state.IsPreview}/>
                             } else if (widget && widget.type === "IMAGE") {
                                 return <ImageWidget
                                     key={key}
@@ -104,7 +113,7 @@ class WidgetListComponent extends React.Component {
                                     findWidgets={this.props.findWidgets}
                                     moveUp={this.props.moveUp}
                                     moveDown={this.props.moveDown}
-                                    IsPreview={this.props.IsPreview}/>
+                                    IsPreview={this.state.IsPreview}/>
                             } else if (widget && widget.type === "LINK") {
                                 return <LinkWidget index={this.props.widgets.indexOf(widget)}
                                                    key={key}
@@ -116,7 +125,7 @@ class WidgetListComponent extends React.Component {
                                                    findWidgets={this.props.findWidgets}
                                                    moveUp={this.props.moveUp}
                                                    moveDown={this.props.moveDown}
-                                                   IsPreview={this.props.IsPreview}/>
+                                                   IsPreview={this.state.IsPreview}/>
                             }
                         })}
 

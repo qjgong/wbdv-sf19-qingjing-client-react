@@ -3,7 +3,6 @@ import WidgetSharedComponents from "./WidgetSharedComponents";
 
 const HeadingWidget = ({
                            index, IsPreview, widgets, widget, deleteWidget, moveUp, moveDown, updateWidget,
-                           update_widget_type, update_heading_size, update_widget_name
                        }) =>
 
     <div className="mb-5 card p-1">
@@ -17,7 +16,6 @@ const HeadingWidget = ({
                     widgets={widgets}
                     moveUp={moveUp}
                     moveDown={moveDown}
-                    update_widget_type={update_widget_type}
                     deleteWidget={deleteWidget}
                     updateWidget={updateWidget}
                 />
@@ -34,14 +32,15 @@ const HeadingWidget = ({
                         onChange={(event) => updateWidget(widget.id, {
                             ...widget, src: event.target.value
                         })}
-                       >
+                >
                     <option value="h1">Heading 1</option>
                     <option value="h2">Heading 2</option>
                     <option value="h3">Heading 3</option>
                 </select>
             </div>
             <div className="form-group row ml-sm-2 col-sm-12">
-                <input onChange={(event) =>updateWidget(widget.id, {...widget,name: event.target.value})} className="form-control"
+                <input onChange={(event) => updateWidget(widget.id, {...widget, name: event.target.value})}
+                       className="form-control"
                        placeholder="Widget name"/>
             </div>
             <div className="form-group row ml-sm-2 col-sm-12">

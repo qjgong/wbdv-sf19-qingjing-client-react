@@ -2,8 +2,7 @@ import React from "react";
 import WidgetSharedComponents from "./WidgetSharedComponents";
 
 
-const LinkWidget = ({index, IsPreview, widget, widgets, deleteWidget, updateWidget,moveUp, update_widget_type, moveDown,
-                        update_widget_href,update_widget_title,update_widget_name}) =>
+const LinkWidget = ({index, IsPreview, widget, widgets, deleteWidget, updateWidget,moveUp, moveDown,}) =>
 
 
     <div className="mb-5 card p-1">
@@ -16,7 +15,6 @@ const LinkWidget = ({index, IsPreview, widget, widgets, deleteWidget, updateWidg
                     widgets={widgets}
                     moveUp={moveUp}
                     moveDown={moveDown}
-                    update_widget_type={update_widget_type}
                     deleteWidget={deleteWidget}
                     updateWidget={updateWidget}
                 />
@@ -44,6 +42,7 @@ const LinkWidget = ({index, IsPreview, widget, widgets, deleteWidget, updateWidg
                 <h4>Preview</h4>
             </div>
         </div>}
+        {console.log(widget)}
         <div className="widget row ml-sm-2 col-sm-12">
             <a href={widget.href}>{widget.title}</a>
         </div>

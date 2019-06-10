@@ -32,11 +32,11 @@ const widgetReducer = (state = {widgets: [], IsPreview:false, topicId:123}, acti
         //     newState.widgets = widgetService.findWidgets();
         //     return newState;
 
-        case 'TOGGLE_PREVIEW':
-
-
-            newState.IsPreview = !newState.IsPreview;
-            return newState;
+        // case 'TOGGLE_PREVIEW':
+        //
+        //
+        //     newState.IsPreview = !newState.IsPreview;
+        //     return newState;
 
         case "MOVE_UP":
             let index = state.widgets.indexOf(state.widgets.find(x=>x.id===action.widgetId));

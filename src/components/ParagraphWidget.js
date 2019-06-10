@@ -1,7 +1,7 @@
 import React from "react";
 import WidgetSharedComponents from "./WidgetSharedComponents";
 
-const ParagraphWidget = ({index, widget, IsPreview, widgets,updateWidget, update_widget_type, deleteWidget, moveUp, moveDown}) =>
+const ParagraphWidget = ({index, widget, IsPreview, widgets, updateWidget, deleteWidget, moveUp, moveDown}) =>
     <div className="mb-5 card p-1">
         {!IsPreview && <div>
             <div className="row ml-sm-2 col-sm-12 d-flex justify-content-between">
@@ -12,7 +12,6 @@ const ParagraphWidget = ({index, widget, IsPreview, widgets,updateWidget, update
                     widgets={widgets}
                     moveUp={moveUp}
                     moveDown={moveDown}
-                    update_widget_type={update_widget_type}
                     deleteWidget={deleteWidget}
                     updateWidget={updateWidget}
                 />
@@ -22,7 +21,9 @@ const ParagraphWidget = ({index, widget, IsPreview, widgets,updateWidget, update
                                   placeholder="Lorem ipsum"/>
             </div>
             <div className="widget row ml-sm-2 col-sm-12">
-                <input className="form-control" placeholder="Widget name"/>
+                <input className="form-control" placeholder="Widget name"
+                       onChange={(event) => updateWidget(widget.id, {...widget, name: event.target.value})}
+                       defaultValue={widget.name}/>
             </div>
             <div className="widget row ml-sm-2 col-sm-12">
                 <h4>Preview</h4>
@@ -31,6 +32,7 @@ const ParagraphWidget = ({index, widget, IsPreview, widgets,updateWidget, update
         <div className="widget row ml-sm-2 col-sm-12">
             <label>Lorem ipsum</label>
         </div>
+        {console.log(widget)}
     </div>;
 
 export default ParagraphWidget

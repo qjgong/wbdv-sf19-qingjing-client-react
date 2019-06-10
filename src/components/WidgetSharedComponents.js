@@ -1,7 +1,7 @@
 import React from 'react'
 import {HEADING, IMAGE, LINK, LIST, PARAGRAPH} from "../constants/constants";
 
-const WidgetSharedComponents=({index,widgets,moveDown,moveUp,widget,updateWidget,update_widget_type,deleteWidget})=>
+const WidgetSharedComponents=({index,widgets,moveDown,moveUp,widget,updateWidget,deleteWidget})=>
     <div className="d-flex justify-content-around">
         {
             (index !== 0) && <button className={"btn btn-xs btn-warning mr-1"} onClick={() => moveUp(widget.id)}>

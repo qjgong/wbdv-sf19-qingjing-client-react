@@ -2,8 +2,7 @@ import React from "react";
 import WidgetSharedComponents from "./WidgetSharedComponents";
 
 
-const ListWidget = ({index, widget, IsPreview,widgets, deleteWidget, updateWidget,update_widget_type, moveUp, moveDown,
-                        update_widget_name,update_list_items,update_list_type}) =>
+const ListWidget = ({index, widget, IsPreview,widgets, deleteWidget, updateWidget, moveUp, moveDown,}) =>
     <div className="mb-5 card p-1">
         {!IsPreview && <div>
             <div className="form-group row ml-sm-2 col-sm-12 d-flex justify-content-between">
@@ -14,7 +13,6 @@ const ListWidget = ({index, widget, IsPreview,widgets, deleteWidget, updateWidge
                     widgets={widgets}
                     moveUp={moveUp}
                     moveDown={moveDown}
-                    update_widget_type={update_widget_type}
                     deleteWidget={deleteWidget}
                     updateWidget={updateWidget}
                 />
@@ -23,7 +21,7 @@ const ListWidget = ({index, widget, IsPreview,widgets, deleteWidget, updateWidge
                 <label>List Items</label>
                         <textarea className="form-control"
                                   placeholder="Put each&#10;item in&#10;a separate row"
-                                  // defaultValue={widget.items.split(",").join("\n")}
+                                   defaultValue={widget.items.split(",").join("\n")}
                                   onChange={(event) => updateWidget(widget.id, {...widget,items:event.target.value})}
                                   rows="4"/>
             </div>
@@ -63,6 +61,7 @@ const ListWidget = ({index, widget, IsPreview,widgets, deleteWidget, updateWidge
                         }
                     </ol>)
             }
+            {console.log(widget)}
         </div>
     </div>;
 

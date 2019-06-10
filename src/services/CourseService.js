@@ -35,9 +35,15 @@ export default class CourseService {
 
 
     updateCourse(id, course) {
-        let this_course = this.findCourseById(id);
-        this_course.title = course.title;
-        this_course.modules = course.modules;
+        return fetch(url + "/" + id,
+            {
+                method: "PUT",
+                body: JSON.stringify(course),
+                headers: {
+                    "content-type": "application/json"
+                }
+            })
+            .then(response => response.json());
     }
 
     deleteCourse = (id) => fetch(url+'/'+id, {

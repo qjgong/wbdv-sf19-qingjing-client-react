@@ -287,7 +287,6 @@ export default class CourseEditor
                             </Link>
                             <a className="navbar-brand ml-3">
                                 {this.state.course.title}
-                                {this.state.course.modules.length}
                             </a>
                         </div>
 
