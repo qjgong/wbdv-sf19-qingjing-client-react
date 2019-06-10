@@ -5,6 +5,14 @@ import WidgetService from '../services/WidgetService'
 
 const widgetService = new WidgetService();
 
+function SwapItems(items, firstIndex, secondIndex) {
+    let results = items.slice();
+    let firstItem = items[firstIndex];
+    results[firstIndex] = items[secondIndex];
+    results[secondIndex] = firstItem;
+    return results;
+}
+
 
 const stateToPropertyMapper = (state) => {
     console.log(state.widgets);
@@ -66,12 +74,23 @@ const propertyToDispatchMapper = dispatch => ({
                     widgets: widgets
                 })),
 
-    moveUp: (widgetId) => {
-        dispatch({type: 'MOVE_UP', widgetId: widgetId})
+    moveUp: (widgets,widgetId) => {
+        let index = widgets.indexOf(widgets.find(x=>x.id===widgetId));
+        let new_widgets=SwapItems(widgets, index, index - 1);
+        widgetService.updateOrder(new_widgets)
+            .then(widgets => dispatch({type: 'MOVE_UP', widgets: widgets}))
+
+
+        /*dispatch({type: 'MOVE_UP', widgetId: widgetId})
+            .then(widgetService.moveUp())
+            .then(widgetService.findWidgets())*/
     },
 
-    moveDown: (widgetId) => {
-        dispatch({type: 'MOVE_DOWN', widgetId: widgetId})
+    moveDown: (widgets,widgetId) => {
+        let index2 = widgets.indexOf(widgets.find(x=>x.id===widgetId));
+        let new_widgets=SwapItems(widgets, index2, index2 +1);
+        widgetService.updateOrder(new_widgets).then(widgets=>
+        dispatch({type: 'MOVE_DOWN', widgets: widgets}))
     },
 
     // update_widget_type: (widget, type) => dispatch({

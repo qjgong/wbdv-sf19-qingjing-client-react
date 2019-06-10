@@ -20,13 +20,13 @@ const widgetReducer = (state = {widgets: [], IsPreview:false, topicId:123}, acti
         case "CREATE_WIDGET":
         case "FIND_ALL_WIDGETS":
         case "UPDATE_WIDGET":
+        case "FIND_WIDGET":
+        case "MOVE_UP":
+        case "MOVE_DOWN":
             newState.widgets = action.widgets;
             return newState;
 
-        case "FIND_WIDGET":
-            return {
-                widgets: action.widgets
-            };
+
         // case "DELETE_WIDGET":
         //     widgetService.deleteWidget(action.widgetId);
         //     newState.widgets = widgetService.findWidgets();
@@ -38,15 +38,12 @@ const widgetReducer = (state = {widgets: [], IsPreview:false, topicId:123}, acti
         //     newState.IsPreview = !newState.IsPreview;
         //     return newState;
 
-        case "MOVE_UP":
-            let index = state.widgets.indexOf(state.widgets.find(x=>x.id===action.widgetId));
-            newState.widgets=SwapItems(state.widgets, index, index - 1);
-            return newState;
 
-        case "MOVE_DOWN":
-            let index2 = state.widgets.indexOf(state.widgets.find(x=>x.id===action.widgetId));
-            newState.widgets=SwapItems(state.widgets, index2, index2 +1)
-            return newState;
+
+        // case "MOVE_DOWN":
+        //     let index2 = state.widgets.indexOf(state.widgets.find(x=>x.id===action.widgetId));
+        //     newState.widgets=SwapItems(state.widgets, index2, index2 +1)
+        //     return newState;
 
         // case "UPDATE_WIDGET":
         //

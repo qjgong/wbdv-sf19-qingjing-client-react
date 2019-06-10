@@ -38,9 +38,8 @@ export default class CourseEditor
             module: "",
             lesson: "",
             topic: "",
-            store:"",
 
-        }
+        };
         // if (this.props.course.modules !== undefined && this.props.course.modules.length !== 0) {
         //     this.state.selectedModule = this.props.course.modules[0];
         //     if (this.props.course.modules[0].lessons !== undefined) {
@@ -53,6 +52,7 @@ export default class CourseEditor
 
 
         this.widgetService = new WidgetService();
+        this.store = createStore(widgetReducer);
         // let widgets=this.widgetService.findWidgets(this.state.selectedTopic.id);
         //
         // this.store = createStore(widgetReducer, {topicId:this.state.selectedTopic.id, widgets:widgets, IsPreview:false})
@@ -151,12 +151,9 @@ export default class CourseEditor
         //     selectedTopic = topic;
         // }
 
-        console.log(this.state.widgets);
-
-        this.store = createStore(widgetReducer);
         this.setState({
             selectedTopic: topic,
-        })
+        });
 
     };
 

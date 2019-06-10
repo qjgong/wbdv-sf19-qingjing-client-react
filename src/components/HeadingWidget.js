@@ -30,7 +30,7 @@ const HeadingWidget = ({
             <div className="form-group row ml-sm-2 col-sm-12">
                 <select className="form-control" defaultValue={widget.size}
                         onChange={(event) => updateWidget(widget.id, {
-                            ...widget, src: event.target.value
+                            ...widget, size: event.target.value
                         })}
                 >
                     <option value="h1">Heading 1</option>

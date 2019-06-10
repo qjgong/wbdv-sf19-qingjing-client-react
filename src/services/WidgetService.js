@@ -98,6 +98,19 @@ export default class WidgetService {
     //     }
     // }
 
+    updateOrder(widgets) {
+        return fetch(url,
+            {
+                method: "PUT",
+                body: JSON.stringify(widgets),
+                headers: {
+                    "content-type": "application/json"
+                }
+            })
+            .then(response => response.json());
+    }
+
+
 
     // createWidget(topicId, widget) {
     //     this.courses.forEach(c => {

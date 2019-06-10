@@ -13,7 +13,7 @@ export default class LessonTabItem extends React.Component {
         this.setState({
             inputHidden: !this.state.inputHidden
         })
-    }
+    };
 
     titleChanged = (event) => {
         this.setState({
@@ -21,13 +21,13 @@ export default class LessonTabItem extends React.Component {
 
             }
         )
-    }
+    };
 
     render() {
         return (
-            <li className="nav-item" onClick={() => this.props.selectLesson(this.props.lesson)}
+            <li  onClick={() => this.props.selectLesson(this.props.lesson)}
                 className={this.props.lesson === this.props.selectedLesson ? "nav-link active bg-secondary" : "nav-link"}>
-                <a>{this.props.lesson.title}</a>
+                <i>{this.props.lesson.title}</i>
                 <button className="btn btn-danger btn-sm ml-3">
                     <i onClick={() => this.props.deleteLesson(this.props.lesson)} className="fa fa-trash"/></button>
                 <button className="btn btn-success btn-sm ml-3">

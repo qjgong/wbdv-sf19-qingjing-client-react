@@ -1,5 +1,6 @@
 import React from "react";
 import WidgetSharedComponents from "./WidgetSharedComponents";
+//import {Linking} from'react-native'
 
 
 const LinkWidget = ({index, IsPreview, widget, widgets, deleteWidget, updateWidget,moveUp, moveDown,}) =>
@@ -31,7 +32,7 @@ const LinkWidget = ({index, IsPreview, widget, widgets, deleteWidget, updateWidg
                        onChange={(event) => updateWidget(widget.id, {...widget,title:event.target.value})}/>
             </div>
             <div className="widget row ml-sm-2 col-sm-12">
-                <input className="form-control" placeholder="https://www.youtube.com/user/jannunzi"/>
+                <input className="form-control" placeholder="https://www.youtube.com/user/jannunzi" defaultValue={widget.href}/>
             </div>
             <div className="widget row ml-sm-2 col-sm-12">
                 <input className="form-control" placeholder="Widget name"
@@ -44,8 +45,9 @@ const LinkWidget = ({index, IsPreview, widget, widgets, deleteWidget, updateWidg
         </div>}
         {console.log(widget)}
         <div className="widget row ml-sm-2 col-sm-12">
+            {/*<a onPress={()=>Linking.openURL(widget.href)} href={widget.href}>{widget.title}</a>*/}
             <a href={widget.href}>{widget.title}</a>
         </div>
-    </div>
+    </div>;
 
 export default LinkWidget
