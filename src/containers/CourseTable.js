@@ -11,7 +11,12 @@ export default class CourseTable extends React.Component {
         super(props)
         this.state = {}
     }
+    titleChanged = (event) => {
+        this.setState({
+            title: event.target.value
 
+        })
+    };
     render() {
         return (
             <div>
@@ -30,10 +35,16 @@ export default class CourseTable extends React.Component {
 
                         <li className="collapse navbar-collapse" id="navbarTogglerDemo01">
 
-                            <input type="text" className="form-control" placeholder="New Course Title"/></li>
+                            <input type="text" className="form-control" placeholder="New Course Title"
+                                   onChange={this.titleChanged}/></li>
 
                         <li className="nav-link" href="#">
-                            <button type="button" className="btn btn-danger btn-lg">
+                            <button type="button" className="btn btn-danger btn-lg"
+                                    onClick={() => this.props.createCourse({
+                                        id: 0,
+                                        title: this.state.title,
+                                        widgets: []
+                                    })}>
                                 <i className="fa fa-plus"></i></button>
                         </li>
                     </div>
@@ -69,7 +80,11 @@ export default class CourseTable extends React.Component {
                     </table>
                 </div>
 
-                <button className="btn btn-danger floating">
+                <button className="btn btn-danger floating" onClick={() => this.props.createCourse({
+                    id: 0,
+                    title: "New Course",
+                    widgets: []
+                })}>
                     <i className="fa fa-plus" style={{color: "white"}}></i>
                 </button>
 

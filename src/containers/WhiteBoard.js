@@ -15,7 +15,8 @@ export default class Whiteboard extends React.Component {
         super(props);
         this.state = {
             selectedCourse: null,
-            courses: []
+            courses: [],
+            title: "New Class"
 
         }
     }
@@ -53,6 +54,22 @@ export default class Whiteboard extends React.Component {
             })
     };
 
+    createCourse = (course) => {
+        console.log(course)
+        this.courseService.createCourse(course)
+            .then(
+                response => {
+                    return this.courseService.findAllCourses()
+                }
+            )
+            .then(courses => {
+                console.log(courses)
+                this.setState({
+                    courses: courses,
+                })
+            })
+    };
+
 
     render() {
 
@@ -65,12 +82,15 @@ export default class Whiteboard extends React.Component {
                            render={() => <CourseTable
                                selectCourse={this.selectCourse}
                                deleteCourse={this.deleteCourse}
-                               courses={this.state.courses}/>}/>
+                               courses={this.state.courses}
+                               createCourse={this.createCourse}
+                           />}/>
                     <Route path="/course-grid"
                            render={() => <CourseGrid
                                selectCourse={this.selectCourse}
                                deleteCourse={this.deleteCourse}
-                               courses={this.state.courses}/>}/>
+                               courses={this.state.courses}
+                               createCourse={this.createCourse}/>}/>
                     <Route path={"/course-editor/:courseId"}
                            render={() => <CourseEditor
                                selectCourse={this.selectCourse}

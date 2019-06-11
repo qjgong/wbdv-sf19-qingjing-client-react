@@ -1,6 +1,6 @@
 import data from "./courses.json"
 import React from "react";
-import WidgetService from "./WidgetService";
+
 
 let url = "http://localhost:8080" + "/api/courses";
 export default class CourseService {
@@ -14,14 +14,13 @@ export default class CourseService {
     }
 
 
-    createCourse = course => {
+    createCourse = course =>
         fetch(url, {
             method: 'POST',
             body: JSON.stringify(course),
             headers: {'content-type': 'application/json'}
-        })
-            .then(response => response.json())
-    };
+        });
+
 
     findAllCourses = () =>
         fetch(url).then(response => response.json());
