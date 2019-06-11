@@ -2,7 +2,7 @@ import data from "./courses.json"
 import React from "react";
 
 
-let url = "http://localhost:8080" + "/api/courses";
+let url = "https://whispering-ravine-77480.herokuapp.com/" + "/api/courses";
 export default class CourseService {
     constructor() {
         if (!!CourseService.instance) {

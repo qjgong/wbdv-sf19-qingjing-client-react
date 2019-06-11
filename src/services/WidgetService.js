@@ -1,7 +1,7 @@
 import myData from './courses';
 import React from "react";
 
-let url = "http://localhost:8080" + "/api/widgets";
+let url = "https://whispering-ravine-77480.herokuapp.com/" + "/api/widgets";
 
 export default class WidgetService {
     constructor() {
