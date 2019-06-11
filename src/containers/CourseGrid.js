@@ -76,6 +76,7 @@ export default class CourseGrid
                                 <CourseCard course={course}
                                             selectCourse={this.props.selectCourse}
                                             deleteCourse={this.props.deleteCourse}
+                                            updateCourse={this.props.updateCourse}
                                             key={key}/>)}
                         </tr>
                         </tbody>

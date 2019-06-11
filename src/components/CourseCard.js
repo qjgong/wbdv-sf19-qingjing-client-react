@@ -7,8 +7,22 @@ export default class CourseCard
 
     constructor(props) {
         super(props)
-        this.state = {}
+        this.state = {
+            editing: false,
+            title: this.props.course.title
+        }
     }
+
+
+    update = () => {
+        this.setState({
+            editing: !this.state.editing
+        });
+        this.props.updateCourse(this.props.course.id, {
+            ...this.props.course,
+            title: this.state.title
+        });
+    };
 
     render() {
         return (
@@ -24,6 +38,29 @@ export default class CourseCard
                           className="btn btn-primary" onClick={() => this.props.selectCourse(this.props.course)}>
                         More...
                     </Link>
+
+                    {
+                        !this.state.editing &&
+
+                        <button className={"btn btn-xs btn-success"}
+                                onClick={() => this.setState({
+                                    editing: !this.state.editing
+                                })}><i className={"fa fa-edit"}/></button>
+                    }
+                    {
+                        this.state.editing &&
+                        <div className={"d-flex"}>
+                            <input className={"form-control"}
+                                   placeholder={"New Title"}
+                                   value={this.state.title || ""}
+                                   onChange={(event) => this.setState({title: event.target.value})}/>
+                            <button className={"btn btn-xs btn-primary"}
+                                    onClick={() => {
+                                        this.update()
+                                    }}>Done
+                            </button>
+                        </div>
+                    }
 
                     <button onClick={() => this.props.deleteCourse(this.props.course.id)}
                             className="btn btn-danger ml-1">Delete

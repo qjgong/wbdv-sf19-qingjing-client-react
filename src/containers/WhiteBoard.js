@@ -70,6 +70,18 @@ export default class Whiteboard extends React.Component {
             })
     };
 
+    updateCourse = (cid, course) => {
+        this.courseService.updateCourse(cid, course)
+            .then(response => {
+                return this.courseService.findAllCourses()
+            })
+            .then(courses => {
+                this.setState({
+                    courses: courses
+                })
+            })
+    };
+
 
     render() {
 
@@ -84,13 +96,15 @@ export default class Whiteboard extends React.Component {
                                deleteCourse={this.deleteCourse}
                                courses={this.state.courses}
                                createCourse={this.createCourse}
+                               updateCourse={this.updateCourse}
                            />}/>
                     <Route path="/course-grid"
                            render={() => <CourseGrid
                                selectCourse={this.selectCourse}
                                deleteCourse={this.deleteCourse}
                                courses={this.state.courses}
-                               createCourse={this.createCourse}/>}/>
+                               createCourse={this.createCourse}
+                               updateCourse={this.updateCourse}/>}/>
                     <Route path={"/course-editor/:courseId"}
                            render={() => <CourseEditor
                                selectCourse={this.selectCourse}

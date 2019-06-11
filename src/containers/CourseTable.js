@@ -11,12 +11,14 @@ export default class CourseTable extends React.Component {
         super(props)
         this.state = {}
     }
+
     titleChanged = (event) => {
         this.setState({
             title: event.target.value
 
         })
     };
+
     render() {
         return (
             <div>
@@ -72,7 +74,8 @@ export default class CourseTable extends React.Component {
                         {this.props.courses.map((course) =>
                             <CourseRow selectCourse={this.props.selectCourse}
                                        deleteCourse={this.props.deleteCourse}
-                                       course={course} key={course.id}/>
+                                       course={course} key={course.id}
+                                       updateCourse={this.props.updateCourse}/>
                         )}
 
                         </tbody>

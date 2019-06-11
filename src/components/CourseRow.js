@@ -4,8 +4,21 @@ import {Link} from 'react-router-dom'
 export default class CourseRow extends React.Component {
     constructor(props) {
         super(props)
-        this.state = {}
+        this.state = {
+            editing: false,
+            title: this.props.course.title
+        }
     }
+
+    update = () => {
+        this.setState({
+            editing: !this.state.editing
+        });
+        this.props.updateCourse(this.props.course.id, {
+            ...this.props.course,
+            title: this.state.title
+        });
+    };
 
     render() {
         return (
@@ -19,6 +32,29 @@ export default class CourseRow extends React.Component {
                 <td style={{color: "gray"}}>6:54PM</td>
                 <td>&nbsp;</td>
                 <td>&nbsp;</td>
+
+                {
+                    !this.state.editing&&
+                    <td>
+                        <button className={"btn btn-xs btn-success"}
+                                onClick={() => this.setState({
+                                    editing: !this.state.editing
+                                })}><i className={"fa fa-edit"}/></button>
+                    </td>
+                }
+                {
+                    this.state.editing &&
+                    <td className={"d-flex"}>
+                        <input className={"form-control"}
+                               placeholder={"New Title"}
+                               value={this.state.title || ""}
+                               onChange={(event) => this.setState({title: event.target.value})}/>
+                        <button className={"btn btn-xs btn-primary"}
+                                onClick={() => {
+                                    this.update()
+                                }}>Done</button>
+                    </td>
+                }
                 <td>
                     <button onClick={() => this.props.deleteCourse(this.props.course.id)}
                             className="fa fa-times"/>
