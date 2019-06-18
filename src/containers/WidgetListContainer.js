@@ -45,9 +45,9 @@ const propertyToDispatchMapper = dispatch => ({
                     widgets: widgets
                 })),
 
-    findWidgets: () =>
+    findWidgets: (topicId) =>
         widgetService
-            .findWidgets()
+            .findWidgetsForTopic(topicId)
             .then(widgets =>
                 dispatch({
                     type: 'FIND_ALL_WIDGETS',
@@ -73,18 +73,18 @@ const propertyToDispatchMapper = dispatch => ({
                     widgets: widgets
                 })),
 
-    moveUp: (widgets, widgetId) => {
+    moveUp: (widgets, widgetId,topicId) => {
         let index = widgets.indexOf(widgets.find(x => x.id === widgetId));
         let new_widgets = SwapItems(widgets, index, index - 1);
-        widgetService.updateOrder(new_widgets)
+        widgetService.updateOrder(new_widgets,topicId)
             .then(widgets => dispatch({type: 'MOVE_UP', widgets: widgets}))
 
     },
 
-    moveDown: (widgets, widgetId) => {
+    moveDown: (widgets, widgetId,topicId) => {
         let index2 = widgets.indexOf(widgets.find(x => x.id === widgetId));
         let new_widgets = SwapItems(widgets, index2, index2 + 1);
-        widgetService.updateOrder(new_widgets).then(widgets =>
+        widgetService.updateOrder(new_widgets,topicId).then(widgets =>
             dispatch({type: 'MOVE_DOWN', widgets: widgets}))
     },
 

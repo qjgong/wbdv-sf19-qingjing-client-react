@@ -5,7 +5,6 @@ export default class ModuleList extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            module: {id: -1, title: 'New Module'},
             modules: this.props.modules
 
         };
@@ -40,7 +39,11 @@ export default class ModuleList extends React.Component {
                             placeholder="New Module"
                             className="form-control"
                             id="add-module-input"/>
-                        <button onClick={() => this.props.createModule()} className="btn btn-secondary btn-block">Add
+                        <button onClick={() => this.props.createModule(this.props.course.id,
+                            {
+                                title: this.props.module.title ? this.props.module.title : "New Module",
+                            }
+                        )} className="btn btn-secondary btn-block">Add
                             Module
                         </button>
                     </li>

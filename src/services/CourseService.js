@@ -1,15 +1,14 @@
-import data from "./courses.json"
+
 import React from "react";
 
 
-let url = "https://whispering-ravine-77480.herokuapp.com/" + "/api/courses";
+let url = "http://localhost:8080" + "/api/courses";
 export default class CourseService {
     constructor() {
         if (!!CourseService.instance) {
             return CourseService.instance;
         }
         CourseService.instance = this;
-        this.courses = data;
         return this;
     }
 

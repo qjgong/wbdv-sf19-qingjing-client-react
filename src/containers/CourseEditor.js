@@ -9,6 +9,9 @@ import widgetReducer from '../reducers/WidgetReducer'
 import WidgetListContainer from "./WidgetListContainer";
 import WidgetService from "../services/WidgetService";
 import CourseService from "../services/CourseService";
+import LessonService from "../services/LessonService";
+import ModuleService from "../services/ModuleService";
+import TopicService from "../services/TopicService";
 
 
 export default class CourseEditor
@@ -38,122 +41,72 @@ export default class CourseEditor
             module: "",
             lesson: "",
             topic: "",
+            store: null,
 
         };
-        // if (this.props.course.modules !== undefined && this.props.course.modules.length !== 0) {
-        //     this.state.selectedModule = this.props.course.modules[0];
-        //     if (this.props.course.modules[0].lessons !== undefined) {
-        //         this.state.selectedLesson = this.props.course.modules[0].lessons[0];
-        //         if (this.props.course.modules[0].lessons[0].topics !== undefined) {
-        //             this.state.selectedTopic = this.props.course.modules[0].lessons[0].topics[0];
-        //         }
-        //     }
-        // }
-
-
         this.widgetService = new WidgetService();
-        this.store = createStore(widgetReducer);
-        // let widgets=this.widgetService.findWidgets(this.state.selectedTopic.id);
-        //
-        // this.store = createStore(widgetReducer, {topicId:this.state.selectedTopic.id, widgets:widgets, IsPreview:false})
-
+        this.lessonService = new LessonService();
+        this.moduleService = new ModuleService();
+        this.topicService = new TopicService();
     }
 
+    componentWillMount() {
+        this.moduleService.findModulesforCourse(this.props.course.id)
+            .then(modules => this.setState({
+                modules: modules,
+            }));
+    }
 
-    createTopic = () => {
-
-        let topics = this.state.selectedLesson.topics;
-        if (!topics) {
-            topics = []
-        }
-        topics.push({
-            title: this.state.topic.title ? this.state.topic.title : "New Topic",
-            id: Math.random() * 1000,
-            widgets: []
-        });
-        document.getElementById("add-topic-input").value = "";
-        let lesson = this.state.selectedLesson;
-        lesson.topics = topics;
-
-        let lessons = this.state.selectedModule.lessons;
-        lessons = lessons.map(x => x.id === lesson.id ? lesson : x);
-
-        let module = this.state.selectedModule;
-        module.lessons = lessons;
-        this.setState({
-            modules: this.state.modules.map(m => m.id === module.id ? module : m)
-        });
+    createTopic = (lessonId, topic) => {
+        this.topicService.createTopic(lessonId, topic)
+            .then(topics => this.setState({
+                topics: topics
+            }))
     };
 
-    createLesson = () => {
-        let lesson = {
-            title: this.state.lesson.title ? this.state.lesson.title : "New Lesson",
-            id: Math.random() * 1000,
-            topics: []
-        };
+    createLesson = (moduleId, lesson) => {
+        this.lessonService.createLesson(moduleId, lesson)
+            .then(lessons =>
+                this.setState({
+                    lessons: lessons
+                }))
 
-        let lessons = this.state.selectedModule.lessons ? [...this.state.selectedModule.lessons] : [];
-        lessons.push(lesson);
-        document.getElementById("add-lesson-input").value = "";
-        let module = this.state.selectedModule;
-        module.lessons = lessons;
-        this.setState({
-            modules: this.state.modules.map(m => m.id === module.id ? module : m),
-        });
     };
 
-    createModule = () => {
-        let modules = this.state.modules ? this.state.modules : [];
-        modules.push({
-            id: Math.random() * 1000,
-            title: this.state.module.title ? this.state.module.title : "New Module",
-            lessons: []
-        });
-        document.getElementById("add-module-input").value = "";
-        this.setState({
-            modules: modules,
-        });
+
+    createModule = (cId, module) => {
+        this.moduleService.createModule(cId, module)
+            .then(modules => this.setState({
+                modules: modules
+            }));
     };
 
 
     selectModule = module => {
 
-        // if (module.lessons !== undefined && module.lessons.length !== 0) {
-        //     selectedLesson = module.lessons[0];
-        //
-        //     if (selectedLesson.length !== 0 && selectedLesson.topics !== undefined) {
-        //         selectedTopic = module.lessons[0].topics[0];
-        //     }
-        // }
-
-        this.setState(
-            {
-                selectedModule: module,
-            })
+        this.lessonService.findAllLessonsforModule(module.id)
+            .then(l => this.setState({
+                lessons: l,
+                selectedModule: module
+            }));
 
     };
 
 
     selectLesson = lesson => {
-
-        // if (lesson.length !== 0 && lesson.topics !== undefined) {
-        //     selectedTopic = lesson.topics[0];
-        // }
-
+        this.topicService.findAllTopicsforLesson(lesson.id).then(
+            topics=>
         this.setState({
+            topics:topics,
             selectedLesson: lesson,
-        })
+        }))
     };
 
     selectTopic = topic => {
-
-        // if (topic.length !== 0 && topic !== undefined) {
-        //     selectedTopic = topic;
-        // }
-
-        this.setState({
+        this.widgetService.findWidgetsForTopic(topic.id).then(response => this.setState({
             selectedTopic: topic,
-        });
+            store: createStore(widgetReducer, {widgets: response, topicId: topic.id}),
+        }))
 
     };
 
@@ -171,34 +124,25 @@ export default class CourseEditor
         m.title = title;
         this.setState({
             modules: this.state.modules.map(i => i.id === m.id ? m : i)
-        })
+        });
+        this.moduleService.updateModule(m.id, m)
     };
 
     updateLesson = (lesson, title) => {
-        let newLesson = this.state.selectedLesson;
-        newLesson.title = title;
-        let module = this.state.selectedModule;
-        let lessons = this.state.selectedModule.lessons;
-        lessons = lessons.map(l => l.id === lesson.id ? newLesson : l);
-        module.lessons = lessons;
+        let l=lesson;
+        l.title=title;
         this.setState({
-            modules: this.state.modules.map(m => m.id === module.id ? module : m)
+            lessons:this.state.lessons.map(i=>i.id===l.id?l:i)
         });
+        this.lessonService.updateLesson(l.id,l)
+
     };
 
     updateTopic = (topic, title) => {
-        let newTopic = this.state.selectedTopic;
-        newTopic.title = title;
-        let topics = this.state.selectedLesson.topics;
-        topics = topics.map(t => t.id === topic.id ? newTopic : t);
-        let lesson = this.state.selectedLesson;
-        lesson.topics = topics;
-        let lessons = this.state.selectedModule.lessons;
-        lessons = lessons.map(l => l.id === lesson.id ? lesson : l);
-        let module = this.state.selectedModule;
-        module.lessons = lessons;
+       let t=topic;
+       t.title=title;
         this.setState({
-            modules: this.state.modules.map(m => m.id === module.id ? module : m)
+            topics: this.state.topics.map(m => m.id === t.id ? t : m)
         });
     };
 
@@ -228,44 +172,28 @@ export default class CourseEditor
     };
 
     deleteModule = id => {
-        let i = this.state.modules.findIndex(m => m.id !== id);
-        this.setState(
-            {
-                selectedModule: i === -1 ? "" : this.state.modules[i],
-                selectedLesson: i !== -1 && this.state.modules[i].lessons ? this.state.modules[i].lessons[0] : "",
-                modules: this.state.modules.filter(m => m.id !== id)
-            }
-        );
+        this.moduleService.deleteModule(id)
+            .then(() => this.moduleService.findModulesforCourse(this.props.course.id))
+            .then(response => this.setState({
+                modules: response
+            }));
     };
 
     deleteLesson = lesson => {
-        if (this.state.selectedModule.lessons !== undefined) {
-            let lessons = this.state.selectedModule.lessons;
-            lessons = lessons.filter(l => l !== lesson);
-            let module = this.state.selectedModule;
-            module.lessons = lessons;
-            this.setState({
-                modules: this.state.modules.map(m => m.id === module.id ? module : m),
-                selectedLesson: lessons.length === 0 ? "" : lessons[0]
-            });
-        }
-    };
+        this.lessonService.deleteLesson(lesson.id)
+            .then(() => this.lessonService.findAllLessonsforModule(this.state.selectedModule.id))
+            .then(response => this.setState({
+                lessons: response
+            }))
+    }
 
     deleteTopic = (topic) => {
-        console.log(topic)
-        if (this.state.selectedLesson.topics !== undefined) {
-            let topics = this.state.selectedLesson.topics;
-            topics = topics.filter(t => t !== topic);
-            let lesson = this.state.selectedLesson;
-            lesson.topics = topics;
-            let lessons = this.state.selectedModule.lessons;
-            lessons = lessons.map(l => l.id === lesson.id ? lesson : l);
-            let module = this.state.selectedModule;
-            module.lessons = lessons;
-            this.setState({
-                modules: this.state.modules.map(m => m.id === module.id ? module : m)
-            });
-        }
+        this.topicService.deleteTopic(topic.id)
+            .then(() => this.topicService.findAllTopicsforLesson(this.state.selectedLesson.id))
+            .then(response => this.setState({
+                topics: response
+            }))
+
     };
 
 
@@ -286,8 +214,10 @@ export default class CourseEditor
                         </div>
 
                         <LessonTabs selectLesson={this.selectLesson}
+                                    module={this.state.selectedModule}
+                                    lesson={this.state.lesson}
                                     selectedLesson={this.state.selectedLesson}
-                                    lessons={this.state.selectedModule.lessons}
+                                    lessons={this.state.lessons}
                                     updateLesson={this.updateLesson}
                                     createLesson={this.createLesson}
                                     lessonTitleChanged={this.LessonTitleChanged}
@@ -299,9 +229,11 @@ export default class CourseEditor
 
                     <div className="col-4 left">
                         <ModuleList selectedModule={this.state.selectedModule}
+                                    course={this.props.course}
+                                    module={this.state.module}
                                     selectModule={this.selectModule}
                                     updateModule={this.updateModule}
-                                    modules={this.state.course.modules}
+                                    modules={this.state.modules}
                                     createModule={this.createModule}
                                     moduleTitleChanged={this.moduleTitleChanged}
                                     deleteModule={this.deleteModule}
@@ -309,8 +241,10 @@ export default class CourseEditor
 
 
                     <div className="col-8 right bg-light">
-                        <TopicPills topics={this.state.selectedLesson.topics}
+                        <TopicPills topics={this.state.topics}
                                     selectedTopic={this.state.selectedTopic}
+                                    lesson={this.state.selectedLesson}
+                                    topic={this.state.topic}
                                     updateTopic={this.updateTopic}
                                     selectTopic={this.selectTopic}
                                     createTopic={this.createTopic}
@@ -318,16 +252,14 @@ export default class CourseEditor
                                     deleteTopic={this.deleteTopic}/>
 
                         <br/>
-                        {this.state.selectedTopic && this.store &&
-                        <Provider store={this.store}>
+                        {this.state.selectedTopic && this.state.store &&
+                        <Provider store={this.state.store}>
                             <WidgetListContainer/>
                         </Provider>}
 
                     </div>
 
                 </div>
-
-
             </div>
 
         )

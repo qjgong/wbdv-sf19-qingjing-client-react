@@ -38,7 +38,9 @@ export default class LessonTabs extends React.Component {
                         placeholder="New Lesson"
                         className="form-control"
                         id="add-lesson-input"/>
-                    <button onClick={() => this.props.createLesson()} className="btn btn-secondary btn-block">Add Lesson
+                    <button onClick={() => this.props.createLesson(this.props.module.id,{
+                        title:this.props.lesson.title?this.props.lesson.title:"New Lesson"
+                    })} className="btn btn-secondary btn-block">Add Lesson
                     </button>
                 </li>
             </ul>

@@ -31,11 +31,11 @@ export default class ModuleItem extends React.Component {
                 className={this.props.module === this.props.selectedModule ? "list-group-item active bg-secondary" : "list-group-item bg-dark"}>
                 <a>{this.props.module.title}</a>
 
-                <button className="btn btn-danger btn-sm ml-3">
-                    <i onClick={() => this.props.deleteModule(this.props.module.id)} className="fa fa-trash"/></button>
+                <button className="btn btn-danger btn-sm ml-3" onClick={() => this.props.deleteModule(this.props.module.id)}>
+                    <i  className="fa fa-trash"/></button>
 
-                <button className="btn btn-success btn-sm ml-3">
-                    <i onClick={() => this.toggleInput()} className="fa fa-edit"/></button>
+                <button className="btn btn-success btn-sm ml-3" onClick={() => this.toggleInput()}>
+                    <i  className="fa fa-edit"/></button>
                 {
                     this.state.inputHidden ? "" :
                         <div><input type="text" onChange={this.titleChanged} placeholder={this.props.module.title}

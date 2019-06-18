@@ -2,7 +2,7 @@ import React from "react";
 
 import WidgetSharedComponents from "./WidgetSharedComponents";
 
-const ImageWidget = ({index, IsPreview, widget, widgets, updateWidget, deleteWidget, moveUp, moveDown,}) =>
+const ImageWidget = ({index, IsPreview, widget, widgets, updateWidget, deleteWidget, moveUp, moveDown,topicId}) =>
     <div className="mb-5 card p-1">
         {!IsPreview && <div>
             <div className="form-group row ml-sm-2 col-sm-12 d-flex justify-content-between">
@@ -13,6 +13,7 @@ const ImageWidget = ({index, IsPreview, widget, widgets, updateWidget, deleteWid
                     widgets={widgets}
                     moveUp={moveUp}
                     moveDown={moveDown}
+                    topicId={topicId}
                     deleteWidget={deleteWidget}
                     updateWidget={updateWidget}
                 />

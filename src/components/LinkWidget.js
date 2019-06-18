@@ -3,7 +3,7 @@ import WidgetSharedComponents from "./WidgetSharedComponents";
 //import {Linking} from'react-native'
 
 
-const LinkWidget = ({index, IsPreview, widget, widgets, deleteWidget, updateWidget, moveUp, moveDown,}) =>
+const LinkWidget = ({index, IsPreview, widget, widgets, deleteWidget, updateWidget, moveUp, moveDown,topicId}) =>
 
 
     <div className="mb-5 card p-1">
@@ -16,6 +16,7 @@ const LinkWidget = ({index, IsPreview, widget, widgets, deleteWidget, updateWidg
                     widgets={widgets}
                     moveUp={moveUp}
                     moveDown={moveDown}
+                    topicId={topicId}
                     deleteWidget={deleteWidget}
                     updateWidget={updateWidget}
                 />

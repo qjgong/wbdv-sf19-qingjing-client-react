@@ -39,7 +39,9 @@ export default class TopicPills extends React.Component {
                         placeholder="New topic"
                         className="form-control"
                         id="add-topic-input"/>
-                    <button onClick={() => this.props.createTopic()}
+                    <button onClick={() => this.props.createTopic(this.props.lesson.id,{
+                        title:this.props.topic.title?this.props.topic.title:"New Topic"
+                    })}
                             className="btn btn-secondary btn-block">Add topic
                     </button>
                 </li>

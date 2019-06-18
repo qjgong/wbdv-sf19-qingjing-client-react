@@ -2,7 +2,7 @@ import React from 'react'
 import WidgetSharedComponents from "./WidgetSharedComponents";
 
 const HeadingWidget = ({
-                           index, IsPreview, widgets, widget, deleteWidget, moveUp, moveDown, updateWidget,
+                           index, IsPreview, widgets, widget, deleteWidget, moveUp, moveDown, updateWidget,topicId
                        }) =>
 
     <div className="mb-5 card p-1">
@@ -16,6 +16,7 @@ const HeadingWidget = ({
                     widgets={widgets}
                     moveUp={moveUp}
                     moveDown={moveDown}
+                    topicId={topicId}
                     deleteWidget={deleteWidget}
                     updateWidget={updateWidget}
                 />
