@@ -43,9 +43,7 @@ export default class CourseTable extends React.Component {
                         <li className="nav-link" href="#">
                             <button type="button" className="btn btn-danger btn-lg"
                                     onClick={() => this.props.createCourse({
-                                        id: 0,
-                                        title: this.state.title,
-                                        widgets: []
+                                        title:  this.state.title?this.state.title:"New Course"
                                     })}>
                                 <i className="fa fa-plus"></i></button>
                         </li>
@@ -84,9 +82,7 @@ export default class CourseTable extends React.Component {
                 </div>
 
                 <button className="btn btn-danger floating" onClick={() => this.props.createCourse({
-                    id: 0,
                     title: "New Course",
-                    widgets: []
                 })}>
                     <i className="fa fa-plus" style={{color: "white"}}></i>
                 </button>

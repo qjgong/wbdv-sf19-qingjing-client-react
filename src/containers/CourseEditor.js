@@ -61,7 +61,8 @@ export default class CourseEditor
         this.topicService.createTopic(lessonId, topic)
             .then(topics => this.setState({
                 topics: topics
-            }))
+            }));
+        document.getElementById("add-topic-input").value = "";
     };
 
     createLesson = (moduleId, lesson) => {
@@ -69,7 +70,8 @@ export default class CourseEditor
             .then(lessons =>
                 this.setState({
                     lessons: lessons
-                }))
+                }));
+        document.getElementById("add-lesson-input").value = "";
 
     };
 
@@ -79,6 +81,7 @@ export default class CourseEditor
             .then(modules => this.setState({
                 modules: modules
             }));
+        document.getElementById("add-module-input").value = "";
     };
 
 
