@@ -2,7 +2,8 @@
 import React from "react";
 
 
-let url = "http://localhost:8080" + "/api/courses";
+//let url = "http://localhost:8080" + "/api/courses";
+let url="https://calm-beyond-87471.herokuapp.com/api/courses"
 export default class CourseService {
     constructor() {
         if (!!CourseService.instance) {

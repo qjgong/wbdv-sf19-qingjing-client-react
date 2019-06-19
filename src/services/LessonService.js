@@ -1,5 +1,10 @@
-let url = "http://localhost:8080" + "/api/lessons";
-let moduleUrl = "http://localhost:8080" + "/api/modules/";
+let url = "https://calm-beyond-87471.herokuapp.com"
+    // "http://localhost:8080"
+    + "/api/lessons";
+let moduleUrl = "https://calm-beyond-87471.herokuapp.com"
+    // "http://localhost:8080"
+    + "/api/modules/";
+
 export default class LessonService {
     constructor() {
         if (!!LessonService.instance) {

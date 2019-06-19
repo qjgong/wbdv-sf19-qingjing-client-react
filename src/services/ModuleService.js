@@ -1,8 +1,12 @@
 //import myData from './courses';
 import React from "react";
 
-let url = "http://localhost:8080" + "/api/modules";
-let courseUrl="http://localhost:8080" + "/api/courses/";
+let url = "https://calm-beyond-87471.herokuapp.com"
+    // "http://localhost:8080"
+    + "/api/modules";
+let courseUrl="https://calm-beyond-87471.herokuapp.com"
+    // "http://localhost:8080"
+    + "/api/courses/";
 
 export default class ModuleService {
     constructor() {

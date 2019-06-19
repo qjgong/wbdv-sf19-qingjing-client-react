@@ -6,7 +6,7 @@ import {Link} from "react-router-dom";
 export default class CourseGrid
     extends React.Component {
     constructor(props) {
-        super(props)
+        super(props);
         this.state = {}
     }
 
@@ -42,10 +42,7 @@ export default class CourseGrid
 
                         <li className="nav-link" href="#">
                             <button type="button" className="btn btn-danger btn-lg" onClick={() => this.props.createCourse({
-                                id: 0,
-                                title: this.state.title,
-                                widgets:[]
-                            })}>
+                                title:  this.state.title?this.state.title:"New Course"})}>
                                 <i className="fa fa-plus"></i></button>
                         </li>
                     </div>
@@ -84,9 +81,7 @@ export default class CourseGrid
                 </div>
 
                 <button className="btn btn-danger floating" onClick={() => this.props.createCourse({
-                    id: 0,
                     title: "New Course",
-                    widgets:[]
                 })}>
                     <i className="fa fa-plus" style={{color: "white"}}></i>
                 </button>

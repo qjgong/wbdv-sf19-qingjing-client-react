@@ -1,8 +1,12 @@
 //import myData from './courses';
 import React from "react";
 
-let url = "http://localhost:8080" + "/api/topics";
-let lessonUrl = "http://localhost:8080" + "/api/lessons/";
+let url = "https://calm-beyond-87471.herokuapp.com"
+    // "http://localhost:8080"
+    + "/api/topics";
+let lessonUrl = "https://calm-beyond-87471.herokuapp.com"
+    // "http://localhost:8080"
+    + "/api/lessons/";
 
 export default class TopicService {
     constructor() {
@@ -14,7 +18,7 @@ export default class TopicService {
     }
 
     createTopic = (lessonId, topic) =>
-        fetch(lessonUrl+lessonId+"/topics", {
+        fetch(lessonUrl + lessonId + "/topics", {
             method: "POST",
             body: JSON.stringify(topic),
             headers: {
@@ -24,8 +28,7 @@ export default class TopicService {
             return response.json();
         });
 
-    findAllTopicsforLesson= (lid) => fetch(lessonUrl + lid + "/topics").then(response => response.json());
-
+    findAllTopicsforLesson = (lid) => fetch(lessonUrl + lid + "/topics").then(response => response.json());
 
 
     findTopics = () =>
