@@ -48,8 +48,10 @@ class WidgetListComponent extends React.Component {
                     type: "HEADING",
                     name: "New Widget",
                     text: "",
-                    size: "h1"
+                    size: "h1",
+                    ord:this.props.widgets.length+1,
                 })}>
+
                     <i className="fa fa-plus" style={{color: "white"}}/>
                 </button>
 

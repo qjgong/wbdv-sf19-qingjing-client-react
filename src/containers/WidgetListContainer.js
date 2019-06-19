@@ -74,6 +74,7 @@ const propertyToDispatchMapper = dispatch => ({
                 })),
 
     moveUp: (widgets, widgetId,topicId) => {
+
         let index = widgets.indexOf(widgets.find(x => x.id === widgetId));
         let new_widgets = SwapItems(widgets, index, index - 1);
         widgetService.updateOrder(new_widgets,topicId)

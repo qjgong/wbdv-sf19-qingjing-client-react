@@ -55,7 +55,6 @@ export default class WidgetService {
     }
 
     updateOrder(widgets,topicId) {
-        console.log(widgets);
         return fetch(topicUrl+topicId+"/widgets",
             {
                 method: "PUT",
